@@ -1,0 +1,21 @@
+{
+  "vmCategory": "TVM",
+  "properties": {
+    "vmProfile":       {
+      "name": "tvm-ub1804",
+      "osType": "Linux",
+      "osName": "Ubuntu18.04",
+      "vmSize": "Standard_D2s_v3",
+      "ports": [22],
+      "hasDNSName": false
+    },
+    "linuxProfile": {
+      "adminUsername": "azureuser",
+      "sshPublicKeys": [
+        {
+          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvwH5oz73ECxmlYUY6H2gI6p3R/UN6f332lmPyvViUBMZdcIQxtMMGaOoXwsF++t2YEkHixp16T13UKeI3ZowVG6W+zm32AB5DcEyLiwf06ELZTgbRv1XD4qAbS5n9PN81g6gfsBmxojA5zgM8g24JgPjvUlJYNae90P7d9CQRTu5wI4NaNV5Oo/rvyLJTb5ns6fvfmpqvjleIZTZwHyScJw0ImPpDzJnB0rnPk1ptDGN9AFU2vFk4MpTXKHBP019g2HeSqw5RW+w7CNyo27LX+hRUmaQMgt1f2Zh/QjtlTllneqHAV62uJJvJXXToyf3KZQEJeQetwdByAJFBc6/N"
+        }
+      ]
+    }
+  }
+}
