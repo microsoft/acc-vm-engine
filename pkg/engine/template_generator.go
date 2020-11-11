@@ -13,6 +13,11 @@ import (
 	"github.com/microsoft/acc-vm-engine/pkg/helpers"
 )
 
+var (
+	baseFile      = "base.t"
+	templateFiles = []string{baseFile, "outputs.t", "params.t", "resources.t", "vars.t"}
+)
+
 // TemplateGenerator represents the object that performs the template generation.
 type TemplateGenerator struct {
 }
@@ -42,9 +47,6 @@ func (t *TemplateGenerator) GenerateTemplate(vm *api.APIModel, generatorCode str
 	setPropertiesDefaults(vm)
 
 	templ = template.New("vm template").Funcs(t.getTemplateFuncMap(vm))
-
-	templateFiles := vm.VMConfigurator.TemplateFiles()
-	baseFile := templateFiles[0]
 
 	for _, file := range templateFiles {
 		bytes, e := Asset(file)
@@ -90,7 +92,7 @@ func (t *TemplateGenerator) GenerateTemplate(vm *api.APIModel, generatorCode str
 }
 
 func (t *TemplateGenerator) verifyFiles(vmconfig api.VMConfigurator) error {
-	for _, file := range vmconfig.TemplateFiles() {
+	for _, file := range templateFiles {
 		if _, err := Asset(file); err != nil {
 			return fmt.Errorf("template file %s does not exist", file)
 		}
@@ -147,6 +149,16 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		},
 		"GetDataDisks": func(p *api.Properties) string {
 			return getDataDisks(p.VMProfile)
+		},
+		"GetSecurityType": func() string {
+			switch vm.VMCategory {
+			case api.TVM:
+				return "SecureBoot"
+			case api.CVM:
+				return "MemoryEncryption"
+			default:
+				return "None"
+			}
 		},
 		"Base64": func(s string) string {
 			return base64.StdEncoding.EncodeToString([]byte(s))

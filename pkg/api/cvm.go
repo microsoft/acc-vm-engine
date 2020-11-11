@@ -1,6 +1,10 @@
 package api
 
-import "fmt"
+import (
+	"fmt"
+
+	log "github.com/sirupsen/logrus"
+)
 
 // cvmConfigurator implements VMConfigurator interface
 type cvmConfigurator struct {
@@ -8,7 +12,6 @@ type cvmConfigurator struct {
 }
 
 var cvmOSImageMap map[OSName]*OSImage
-var cvmOSTypeMap map[OSName]OSType
 
 func init() {
 	cvmOSImageMap = map[OSName]*OSImage{
@@ -19,14 +22,14 @@ func init() {
 			Version:   "18.04.202004290",
 		},
 	}
-	cvmOSTypeMap = map[OSName]OSType{
-		Ubuntu1804: Linux,
-	}
 }
 
+// NewCVMConfigurator returns VMConfigurator for CVM
 func NewCVMConfigurator(osName OSName) (VMConfigurator, error) {
-	if _, ok := cvmOSImageMap[osName]; !ok {
-		return nil, fmt.Errorf("OSName %s is not supported", osName)
+	if len(osName) > 0 {
+		if _, ok := cvmOSImageMap[osName]; !ok {
+			return nil, fmt.Errorf("OSName %q is not supported", osName)
+		}
 	}
 	return &cvmConfigurator{osName: osName}, nil
 }
@@ -37,6 +40,9 @@ func (h *cvmConfigurator) DefaultVMName() string {
 
 // DefaultLinuxImage returns default Linux OS image
 func (h *cvmConfigurator) OSImage() *OSImage {
+	if len(h.osName) == 0 {
+		log.Fatal("OSName is not set")
+	}
 	return cvmOSImageMap[h.osName]
 }
 
@@ -87,8 +93,4 @@ func (h *cvmConfigurator) AllowedVMSizes() []string {
 		"Standard_D32s_v3",
 		"Standard_D64s_v3",
 	}
-}
-
-func (h *cvmConfigurator) TemplateFiles() []string {
-	return []string{"cvm/base.t", "cvm/outputs.t", "cvm/params.t", "cvm/resources.t", "cvm/vars.t"}
 }

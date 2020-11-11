@@ -21,7 +21,6 @@ type VMConfigurator interface {
 	AllowedLocations() []string
 	AllowedOsDiskTypes() []string
 	AllowedVMSizes() []string
-	TemplateFiles() []string
 }
 
 // LoadVMFromFile loads an API Model from a JSON file

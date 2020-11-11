@@ -20,7 +20,7 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 		addValue(parametersMap, "osDiskType", properties.VMProfile.OSDiskType)
 	}
 	if properties.VMProfile.OSImage.HasCustomImage() {
-		addValue(parametersMap, "osImageSourceUrl", properties.VMProfile.OSImage.URL)
+		addValue(parametersMap, "osImageURL", properties.VMProfile.OSImage.URL)
 	} else {
 		addValue(parametersMap, "osImagePublisher", properties.VMProfile.OSImage.Publisher)
 		addValue(parametersMap, "osImageOffer", properties.VMProfile.OSImage.Offer)

@@ -2,6 +2,8 @@ package api
 
 import (
 	"fmt"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // tvmConfigurator implements VMConfigurator interface
@@ -58,9 +60,12 @@ func init() {
 	}
 }
 
+// NewTVMConfigurator creates VMConfigurator for TVM
 func NewTVMConfigurator(osName OSName) (VMConfigurator, error) {
-	if _, ok := tvmOSImageMap[osName]; !ok {
-		return nil, fmt.Errorf("OSName %s is not supported", osName)
+	if len(osName) > 0 {
+		if _, ok := tvmOSImageMap[osName]; !ok {
+			return nil, fmt.Errorf("OSName %q is not supported", osName)
+		}
 	}
 	return &tvmConfigurator{osName: osName}, nil
 }
@@ -70,6 +75,9 @@ func (h *tvmConfigurator) DefaultVMName() string {
 }
 
 func (h *tvmConfigurator) OSImage() *OSImage {
+	if len(h.osName) == 0 {
+		log.Fatal("OSName is not set")
+	}
 	return tvmOSImageMap[h.osName]
 }
 
@@ -109,8 +117,4 @@ func (h *tvmConfigurator) AllowedVMSizes() []string {
 		"Standard_D32s_v3",
 		"Standard_D64s_v3",
 	}
-}
-
-func (h *tvmConfigurator) TemplateFiles() []string {
-	return []string{"tvm/base.t", "tvm/outputs.t", "tvm/params.t", "tvm/resources.t", "tvm/vars.t"}
 }

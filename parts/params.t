@@ -72,9 +72,9 @@
         "description": "OS image version."
       }
     },
-    "osImageSourceUrl": {
+    "osImageURL": {
       "type": "string",
-      "defaultValue": "latest",
+      "defaultValue": "",
       "metadata": {
         "description": "OS image URL."
       }

@@ -99,6 +99,28 @@
         "name": "[parameters('diagnosticsStorageAccountType')]"
       }
     },
+{{if HasCustomImage}}
+     {
+      "type": "Microsoft.Compute/images",
+      "apiVersion": "2018-06-01",
+      "name": "CustomImage",
+      "location": "[parameters('location')]",
+      "properties": {
+        "storageProfile": {
+          "osDisk": {
+{{if IsLinux .}}
+            "osType": "Linux",
+{{else}}
+            "osType": "Windows",
+{{end}}
+            "osState": "Generalized",
+            "blobUri": "[parameters('osImageURL')]",
+            "storageAccountType": "Standard_LRS"
+          }
+        }
+      }
+    },
+{{end}}
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2020-06-01",
@@ -119,6 +141,7 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "securityProfile": {
+          "securityType" : "{{GetSecurityType}}",
           "uefiSettings": {
             "secureBootEnabled": "[parameters('secureBoot')]",
             "vTPMEnabled": "[parameters('VTPM')]"
