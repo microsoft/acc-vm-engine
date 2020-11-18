@@ -1,10 +1,12 @@
 {
-  "vmCategory": "TVM",
+  "vmCategory": "CVM",
   "properties": {
     "vmProfile":       {
-      "name": "tvm-ub1804",
+      "name": "cvm-ub1804",
       "osType": "Linux",
-      "osName": "Ubuntu18.04",
+      "osImage": {
+        "url": "a/b/c/d/e/f"
+      },
       "vmSize": "Standard_D2s_v3",
       "ports": [22],
       "hasDNSName": false
