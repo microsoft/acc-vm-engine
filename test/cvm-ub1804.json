@@ -5,9 +5,9 @@
       "name": "cvm-ub1804",
       "osType": "Windows",
       "osDisk": {
-        "vhd_url": "a/b/c/d/e/f",
-        "vmgs_url": "/x/y/z",
-	      "storage_account_id": "a/s/d/f/g/h"
+        "vhd_url": "https://mystorage.blob.core.windows.net/vhds/osdisk.vhd",
+        "vmgs_url": "https://mystorage.blob.core.windows.net/vhds/vmgsdata.vhd",
+        "storage_account_id": "/subscriptions/12345/resourceGroups/myresourcegroup/providers/Microsoft.Storage/storageAccounts/mystorage"
       },
       "vmSize": "Standard_D2s_v3",
       "ports": [3389],
