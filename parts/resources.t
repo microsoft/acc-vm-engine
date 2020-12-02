@@ -99,7 +99,7 @@
         "name": "[parameters('diagnosticsStorageAccountType')]"
       }
     },
-{{if HasCustomImage}}
+{{if HasCustomOsImage}}
      {
       "type": "Microsoft.Compute/images",
       "apiVersion": "2018-06-01",
@@ -121,14 +121,46 @@
       }
     },
 {{end}}
+{{if HasAttachedOsDisk}}
+    {
+      "type": "Microsoft.Compute/disks",
+      "apiVersion": "2018-06-01",
+      "name": "CustomDisk",
+      "location": "[parameters('location')]",
+{{if HasAttachedOsDiskVMGS}}
+      "tags": {
+        "VmgsBlobUri": "[parameters('osDiskVmgsURL')]"
+     },
+{{end}}
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+{{if IsLinux .}}
+        "osType": "Linux",
+{{else}}
+        "osType": "Windows",
+{{end}}
+        "securityType" : "{{GetSecurityType}}",
+        "creationData": {
+          "createOption": "Import",
+          "storageAccountId": "[parameters('osDiskStorageAccountID')]",
+          "sourceUri": "[parameters('osDiskURL')]"
+        }
+      }
+    },
+{{end}}
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2020-06-01",
       "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-{{if HasCustomImage}}
+{{if HasCustomOsImage}}
         "CustomImage",
+{{end}}
+{{if HasAttachedOsDisk}}
+        "CustomDisk",
 {{end}}
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
@@ -141,7 +173,6 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "securityProfile": {
-          "securityType" : "{{GetSecurityType}}",
           "uefiSettings": {
             "secureBootEnabled": "[parameters('secureBoot')]",
             "vTPMEnabled": "[parameters('VTPM')]"

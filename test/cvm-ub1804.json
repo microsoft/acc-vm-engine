@@ -3,21 +3,19 @@
   "properties": {
     "vmProfile":       {
       "name": "cvm-ub1804",
-      "osType": "Linux",
-      "osImage": {
-        "url": "a/b/c/d/e/f"
+      "osType": "Windows",
+      "osDisk": {
+        "vhd_url": "a/b/c/d/e/f",
+        "vmgs_url": "/x/y/z",
+	      "storage_account_id": "a/s/d/f/g/h"
       },
       "vmSize": "Standard_D2s_v3",
-      "ports": [22],
+      "ports": [3389],
       "hasDNSName": false
     },
-    "linuxProfile": {
+    "windowsProfile": {
       "adminUsername": "azureuser",
-      "sshPublicKeys": [
-        {
-          "keyData": "ssh-rsa AAAA"
-        }
-      ]
+      "adminPassword": "admin"
     }
   }
 }

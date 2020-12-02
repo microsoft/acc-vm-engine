@@ -178,8 +178,14 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		"IsWindows": func(p *api.Properties) bool {
 			return p.VMProfile.OSType == api.Windows
 		},
-		"HasCustomImage": func() bool {
-			return vm.Properties.VMProfile.OSImage.HasCustomImage()
+		"HasCustomOsImage": func() bool {
+			return vm.Properties.VMProfile.HasCustomOsImage()
+		},
+		"HasAttachedOsDisk": func() bool {
+			return vm.Properties.VMProfile.HasAttachedOsDisk()
+		},
+		"HasAttachedOsDiskVMGS": func() bool {
+			return vm.Properties.VMProfile.HasAttachedOsDiskVMGS()
 		},
 		"HasDNSName": func(p *api.Properties) bool {
 			return p.VMProfile.HasDNSName

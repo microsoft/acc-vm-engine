@@ -28,7 +28,7 @@ func setPropertiesDefaults(vm *api.APIModel) {
 			vm.Properties.VnetProfile.SubnetAddress = api.DefaultSubnet
 		}
 	}
-	if vm.Properties.VMProfile.OSImage == nil {
+	if vm.Properties.VMProfile.OSImage == nil && vm.Properties.VMProfile.OSDisk == nil {
 		vm.Properties.VMProfile.OSImage = vm.VMConfigurator.OSImage()
 	}
 	if len(vm.Properties.VMProfile.OSDiskType) == 0 {

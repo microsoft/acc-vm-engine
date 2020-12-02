@@ -79,6 +79,27 @@
         "description": "OS image URL."
       }
     },
+    "osDiskURL": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "OS VHD URL."
+      }
+    },
+    "osDiskVmgsURL": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "OS VMGS URL."
+      }
+    },
+    "osDiskStorageAccountID": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "ID of the OS disk storage account."
+      }
+    },
     "osDiskType": {
       "type": "string",
       {{GetOsDiskTypes}}

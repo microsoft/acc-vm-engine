@@ -61,14 +61,26 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	if len(vm.OSType) == 0 {
 		return fmt.Errorf("OSType is not specified")
 	}
-	if len(vm.OSName) == 0 {
-		if vm.OSImage == nil {
-			return fmt.Errorf("Either OSName or OSImage should be specified")
+	hasOsImage := (len(vm.OSName) > 0 || vm.OSImage != nil)
+	hasOsDisk := (vm.OSDisk != nil)
+
+	if hasOsImage {
+		if len(vm.OSName) == 0 {
+			if vm.OSImage == nil {
+				return fmt.Errorf("Either OSName or OSImage should be specified")
+			}
+		} else {
+			if vm.OSImage != nil {
+				return fmt.Errorf("Cannot have OSName and OSImage both specified")
+			}
 		}
-	} else {
-		if vm.OSImage != nil {
-			return fmt.Errorf("Cannot have OSName and OSImage both specified")
-		}
+	}
+
+	if hasOsImage && hasOsDisk {
+		return fmt.Errorf("OS image and disk are mutually exclusive")
+	}
+	if !hasOsImage && !hasOsDisk {
+		return fmt.Errorf("Neither OS image nor disk are specified")
 	}
 
 	switch vm.OSType {
@@ -80,10 +92,11 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 		return fmt.Errorf("OS type '%s' is not supported", vm.OSType)
 	}
 
-	if vm.OSImage != nil {
-		if e := validateOSImage(vm.OSImage); e != nil {
-			return e
-		}
+	if e := validateOSImage(vm.OSImage); e != nil {
+		return e
+	}
+	if e := validateOSDisk(vm.OSDisk); e != nil {
+		return e
 	}
 
 	if len(vm.OSDiskType) > 0 {
@@ -153,20 +166,34 @@ func validateOSImage(p *OSImage) error {
 	if p == nil {
 		return nil
 	}
-	if len(p.URL) > 0 && (len(p.Publisher) > 0 || len(p.Offer) > 0 || len(p.SKU) > 0 || len(p.Version) > 0) {
-		return fmt.Errorf("OSImage URL and Publisher/Offer/SKU are mutually exclusive")
-	}
-	if len(p.Publisher) > 0 || len(p.Offer) > 0 || len(p.SKU) > 0 || len(p.Version) > 0 {
+	if len(p.URL) > 0 {
+		if len(p.Publisher) > 0 || len(p.Offer) > 0 || len(p.SKU) > 0 || len(p.Version) > 0 {
+			return fmt.Errorf("OS image URL and Publisher/Offer/SKU are mutually exclusive")
+		}
+	} else {
 		if len(p.Publisher) == 0 {
-			return fmt.Errorf("OSImage Publisher is not set")
+			return fmt.Errorf("OS image Publisher is not set")
 		}
 		if len(p.Offer) == 0 {
-			return fmt.Errorf("OSImage Offer is not set")
+			return fmt.Errorf("OS image Offer is not set")
 		}
 		if len(p.SKU) == 0 {
-			return fmt.Errorf("OSImage SKU is not set")
+			return fmt.Errorf("OS image SKU is not set")
 		}
 		// version is optional
+	}
+	return nil
+}
+
+func validateOSDisk(p *OSDisk) error {
+	if p == nil {
+		return nil
+	}
+	if len(p.VHD) == 0 {
+		return fmt.Errorf("OS VHD URL is not set")
+	}
+	if len(p.StorageAccountID) == 0 {
+		return fmt.Errorf("OS VHD storage account ID is not set")
 	}
 	return nil
 }

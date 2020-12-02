@@ -23,8 +23,9 @@
 {{end}}
     },
     "storageProfile": {
+{{if not HasAttachedOsDisk}}
       "imageReference": {
-{{if HasCustomImage}}
+{{if HasCustomOsImage}}
         "id": "[resourceId('Microsoft.Compute/images','CustomImage')]"
 {{else}}
         "publisher": "[parameters('osImagePublisher')]",
@@ -33,12 +34,20 @@
         "version": "[parameters('osImageVersion')]"
 {{end}}
       },
+{{end}}
       {{GetDataDisks .}}
       "osDisk": {
         "caching": "ReadWrite",
+{{if HasAttachedOsDisk}}
+        "createOption": "Attach",
+        "managedDisk": {
+          "id": "[resourceId('Microsoft.Compute/disks','CustomDisk')]"
+        }
+{{else}}
         "createOption": "FromImage",
         "managedDisk": {
           "storageAccountType": "[parameters('osDiskType')]"
         }
+{{end}}
       }
     }

@@ -63,9 +63,7 @@ func (h *cvmConfigurator) DefaultOsDiskType() string {
 // AllowedLocations returns supported azure regions
 func (h *cvmConfigurator) AllowedLocations() []string {
 	return []string{
-		"eastus",
-		"westeurope",
-		"uksouth",
+		"centraluseuap",
 	}
 }
 

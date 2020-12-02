@@ -26,6 +26,7 @@ type VMProfile struct {
 	OSName      OSName   `json:"osName"`
 	OSDiskType  string   `json:"osDiskType"`
 	OSImage     *OSImage `json:"osImage,omitempty"`
+	OSDisk      *OSDisk  `json:"osDisk,omitempty"`
 	DiskSizesGB []int    `json:"diskSizesGB,omitempty"`
 	VMSize      string   `json:"vmSize"`
 	Ports       []int    `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
@@ -50,6 +51,13 @@ type OSImage struct {
 	Offer     string `json:"offer"`
 	SKU       string `json:"sku"`
 	Version   string `json:"version,omitempty"`
+}
+
+// OSDisk represents Managed OS Disk
+type OSDisk struct {
+	VHD              string `json:"vhd_url"`
+	VMGS             string `json:"vmgs_url"`
+	StorageAccountID string `json:"storage_account_id"`
 }
 
 // LinuxProfile represents the linux parameters passed to the cluster
@@ -94,16 +102,26 @@ func (p *VnetProfile) IsCustomVNET() bool {
 }
 
 // HasAzureGalleryImage returns true if Azure Image Gallery is used
-func (img *OSImage) HasAzureGalleryImage() bool {
-	return len(img.Publisher) > 0 && len(img.Offer) > 0 && len(img.SKU) > 0
+func (h *VMProfile) HasAzureGalleryImage() bool {
+	return h.OSImage != nil && len(h.OSImage.Publisher) > 0 && len(h.OSImage.Offer) > 0 && len(h.OSImage.SKU) > 0
 }
 
-// HasCustomImage returns true if there is a custom OS image url specified
-func (p *OSImage) HasCustomImage() bool {
-	return len(p.URL) > 0
+// HasCustomOsImage returns true if there is a custom OS image url specified
+func (h *VMProfile) HasCustomOsImage() bool {
+	return h.OSImage != nil && len(h.OSImage.URL) > 0
+}
+
+// HasAttachedOsDisk returns true if there is an attached OS disk specified
+func (h *VMProfile) HasAttachedOsDisk() bool {
+	return h.OSDisk != nil && len(h.OSDisk.VHD) > 0
+}
+
+// HasAttachedOsDiskVMGS returns true if there is an VMGS specified
+func (h *VMProfile) HasAttachedOsDiskVMGS() bool {
+	return h.OSDisk != nil && len(h.OSDisk.VMGS) > 0
 }
 
 // HasDisks returns true if the customer specified disks
-func (a *VMProfile) HasDisks() bool {
-	return len(a.DiskSizesGB) > 0
+func (h *VMProfile) HasDisks() bool {
+	return len(h.DiskSizesGB) > 0
 }
