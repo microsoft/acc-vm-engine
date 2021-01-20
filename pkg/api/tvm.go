@@ -86,13 +86,6 @@ func (h *tvmConfigurator) DefaultOsDiskType() string {
 	return "Premium_LRS"
 }
 
-// AllowedLocations returns supported azure regions
-func (h *tvmConfigurator) AllowedLocations() []string {
-	return []string{
-		"eastus2euap",
-	}
-}
-
 // AllowedOsDiskTypes returns supported OS disk types
 func (h *tvmConfigurator) AllowedOsDiskTypes() []string {
 	return []string{

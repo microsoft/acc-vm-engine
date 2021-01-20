@@ -1,11 +1,3 @@
-    "location": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().location]",
-      {{GetAllowedLocations}}
-      "metadata": {
-        "description": "Location for all resources."
-      }
-    },
     "vmName": {
       "type": "string",
       "metadata": {
@@ -174,17 +166,6 @@
       "defaultValue": "",
       "metadata": {
         "description": "Cluster"
-      }
-    },
-    "securityType": {
-      "type": "string",
-      "defaultValue": "MemoryEncryption",
-      "allowedValues": [
-        "Unencrypted",
-        "MemoryEncryption"
-      ],
-      "metadata": {
-        "description": "VM security type. VHD and VMGS must be encrypted if true; unecrypted otherwise."
       }
     },
     "secureBootEnabled": {

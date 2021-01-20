@@ -7,7 +7,6 @@
       "disablePasswordAuthentication": "true",
       "ssh": {{GetLinuxPublicKeys}}
     },
-    "singleQuote": "'",
     "windowsConfiguration": {
       "provisionVmAgent": "true"
     },
@@ -15,6 +14,7 @@
 {{if HasTipNodeSession}}
     "availabilitySetName": "[concat(parameters('vmName'), '-availSet')]",
 {{end}}
+{{if not HasTipNodeSession}}
     "osProfile": {
       "computername": "[parameters('vmName')]",
       "adminUsername": "[parameters('adminUsername')]",
@@ -25,6 +25,7 @@
       "windowsConfiguration": "[variables('windowsConfiguration')]"
 {{end}}
     },
+{{end}}
     "storageProfile": {
 {{if not HasAttachedOsDisk}}
       "imageReference": {

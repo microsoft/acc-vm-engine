@@ -8,12 +8,8 @@ import (
 
 func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	properties := vm.Properties
-	location := vm.Location
 	parametersMap := paramsMap{}
 
-	if len(vm.Location) > 0 {
-		addValue(parametersMap, "location", location)
-	}
 	addValue(parametersMap, "vmName", properties.VMProfile.Name)
 	addValue(parametersMap, "vmSize", properties.VMProfile.VMSize)
 	addValue(parametersMap, "osType", properties.VMProfile.OSType)

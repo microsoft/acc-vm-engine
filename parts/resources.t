@@ -15,7 +15,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2019-02-01",
       "name": "[variables('publicIPAddressName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
 {{if HasDNSName .}}
         "dnsSettings": {
@@ -29,7 +29,7 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-02-01",
       "name": "[variables('nsgName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "securityRules": [
           {{GetSecurityRules .VMProfile.Ports}}
@@ -41,7 +41,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2019-09-01",
       "name": "[parameters('vnetName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -62,7 +62,7 @@
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2019-07-01",
       "name": "[variables('nicName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[variables('publicIPAddressName')]",
         "[parameters('vnetName')]",
@@ -93,7 +93,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2019-06-01",
       "name": "[parameters('diagnosticsStorageAccountName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "kind": "[parameters('diagnosticsStorageAccountKind')]",
       "sku": {
         "name": "[parameters('diagnosticsStorageAccountType')]"
@@ -104,7 +104,7 @@
       "type": "Microsoft.Compute/images",
       "apiVersion": "2018-06-01",
       "name": "CustomImage",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "storageProfile": {
           "osDisk": {
@@ -122,7 +122,7 @@
       "type": "Microsoft.Compute/disks",
       "apiVersion": "2020-09-30",
       "name": "CustomDisk",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
 {{if HasAttachedOsDiskVMGS}}
       "tags": {
         "VmgsBlobUri": "[parameters('osDiskVmgsURL')]"
@@ -168,7 +168,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2020-12-01",
       "name": "[parameters('vmName')]",
-      "location": "[parameters('location')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
 {{if HasCustomOsImage}}
         "CustomImage",

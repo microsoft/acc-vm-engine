@@ -27,13 +27,6 @@ func (h *cvmConfigurator) DefaultOsDiskType() string {
 	return "Premium_LRS"
 }
 
-// AllowedLocations returns supported azure regions
-func (h *cvmConfigurator) AllowedLocations() []string {
-	return []string{
-		"centraluseuap",
-	}
-}
-
 // AllowedOsDiskTypes returns supported OS disk types
 func (h *cvmConfigurator) AllowedOsDiskTypes() []string {
 	return []string{
@@ -45,7 +38,6 @@ func (h *cvmConfigurator) AllowedOsDiskTypes() []string {
 // AllowedVMSizes returns supported VM sizes
 func (h *cvmConfigurator) AllowedVMSizes() []string {
 	return []string{
-		"Standard_DC1as_v4",
 		"Standard_DC2as_v4",
 		"Standard_DC16as_v4",
 		"Standard_DC32as_v4",

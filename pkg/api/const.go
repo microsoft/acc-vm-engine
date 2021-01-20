@@ -9,9 +9,9 @@ const (
 	// DefaultGeneratorCode specifies the source generator of the cluster template.
 	DefaultGeneratorCode = "acc-vm-engine"
 	// DefaultVnet specifies default vnet address space
-	DefaultVnet = "10.0.0.0/16"
+	DefaultVnet = "10.1.16.0/24"
 	// DefaultSubnet specifies default subnet
-	DefaultSubnet = "10.0.0.0/24"
+	DefaultSubnet = "10.1.16.0/24"
 )
 
 const (
@@ -50,11 +50,6 @@ func getDefaultValue(def string) string {
 
 func getAllowedDefaultValues(vals []string, def string) string {
 	return getAllowedValues(vals) + "    " + getDefaultValue(def)
-}
-
-// GetAllowedLocations returns allowed locations
-func GetAllowedLocations(vmconf VMConfigurator) string {
-	return getAllowedValues(vmconf.AllowedLocations())
 }
 
 // GetAllowedVMSizes returns allowed sizes for VM

@@ -166,9 +166,6 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		"Base64": func(s string) string {
 			return base64.StdEncoding.EncodeToString([]byte(s))
 		},
-		"GetAllowedLocations": func() string {
-			return api.GetAllowedLocations(vm.VMConfigurator)
-		},
 		"WrapAsVariable": func(s string) string {
 			return fmt.Sprintf("',variables('%s'),'", s)
 		},

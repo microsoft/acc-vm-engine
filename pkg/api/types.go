@@ -7,7 +7,6 @@ type VMCategory string
 // resource definition in a JSON template.
 type APIModel struct {
 	VMCategory VMCategory  `json:"vm_category"`
-	Location   string      `json:"location"`
 	Properties *Properties `json:"properties,omitempty"`
 
 	VMConfigurator VMConfigurator
