@@ -72,7 +72,7 @@ func getVMConfigurator(vmcat VMCategory, osName OSName) (VMConfigurator, error) 
 	case TVM:
 		return NewTVMConfigurator(osName)
 	case CVM:
-		return NewCVMConfigurator(osName)
+		return NewCVMConfigurator()
 	default:
 		return nil, fmt.Errorf("unsupported VM category %q", vmcat)
 	}

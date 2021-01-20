@@ -1,19 +1,19 @@
 {
-  "vmCategory": "TVM",
+  "vm_category": "TVM",
   "properties": {
-    "vmProfile":       {
+    "vm_profile":       {
       "name": "tvm-ub1804",
-      "osType": "Linux",
-      "osName": "Ubuntu18.04",
-      "vmSize": "Standard_D2s_v3",
+      "os_type": "Linux",
+      "os_name": "Ubuntu18.04",
+      "vm_size": "Standard_D2s_v3",
       "ports": [22],
-      "hasDNSName": false
+      "has_dns_name": false
     },
-    "linuxProfile": {
-      "adminUsername": "azureuser",
-      "sshPublicKeys": [
+    "linux_profile": {
+      "admin_username": "azureuser",
+      "ssh_public_keys": [
         {
-          "keyData": "ssh-rsa AAAA"
+          "key_data": "ssh-rsa AAAA"
         }
       ]
     }

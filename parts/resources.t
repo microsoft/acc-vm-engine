@@ -108,11 +108,7 @@
       "properties": {
         "storageProfile": {
           "osDisk": {
-{{if IsLinux .}}
-            "osType": "Linux",
-{{else}}
-            "osType": "Windows",
-{{end}}
+            "osType": "[parameters('osType')]",
             "osState": "Generalized",
             "blobUri": "[parameters('osImageURL')]",
             "storageAccountType": "Standard_LRS"
@@ -124,7 +120,7 @@
 {{if HasAttachedOsDisk}}
     {
       "type": "Microsoft.Compute/disks",
-      "apiVersion": "2018-06-01",
+      "apiVersion": "2020-09-30",
       "name": "CustomDisk",
       "location": "[parameters('location')]",
 {{if HasAttachedOsDiskVMGS}}
@@ -136,11 +132,8 @@
         "name": "Standard_LRS"
       },
       "properties": {
-{{if IsLinux .}}
-        "osType": "Linux",
-{{else}}
-        "osType": "Windows",
-{{end}}
+        "osType": "[parameters('osType')]",
+        "hyperVGeneration": "V2",
         "securityType" : "{{GetSecurityType}}",
         "creationData": {
           "createOption": "Import",
@@ -150,9 +143,30 @@
       }
     },
 {{end}}
+{{if HasTipNodeSession}}
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "apiVersion": "2020-06-01",
+      "name": "[variables('availabilitySetName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "platformUpdateDomainCount": "1",
+        "platformFaultDomainCount": "1",
+        "internalData": {
+          "pinnedFabricCluster": "[parameters('clusterName')]"
+        }
+      },
+      "tags": {
+        "TipNode.SessionId": "[parameters('tipNodeSessionId')]"
+      },
+      "sku": {
+        "name": "aligned"
+      }
+    },
+{{end}}
     {
       "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-12-01",
       "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
@@ -162,10 +176,14 @@
 {{if HasAttachedOsDisk}}
         "CustomDisk",
 {{end}}
+{{if HasTipNodeSession}}
+        "[variables('availabilitySetName')]",
+{{end}}
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
       "tags":
       {
+        "Platform.SecurityType": "{{GetSecurityType}}",
         "creationSource" : "['acc-vm-engine']"
       },
       "properties": {
@@ -174,11 +192,13 @@
         },
         "securityProfile": {
           "uefiSettings": {
-            "secureBootEnabled": "[parameters('secureBoot')]",
-            "vTPMEnabled": "[parameters('VTPM')]"
+            "secureBootEnabled": "[parameters('secureBootEnabled')]",
+            "vTPMEnabled": "[parameters('vTPMEnabled')]"
           }
         },
+{{if not HasTipNodeSession}}
         "osProfile": "[variables('osProfile')]",
+{{end}}
         "storageProfile": "[variables('storageProfile')]",
         "networkProfile": {
           "networkInterfaces": [
@@ -187,6 +207,11 @@
             }
           ]
         },
+{{if HasTipNodeSession}}
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
+        },
+{{end}}
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "[equals(parameters('bootDiagnostics'), 'true')]",

@@ -16,6 +16,7 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	}
 	addValue(parametersMap, "vmName", properties.VMProfile.Name)
 	addValue(parametersMap, "vmSize", properties.VMProfile.VMSize)
+	addValue(parametersMap, "osType", properties.VMProfile.OSType)
 	if len(properties.VMProfile.OSDiskType) > 0 {
 		addValue(parametersMap, "osDiskType", properties.VMProfile.OSDiskType)
 	}
@@ -49,10 +50,16 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 		addValue(parametersMap, "adminPassword", properties.WindowsProfile.AdminPassword)
 	}
 	if properties.VMProfile.SecureBoot != nil {
-		addValue(parametersMap, "secureBoot", strconv.FormatBool(*properties.VMProfile.SecureBoot))
+		addValue(parametersMap, "secureBootEnabled", strconv.FormatBool(*properties.VMProfile.SecureBoot))
 	}
 	if properties.VMProfile.VTPM != nil {
-		addValue(parametersMap, "vTPM", strconv.FormatBool(*properties.VMProfile.VTPM))
+		addValue(parametersMap, "vTPMEnabled", strconv.FormatBool(*properties.VMProfile.VTPM))
+	}
+	if len(properties.VMProfile.TipNodeSessionID) > 0 {
+		addValue(parametersMap, "tipNodeSessionId", properties.VMProfile.TipNodeSessionID)
+	}
+	if len(properties.VMProfile.ClusterName) > 0 {
+		addValue(parametersMap, "clusterName", properties.VMProfile.ClusterName)
 	}
 	if properties.VnetProfile.IsCustomVNET() {
 		addValue(parametersMap, "vnetNewOrExisting", "existing")

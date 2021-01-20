@@ -44,6 +44,13 @@
         "description": "Password for the Virtual Machine."
       }
     },
+    "osType": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "OS type."
+      }
+    },
     "osImagePublisher": {
       "type": "string",
       "defaultValue": "",
@@ -155,7 +162,32 @@
         "description": "Sets the subnet of the VM."
       }
     },
-    "secureBoot": {
+    "tipNodeSessionId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "TIP Node session ID"
+      }
+    },
+    "clusterName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Cluster"
+      }
+    },
+    "securityType": {
+      "type": "string",
+      "defaultValue": "MemoryEncryption",
+      "allowedValues": [
+        "Unencrypted",
+        "MemoryEncryption"
+      ],
+      "metadata": {
+        "description": "VM security type. VHD and VMGS must be encrypted if true; unecrypted otherwise."
+      }
+    },
+    "secureBootEnabled": {
       "type": "string",
       "defaultValue": "true",
       "allowedValues": [
@@ -166,7 +198,7 @@
         "description": "Secure Boot setting of the VM."
       }
     },
-    "vTPM": {
+    "vTPMEnabled": {
       "type": "string",
       "defaultValue": "true",
       "allowedValues": [

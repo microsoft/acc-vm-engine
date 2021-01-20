@@ -6,7 +6,7 @@ type VMCategory string
 // APIModel complies with the ARM model of
 // resource definition in a JSON template.
 type APIModel struct {
-	VMCategory VMCategory  `json:"vmCategory"`
+	VMCategory VMCategory  `json:"vm_category"`
 	Location   string      `json:"location"`
 	Properties *Properties `json:"properties,omitempty"`
 
@@ -22,26 +22,29 @@ type OSName string
 // VMProfile represents the definition of a VM
 type VMProfile struct {
 	Name        string   `json:"name"`
-	OSType      OSType   `json:"osType"`
-	OSName      OSName   `json:"osName"`
-	OSDiskType  string   `json:"osDiskType"`
-	OSImage     *OSImage `json:"osImage,omitempty"`
-	OSDisk      *OSDisk  `json:"osDisk,omitempty"`
-	DiskSizesGB []int    `json:"diskSizesGB,omitempty"`
-	VMSize      string   `json:"vmSize"`
+	OSType      OSType   `json:"os_type"`
+	OSName      OSName   `json:"os_name"`
+	OSDiskType  string   `json:"os_disk_type"`
+	OSImage     *OSImage `json:"os_image,omitempty"`
+	OSDisk      *OSDisk  `json:"os_disk,omitempty"`
+	DiskSizesGB []int    `json:"disk_sizes_gb,omitempty"`
+	VMSize      string   `json:"vm_size"`
 	Ports       []int    `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
-	HasDNSName  bool     `json:"hasDNSName"`
-	SecureBoot  *bool    `json:"secureBoot,omitempty"`
-	VTPM        *bool    `json:"vTPMEnabled,omitempty"`
+	HasDNSName  bool     `json:"has_dns_name"`
+	SecureBoot  *bool    `json:"secure_boot_enabled,omitempty"`
+	VTPM        *bool    `json:"vtpm_enabled,omitempty"`
+
+	TipNodeSessionID string `json:"tip_node_session_id,omitempty"`
+	ClusterName      string `json:"cluster_name,omitempty"`
 }
 
 // Properties represents the ACS cluster definition
 type Properties struct {
-	VnetProfile        *VnetProfile        `json:"vnetProfile"`
-	VMProfile          *VMProfile          `json:"vmProfile"`
-	LinuxProfile       *LinuxProfile       `json:"linuxProfile,omitempty"`
-	WindowsProfile     *WindowsProfile     `json:"windowsProfile,omitempty"`
-	DiagnosticsProfile *DiagnosticsProfile `json:"diagnosticsProfile,omitempty"`
+	VnetProfile        *VnetProfile        `json:"vnet_rofile"`
+	VMProfile          *VMProfile          `json:"vm_profile"`
+	LinuxProfile       *LinuxProfile       `json:"linux_profile,omitempty"`
+	WindowsProfile     *WindowsProfile     `json:"windows_profile,omitempty"`
+	DiagnosticsProfile *DiagnosticsProfile `json:"diagnostics_profile,omitempty"`
 }
 
 // OSImage represents OS Image from Azure Image Gallery
@@ -62,16 +65,15 @@ type OSDisk struct {
 
 // LinuxProfile represents the linux parameters passed to the cluster
 type LinuxProfile struct {
-	AdminUsername string       `json:"adminUsername" validate:"required"`
-	AdminPassword string       `json:"adminPassword"`
-	SSHPubKeys    []*PublicKey `json:"sshPublicKeys"`
+	AdminUsername string       `json:"admin_username" validate:"required"`
+	AdminPassword string       `json:"admin_password"`
+	SSHPubKeys    []*PublicKey `json:"ssh_public_keys"`
 }
 
 // WindowsProfile represents the windows parameters passed to the cluster
 type WindowsProfile struct {
-	AdminUsername string `json:"adminUsername" validate:"required"`
-	AdminPassword string `json:"adminPassword" validate:"required"`
-	SSHPubKey     string `json:"sshPublicKey,omitempty"`
+	AdminUsername string `json:"admin_username" validate:"required"`
+	AdminPassword string `json:"admin_password" validate:"required"`
 }
 
 // VnetProfile represents the definition of a vnet
@@ -93,7 +95,7 @@ type DiagnosticsProfile struct {
 
 // PublicKey contains puvlic SSH key
 type PublicKey struct {
-	KeyData string `json:"keyData"`
+	KeyData string `json:"key_data"`
 }
 
 // IsCustomVNET returns true if the customer brought their own VNET

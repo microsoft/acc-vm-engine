@@ -14,7 +14,7 @@ bootstrap:
 .PHONY: test
 test:
 	./acc-vm-engine generate -c ./test/tvm-ub1804.json -o ./_output/tvm
-	./acc-vm-engine generate -c ./test/cvm-ub1804.json -o ./_output/cvm
+	./acc-vm-engine generate -c ./test/cvm-win.json -o ./_output/cvm-win
 
 .PHONY: clean
 clean:

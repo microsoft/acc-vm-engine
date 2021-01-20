@@ -160,6 +160,9 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 				return "None"
 			}
 		},
+		"HasTipNodeSession": func() bool {
+			return len(vm.Properties.VMProfile.TipNodeSessionID) > 0
+		},
 		"Base64": func(s string) string {
 			return base64.StdEncoding.EncodeToString([]byte(s))
 		},

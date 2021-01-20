@@ -1,21 +1,19 @@
 {
-  "vmCategory": "CVM",
+  "vm_category": "CVM",
   "properties": {
-    "vmProfile":       {
-      "name": "cvm-ub1804",
-      "osType": "Windows",
-      "osDisk": {
+    "vm_profile": {
+      "name": "cvm-win",
+      "os_type": "Windows",
+      "os_disk": {
         "vhd_url": "https://mystorage.blob.core.windows.net/vhds/osdisk.vhd",
         "vmgs_url": "https://mystorage.blob.core.windows.net/vhds/vmgsdata.vhd",
         "storage_account_id": "/subscriptions/12345/resourceGroups/myresourcegroup/providers/Microsoft.Storage/storageAccounts/mystorage"
       },
-      "vmSize": "Standard_D2s_v3",
+      "tip_node_session_id": "aaa-bbb-ccc-ddd",
+      "cluster_name": "QWERTY",
+      "vm_size": "Standard_DC1as_v4",
       "ports": [3389],
-      "hasDNSName": false
-    },
-    "windowsProfile": {
-      "adminUsername": "azureuser",
-      "adminPassword": "admin"
+      "has_dns_name": false
     }
   }
 }

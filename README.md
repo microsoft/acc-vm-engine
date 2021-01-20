@@ -18,17 +18,17 @@ docker run \
 ```
 
 #### Generate template
-A sample configuration file for TVM deployment is located in [test/tvm-ub1804.json](./test/tvm-ub1804.json)
+A sample configuration file for TVM deployment is located in [test/cvm-win.json](./test/cvm-win.json)
 On Linux or MacOS, execute:
 ```sh
-./acc-vm-engine generate -c ./test/tvm-ub1804.json
+./acc-vm-engine generate -c ./test/cvm-win.json
 ```
 Alternatively, use the Docker container:
 ```sh
 docker run \
   -v $PWD:/go/src/github.com/microsoft/acc-vm-engine \
   -w /go/src/github.com/microsoft/acc-vm-engine \
-  golang:1.15-alpine ./acc-vm-engine generate -c ./test/tvm-ub1804.json
+  golang:1.15-alpine ./acc-vm-engine generate -c ./test/cvm-win.json
 ```
 The template and parameter files will be generated in `_output` directory
 
