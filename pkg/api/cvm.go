@@ -38,6 +38,7 @@ func (h *cvmConfigurator) AllowedOsDiskTypes() []string {
 // AllowedVMSizes returns supported VM sizes
 func (h *cvmConfigurator) AllowedVMSizes() []string {
 	return []string{
+		"Standard_DC1as_v4",
 		"Standard_DC2as_v4",
 		"Standard_DC16as_v4",
 		"Standard_DC32as_v4",
