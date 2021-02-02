@@ -120,7 +120,7 @@
 {{if HasAttachedOsDisk}}
     {
       "type": "Microsoft.Compute/disks",
-      "apiVersion": "2020-09-30",
+      "apiVersion": "2020-12-01",
       "name": "CustomDisk",
       "location": "[resourceGroup().location]",
 {{if HasAttachedOsDiskVMGS}}
@@ -134,7 +134,9 @@
       "properties": {
         "osType": "[parameters('osType')]",
         "hyperVGeneration": "V2",
-        "securityType" : "{{GetSecurityType}}",
+        "securityProfile":{
+          "securityType" : "{{GetSecurityType}}"
+        },
         "creationData": {
           "createOption": "Import",
           "storageAccountId": "[parameters('osDiskStorageAccountID')]",

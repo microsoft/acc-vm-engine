@@ -57,6 +57,11 @@ func GetAllowedVMSizes(vmconf VMConfigurator) string {
 	return getAllowedValues(vmconf.AllowedVMSizes())
 }
 
+// GetAllowedVMSizes returns allowed sizes for VM
+func GetDefaultVMSize(vmconf VMConfigurator) string {
+	return getDefaultValue(vmconf.DefaultVMSize())
+}
+
 // GetOsDiskTypes returns allowed and default OS disk types
 func GetOsDiskTypes(vmconf VMConfigurator) string {
 	return getAllowedDefaultValues(vmconf.AllowedOsDiskTypes(), vmconf.DefaultOsDiskType())
