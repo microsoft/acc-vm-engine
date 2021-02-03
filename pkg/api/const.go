@@ -52,14 +52,9 @@ func getAllowedDefaultValues(vals []string, def string) string {
 	return getAllowedValues(vals) + "    " + getDefaultValue(def)
 }
 
-// GetAllowedVMSizes returns allowed sizes for VM
-func GetAllowedVMSizes(vmconf VMConfigurator) string {
-	return getAllowedValues(vmconf.AllowedVMSizes())
-}
-
-// GetAllowedVMSizes returns allowed sizes for VM
-func GetDefaultVMSize(vmconf VMConfigurator) string {
-	return getDefaultValue(vmconf.DefaultVMSize())
+// GetVMSizes returns allowed and default sizes for VM
+func GetVMSizes(vmconf VMConfigurator) string {
+	return getAllowedDefaultValues(vmconf.AllowedVMSizes(), vmconf.DefaultVMSize())
 }
 
 // GetOsDiskTypes returns allowed and default OS disk types

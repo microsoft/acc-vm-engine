@@ -6,8 +6,7 @@
     },
     "vmSize": {
       "type": "string",
-      {{GetDefaultVMSize}}
-      {{GetAllowedVMSizes}}
+      {{GetVMSizes}}
       "metadata": {
         "description": "Size of the VM."
       }
