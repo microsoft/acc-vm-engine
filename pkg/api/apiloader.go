@@ -20,6 +20,7 @@ type VMConfigurator interface {
 	DefaultOsDiskType() string
 	AllowedOsDiskTypes() []string
 	AllowedVMSizes() []string
+	DefaultVMSize() string
 }
 
 // LoadVMFromFile loads an API Model from a JSON file

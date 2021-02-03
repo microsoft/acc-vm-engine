@@ -111,3 +111,7 @@ func (h *tvmConfigurator) AllowedVMSizes() []string {
 		"Standard_D64s_v3",
 	}
 }
+
+func (h *tvmConfigurator) DefaultVMSize() string {
+	return "Standard_DC2s_v2"
+}

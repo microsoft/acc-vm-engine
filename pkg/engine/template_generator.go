@@ -141,8 +141,8 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
       }`
 			return fmt.Sprintf(sshTempl, strings.Join(keyData, ",\n"))
 		},
-		"GetAllowedVMSizes": func() string {
-			return api.GetAllowedVMSizes(vm.VMConfigurator)
+		"GetVMSizes": func() string {
+			return api.GetVMSizes(vm.VMConfigurator)
 		},
 		"GetOsDiskTypes": func() string {
 			return api.GetOsDiskTypes(vm.VMConfigurator)
