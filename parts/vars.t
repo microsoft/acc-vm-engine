@@ -14,7 +14,7 @@
 {{if HasTipNodeSession}}
     "availabilitySetName": "[concat(parameters('vmName'), '-availSet')]",
 {{end}}
-{{if not HasTipNodeSession}}
+{{if not HasAttachedOsDisk}}
     "osProfile": {
       "computername": "[parameters('vmName')]",
       "adminUsername": "[parameters('adminUsername')]",
