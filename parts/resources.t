@@ -198,7 +198,7 @@
             "vTPMEnabled": "[parameters('vTPMEnabled')]"
           }
         },
-{{if not HasTipNodeSession}}
+{{if not HasAttachedOsDisk}}
         "osProfile": "[variables('osProfile')]",
 {{end}}
         "storageProfile": "[variables('storageProfile')]",
