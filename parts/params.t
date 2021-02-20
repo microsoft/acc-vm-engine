@@ -153,21 +153,21 @@
       "metadata": {
         "description": "Sets the subnet of the VM."
       }
-    },
+    }, {{if HasTipNodeSession}}
     "tipNodeSessionId": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "TIP Node session ID"
       }
-    },
+    }, {{end}}
     "clusterName": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "Cluster"
       }
-    },
+    },  {{if not IsSNPDisabled}}
     "secureBootEnabled": {
       "type": "string",
       "defaultValue": "true",
@@ -189,7 +189,7 @@
       "metadata": {
         "description": "vTPM setting of the VM."
       }
-    },
+    }, {{end}}
     "bootDiagnostics": {
       "type": "string",
       "defaultValue": "false",

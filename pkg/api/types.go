@@ -44,6 +44,9 @@ type Properties struct {
 	LinuxProfile       *LinuxProfile       `json:"linux_profile,omitempty"`
 	WindowsProfile     *WindowsProfile     `json:"windows_profile,omitempty"`
 	DiagnosticsProfile *DiagnosticsProfile `json:"diagnostics_profile,omitempty"`
+	//Add some flags
+	DisableSNP bool `json:"vnet_rofile,omit"`
+	DiskRPversion string `json:"vnet_rofile,omit"`
 }
 
 // OSImage represents OS Image from Azure Image Gallery

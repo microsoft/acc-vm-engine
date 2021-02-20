@@ -16,6 +16,8 @@ type generateCmd struct {
 	configFile string
 	outputDir  string
 	sshPubKeys []string
+	Disable_SNP bool
+	DiskRP_ver string
 
 	// derived
 	vm *api.APIModel
@@ -34,6 +36,11 @@ func (h *generateCmd) Run() error {
 
 	if err := h.loadAPIModel(); err != nil {
 		return errors.Wrap(err, "failed to load API model in 'generate'")
+	}
+	if(h.DiskRP_ver == "1") || (h.DiskRP_ver == "2") {
+		h.vm.Properties.DiskRPversion = h.DiskRP_ver
+	} else {
+		h.vm.Properties.DiskRPversion = "2"
 	}
 	return h.run()
 }
@@ -59,6 +66,10 @@ func (h *generateCmd) loadAPIModel() error {
 	var err error
 
 	apiloader := &api.Apiloader{}
+	if(h.Disable_SNP) {
+		apiloader.DisableSNP = true
+	}
+
 	h.vm, err = apiloader.LoadVMFromFile(h.configFile, true, false, h.sshPubKeys)
 	if err != nil {
 		return errors.Wrap(err, "failed to parse config file")

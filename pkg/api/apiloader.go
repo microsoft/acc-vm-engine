@@ -11,6 +11,7 @@ import (
 
 // Apiloader represents the object that loads api model
 type Apiloader struct {
+	DisableSNP bool  
 }
 
 // VMConfigurator manages VM specific configuration
@@ -55,6 +56,10 @@ func (a *Apiloader) LoadVM(contents []byte, validate, isUpdate bool, sshPubKeys 
 		for _, key := range sshPubKeys {
 			vm.Properties.LinuxProfile.SSHPubKeys = append(vm.Properties.LinuxProfile.SSHPubKeys, &PublicKey{KeyData: key})
 		}
+	}
+	//add flags
+	if a.DisableSNP {
+		vm.Properties.DisableSNP = true
 	}
 	if err := vm.Properties.Validate(vm.VMConfigurator, isUpdate); validate && err != nil {
 		return nil, err

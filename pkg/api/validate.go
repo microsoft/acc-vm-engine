@@ -116,10 +116,11 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 			return e
 		}
 	}
-	if (len(vm.TipNodeSessionID) == 0 && len(vm.ClusterName) != 0) || (len(vm.TipNodeSessionID) != 0 && len(vm.ClusterName) == 0) {
-		return fmt.Errorf("Must specify either both 'tip_node_session_id' and 'cluster_name', or neither")
+	if (vm.SecureBoot == nil)&&(!p.DisableSNP){
+		var temp = true 
+		vm.SecureBoot = &temp
 	}
-	if len(vm.TipNodeSessionID) == 0 {
+	if !hasOsDisk {
 		if isLinux {
 			if e := validateLinuxProfile(p.LinuxProfile); e != nil {
 				return e
