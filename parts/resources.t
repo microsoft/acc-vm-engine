@@ -134,9 +134,11 @@
       "properties": {
         "osType": "[parameters('osType')]",
         "hyperVGeneration": "V2",
+{{if not IsSNPDisabled }}       
         "securityProfile":{
           "securityType" : "{{GetSecurityType}}"
         },
+{{end}}
         "creationData": {
           "createOption": "Import",
           "storageAccountId": "[parameters('osDiskStorageAccountID')]",
@@ -185,19 +187,23 @@
       ],
       "tags":
       {
+{{if not IsSNPDisabled}}
         "Platform.SecurityType": "{{GetSecurityType}}",
+{{end}}
         "creationSource" : "['acc-vm-engine']"
       },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
+{{if not IsSNPDisabled}}
         "securityProfile": {
           "uefiSettings": {
             "secureBootEnabled": "[parameters('secureBootEnabled')]",
             "vTPMEnabled": "[parameters('vTPMEnabled')]"
           }
         },
+{{end}}
 {{if not HasAttachedOsDisk}}
         "osProfile": "[variables('osProfile')]",
 {{end}}

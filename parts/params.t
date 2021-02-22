@@ -167,7 +167,7 @@
       "metadata": {
         "description": "Cluster"
       }
-    },
+    },  {{if not IsSNPDisabled}}
     "secureBootEnabled": {
       "type": "string",
       "defaultValue": "true",
@@ -189,7 +189,7 @@
       "metadata": {
         "description": "vTPM setting of the VM."
       }
-    },
+    }, {{end}}
     "bootDiagnostics": {
       "type": "string",
       "defaultValue": "false",
