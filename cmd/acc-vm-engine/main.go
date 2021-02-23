@@ -14,7 +14,6 @@ func main() {
 	gen.Flag("config.file", "Configuration file path.").Short('c').Required().StringVar(&genCmd.configFile)
 	gen.Flag("output.directory", "Output directory.").Short('o').StringVar(&genCmd.outputDir)
 	gen.Flag("ssh.public.key", "SSH public key file path.").Short('k').StringsVar(&genCmd.sshPubKeys)
-	gen.Flag("disable-snp","Disable SNP.").Short('s').Default("false").BoolVar(&genCmd.Disable_SNP)
 
 	switch kingpin.Parse() {
 	case "generate":

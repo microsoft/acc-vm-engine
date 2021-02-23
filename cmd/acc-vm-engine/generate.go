@@ -16,7 +16,6 @@ type generateCmd struct {
 	configFile string
 	outputDir  string
 	sshPubKeys []string
-	Disable_SNP bool
 
 	// derived
 	vm *api.APIModel
@@ -60,9 +59,6 @@ func (h *generateCmd) loadAPIModel() error {
 	var err error
 
 	apiloader := &api.Apiloader{}
-	if(h.Disable_SNP) {
-		apiloader.DisableSNP = true
-	}
 
 	h.vm, err = apiloader.LoadVMFromFile(h.configFile, true, false, h.sshPubKeys)
 	if err != nil {

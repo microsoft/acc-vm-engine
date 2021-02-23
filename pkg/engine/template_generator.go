@@ -150,13 +150,10 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		"GetDataDisks": func(p *api.Properties) string {
 			return getDataDisks(p.VMProfile)
 		},
-		"IsSNPDisabled": func() bool {
-			return vm.Properties.DisableSNP
+		"IsSNPEnabled": func() bool {
+			return (*vm.Properties.VMProfile.SecureBoot == true)
 		},
 		"GetSecurityType": func() string {
-			if (vm.Properties.DisableSNP) {
-				return "None"
-			}
 			switch vm.VMCategory {
 			case api.TVM:
 				return "SecureBoot"

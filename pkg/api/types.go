@@ -44,8 +44,6 @@ type Properties struct {
 	LinuxProfile       *LinuxProfile       `json:"linux_profile,omitempty"`
 	WindowsProfile     *WindowsProfile     `json:"windows_profile,omitempty"`
 	DiagnosticsProfile *DiagnosticsProfile `json:"diagnostics_profile,omitempty"`
-	//Add some command line flags
-	DisableSNP bool `json:"ignore,omit"`
 }
 
 // OSImage represents OS Image from Azure Image Gallery

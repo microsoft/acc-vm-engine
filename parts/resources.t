@@ -134,7 +134,7 @@
       "properties": {
         "osType": "[parameters('osType')]",
         "hyperVGeneration": "V2",
-{{if not IsSNPDisabled }}       
+{{if IsSNPEnabled}}       
         "securityProfile":{
           "securityType" : "{{GetSecurityType}}"
         },
@@ -187,7 +187,7 @@
       ],
       "tags":
       {
-{{if not IsSNPDisabled}}
+{{if IsSNPEnabled}}
         "Platform.SecurityType": "{{GetSecurityType}}",
 {{end}}
         "creationSource" : "['acc-vm-engine']"
@@ -196,7 +196,7 @@
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
-{{if not IsSNPDisabled}}
+{{if IsSNPEnabled}}
         "securityProfile": {
           "uefiSettings": {
             "secureBootEnabled": "[parameters('secureBootEnabled')]",
