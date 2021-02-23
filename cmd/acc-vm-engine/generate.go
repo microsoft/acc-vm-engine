@@ -59,7 +59,6 @@ func (h *generateCmd) loadAPIModel() error {
 	var err error
 
 	apiloader := &api.Apiloader{}
-
 	h.vm, err = apiloader.LoadVMFromFile(h.configFile, true, false, h.sshPubKeys)
 	if err != nil {
 		return errors.Wrap(err, "failed to parse config file")
