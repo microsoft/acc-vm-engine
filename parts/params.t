@@ -168,7 +168,7 @@
         "description": "Cluster"
       }
     },  
-{{if IsSNPEnabled}}
+{{if  IsSecureBootEnabled}}
     "secureBootEnabled": {
       "type": "string",
       "defaultValue": "true",

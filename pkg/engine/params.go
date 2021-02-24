@@ -47,11 +47,6 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	}
 	if properties.VMProfile.SecureBoot != nil {
 		addValue(parametersMap, "secureBootEnabled", strconv.FormatBool(*properties.VMProfile.SecureBoot))
-	} else {
-		addValue(parametersMap, "secureBootEnabled", "true")
-	}
-	if (*properties.VMProfile.SecureBoot == false)	{
-		properties.VMProfile.VTPM = nil
 	}
 	if properties.VMProfile.VTPM != nil {
 		addValue(parametersMap, "vTPMEnabled", strconv.FormatBool(*properties.VMProfile.VTPM))
