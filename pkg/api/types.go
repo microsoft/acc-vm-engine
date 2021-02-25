@@ -18,20 +18,25 @@ type OSType string
 // OSName represents pre-set OS name
 type OSName string
 
+// SecurityProfile represents VM security profile
+type SecurityProfile struct {
+	SecureBoot bool `json:"secure_boot_enabled,omitempty"`
+	VTPM       bool `json:"vtpm_enabled,omitempty"`
+}
+
 // VMProfile represents the definition of a VM
 type VMProfile struct {
-	Name        string   `json:"name"`
-	OSType      OSType   `json:"os_type"`
-	OSName      OSName   `json:"os_name"`
-	OSDiskType  string   `json:"os_disk_type"`
-	OSImage     *OSImage `json:"os_image,omitempty"`
-	OSDisk      *OSDisk  `json:"os_disk,omitempty"`
-	DiskSizesGB []int    `json:"disk_sizes_gb,omitempty"`
-	VMSize      string   `json:"vm_size"`
-	Ports       []int    `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
-	HasDNSName  bool     `json:"has_dns_name"`
-	SecureBoot  *bool    `json:"secure_boot_enabled,omitempty"`
-	VTPM        *bool    `json:"vtpm_enabled,omitempty"`
+	Name            string           `json:"name"`
+	OSType          OSType           `json:"os_type"`
+	OSName          OSName           `json:"os_name"`
+	OSDiskType      string           `json:"os_disk_type"`
+	OSImage         *OSImage         `json:"os_image,omitempty"`
+	OSDisk          *OSDisk          `json:"os_disk,omitempty"`
+	DiskSizesGB     []int            `json:"disk_sizes_gb,omitempty"`
+	VMSize          string           `json:"vm_size"`
+	Ports           []int            `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
+	HasDNSName      bool             `json:"has_dns_name"`
+	SecurityProfile *SecurityProfile `json:"security_profile,omitempty"`
 
 	TipNodeSessionID string `json:"tip_node_session_id,omitempty"`
 	ClusterName      string `json:"cluster_name,omitempty"`

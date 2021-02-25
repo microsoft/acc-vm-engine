@@ -45,11 +45,9 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 		addValue(parametersMap, "adminUsername", properties.WindowsProfile.AdminUsername)
 		addValue(parametersMap, "adminPassword", properties.WindowsProfile.AdminPassword)
 	}
-	if properties.VMProfile.SecureBoot != nil {
-		addValue(parametersMap, "secureBootEnabled", strconv.FormatBool(*properties.VMProfile.SecureBoot))
-	}
-	if properties.VMProfile.VTPM != nil {
-		addValue(parametersMap, "vTPMEnabled", strconv.FormatBool(*properties.VMProfile.VTPM))
+	if properties.VMProfile.SecurityProfile != nil {
+		addValue(parametersMap, "secureBootEnabled", strconv.FormatBool(properties.VMProfile.SecurityProfile.SecureBoot))
+		addValue(parametersMap, "vTPMEnabled", strconv.FormatBool(properties.VMProfile.SecurityProfile.VTPM))
 	}
 	if len(properties.VMProfile.TipNodeSessionID) > 0 {
 		addValue(parametersMap, "tipNodeSessionId", properties.VMProfile.TipNodeSessionID)
