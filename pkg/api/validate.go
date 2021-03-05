@@ -98,7 +98,17 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	if e := validateOSDisk(vm.OSDisk); e != nil {
 		return e
 	}
-
+	if (vm.SecurityProfile != nil) {
+		if (vm.SecurityProfile.SecureBoot != "true") && (vm.SecurityProfile.SecureBoot != "false") && (vm.SecurityProfile.SecureBoot != "none"){
+			return fmt.Errorf("Invalid Entry! Only the values \"true\", \"false\" and \"none\" are allowed for secure_boot_enabled")
+		}
+		if (vm.SecurityProfile.VTPM != "true") && (vm.SecurityProfile.VTPM != "false") {
+			return fmt.Errorf("Invalid Entry! Only the values \"true\" and \"false\" are allowed for VTPM")
+		}
+		if (vm.SecurityProfile.SecureBoot == "none") && (vm.SecurityProfile.VTPM == "true") {
+			return fmt.Errorf("Invalid Entry! vTPM cannot be \"true\" when secure-boot is \"none\"")
+		}
+	}
 	if len(vm.OSDiskType) > 0 {
 		found := false
 		for _, t := range vmconf.AllowedOsDiskTypes() {

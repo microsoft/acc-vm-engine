@@ -174,7 +174,8 @@
       "defaultValue": "true",
       "allowedValues": [
         "true",
-         "false"
+        "false",
+        "none"
       ],
       "metadata": {
         "description": "Secure Boot setting of the VM."

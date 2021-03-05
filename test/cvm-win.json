@@ -12,10 +12,6 @@
       "tip_node_session_id": "aaa-bbb-ccc-ddd",
       "cluster_name": "QWERTY",
       "vm_size": "Standard_DC1as_v4",
-      "security_profile": {
-        "secure_boot_enabled": true,
-        "vtpm_enabled": true
-      },
       "ports": [3389],
       "has_dns_name": false
     }

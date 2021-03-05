@@ -34,6 +34,19 @@ func setPropertiesDefaults(vm *api.APIModel) {
 	if len(vm.Properties.VMProfile.OSDiskType) == 0 {
 		vm.Properties.VMProfile.OSDiskType = vm.VMConfigurator.DefaultOsDiskType()
 	}
+	if(vm.Properties.VMProfile.SecurityProfile == nil) {
+		vm.Properties.VMProfile.SecurityProfile = &api.SecurityProfile{ "true","true"}
+	}	else {
+			if len(vm.Properties.VMProfile.SecurityProfile.SecureBoot) == 0 {
+				vm.Properties.VMProfile.SecurityProfile.SecureBoot = "true"
+			}	
+			if len(vm.Properties.VMProfile.SecurityProfile.VTPM) == 0 {
+				vm.Properties.VMProfile.SecurityProfile.VTPM = "true"
+			}
+			if (vm.Properties.VMProfile.SecurityProfile.SecureBoot == "none") {
+				vm.Properties.VMProfile.SecurityProfile = nil
+			} 
+	}
 }
 
 func combineValues(inputs ...string) string {
