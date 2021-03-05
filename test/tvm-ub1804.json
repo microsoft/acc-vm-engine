@@ -6,10 +6,6 @@
       "os_type": "Linux",
       "os_name": "Ubuntu18.04",
       "vm_size": "Standard_D2s_v3",
-      "security_profile": {
-        "secure_boot_enabled": "true",
-        "vtpm_enabled": true
-      },
       "ports": [22],
       "has_dns_name": false
     },

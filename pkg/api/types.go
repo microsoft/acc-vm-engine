@@ -21,7 +21,7 @@ type OSName string
 // SecurityProfile represents VM security profile
 type SecurityProfile struct {
 	SecureBoot string `json:"secure_boot_enabled,omitempty"`
-	VTPM       bool `json:"vtpm_enabled,omitempty"`
+	VTPM       string `json:"vtpm_enabled,omitempty"`
 }
 
 // VMProfile represents the definition of a VM

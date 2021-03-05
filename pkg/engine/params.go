@@ -1,7 +1,6 @@
 package engine
 
 import (
-	"strconv"
 
 	"github.com/microsoft/acc-vm-engine/pkg/api"
 )
@@ -47,7 +46,7 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	}
 	if properties.VMProfile.SecurityProfile != nil {
 		addValue(parametersMap, "secureBootEnabled", properties.VMProfile.SecurityProfile.SecureBoot)
-		addValue(parametersMap, "vTPMEnabled", strconv.FormatBool(properties.VMProfile.SecurityProfile.VTPM))
+		addValue(parametersMap, "vTPMEnabled", properties.VMProfile.SecurityProfile.VTPM)
 	}
 	if len(properties.VMProfile.TipNodeSessionID) > 0 {
 		addValue(parametersMap, "tipNodeSessionId", properties.VMProfile.TipNodeSessionID)
