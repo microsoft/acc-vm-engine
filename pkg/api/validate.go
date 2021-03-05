@@ -98,7 +98,17 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	if e := validateOSDisk(vm.OSDisk); e != nil {
 		return e
 	}
-
+	if(vm.SecurityProfile == nil) {
+		vm.SecurityProfile = &SecurityProfile{ "true",false}
+	}	else {
+		if len(vm.SecurityProfile.SecureBoot) == 0 {
+			vm.SecurityProfile.SecureBoot = "true"
+		}	else if (vm.SecurityProfile.SecureBoot == "none") {
+				vm.SecurityProfile = nil
+		}	else if (vm.SecurityProfile.SecureBoot != "true") && (vm.SecurityProfile.SecureBoot != "false") {
+				return fmt.Errorf("Invalid Entry! Only the values \"true\", \"false\" and \"none\" are allowed for secure_boot_enabled")
+		}
+	}
 	if len(vm.OSDiskType) > 0 {
 		found := false
 		for _, t := range vmconf.AllowedOsDiskTypes() {

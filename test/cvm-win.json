@@ -13,7 +13,7 @@
       "cluster_name": "QWERTY",
       "vm_size": "Standard_DC1as_v4",
       "security_profile": {
-        "secure_boot_enabled": true,
+        "secure_boot_enabled": "true",
         "vtpm_enabled": true
       },
       "ports": [3389],
