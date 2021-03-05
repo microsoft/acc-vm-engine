@@ -43,13 +43,9 @@ func setPropertiesDefaults(vm *api.APIModel) {
 			if len(vm.Properties.VMProfile.SecurityProfile.VTPM) == 0 {
 				vm.Properties.VMProfile.SecurityProfile.VTPM = "true"
 			}
-			if (vm.Properties.VMProfile.SecurityProfile.SecureBoot == "none")&&(vm.Properties.VMProfile.SecurityProfile.VTPM == "none") {
+			if (vm.Properties.VMProfile.SecurityProfile.SecureBoot == "none") {
 				vm.Properties.VMProfile.SecurityProfile = nil
-			} else if (vm.Properties.VMProfile.SecurityProfile.SecureBoot == "none") {
-				vm.Properties.VMProfile.SecurityProfile.SecureBoot = ""
-			} else if (vm.Properties.VMProfile.SecurityProfile.VTPM == "none") {
-				vm.Properties.VMProfile.SecurityProfile.VTPM = ""
-			}
+			} 
 	}
 }
 
