@@ -243,4 +243,11 @@
       "metadata": {
         "description": "Kind of diagnostics storage account."
       }
-    }
+    },
+    "securityDataURL": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Security Data URL."
+      }
+    },
