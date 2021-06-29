@@ -134,16 +134,28 @@
       "properties": {
         "osType": "[parameters('osType')]",
         "hyperVGeneration": "V2",
-{{if HasSecurityProfile}}
-        "securityProfile":{
-          "securityType" : "{{GetSecurityType}}"
-        },
-{{end}}
         "creationData": {
           "createOption": "Import",
+          "sourceUri": "[parameters('osDiskURL')]",
           "storageAccountId": "[parameters('osDiskStorageAccountID')]",
-          "sourceUri": "[parameters('osDiskURL')]"
-        }
+          "securityDataUri": "[parameters('securityDataURL')]"
+        },
+{{if HasSecurityProfile}}
+        "securityProfile":{
+          "securityType" : "{{GetSecurityType}}",
+          "secureVMdiskEncryptionSetId":  "[parameters('secureVMDiskEncryptionSetId')]",
+      "uefiContents": {
+          "pk": {
+            "type": "sha256",
+            "value": "A3GfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQ+fnkGTsUkDKEyFOGwgh"
+          } , 
+          "kek ": {
+            "type": "sha256",
+            "value": "GwghR234d5GjPnMIC0RFtXtw2tdcNM8I9Qk+h6fnPHiA7r27iHBfd"
+          }
+          "efiData  ": "[parameters('efiDataURL')]"
+        },
+{{end}}
       }
     },
 {{end}}
