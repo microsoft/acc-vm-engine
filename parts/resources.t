@@ -142,18 +142,7 @@
         },
 {{if HasSecurityProfile}}
         "securityProfile":{
-          "securityType" : "{{GetSecurityType}}",
-          "secureVMdiskEncryptionSetId":  "[parameters('secureVMDiskEncryptionSetId')]",
-      "uefiContents": {
-          "pk": {
-            "type": "sha256",
-            "value": "A3GfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQ+fnkGTsUkDKEyFOGwgh"
-          } , 
-          "kek ": {
-            "type": "sha256",
-            "value": "GwghR234d5GjPnMIC0RFtXtw2tdcNM8I9Qk+h6fnPHiA7r27iHBfd"
-          }
-          "efiData  ": "[parameters('efiDataURL')]"
+          "securityType" : "{{GetSecurityType}}"
         },
 {{end}}
       }
