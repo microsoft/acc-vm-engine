@@ -143,7 +143,7 @@
 {{if HasSecurityProfile}}
         "securityProfile":{
           "securityType" : "{{GetSecurityType}}"
-        },
+        }
 {{end}}
       }
     },
