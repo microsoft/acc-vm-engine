@@ -4,7 +4,6 @@
     "vm_profile": {
       "name": "anjuli-test-cvm",
       "os_type": "Linux",
-      "secure_boot_enabled":true,
       "os_disk": {
         "vhd_url": "https://acccvmpp.blob.core.windows.net/vhds/AzureAZCC.210220.vhd",
         "vmgs_url": "https://acccvmpp.blob.core.windows.net/vhds/AzureAZCC.210220-vmgs.vhd",
