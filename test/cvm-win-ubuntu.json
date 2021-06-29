@@ -7,7 +7,8 @@
       "os_disk": {
         "vhd_url": "https://acccvmpp.blob.core.windows.net/vhds/AzureAZCC.210220.vhd",
         "vmgs_url": "https://acccvmpp.blob.core.windows.net/vhds/AzureAZCC.210220-vmgs.vhd",
-        "storage_account_id": "/subscriptions/e5839dfd-61f0-4b2f-b06f-de7fc47b5998/resourceGroups/acccvm/providers/Microsoft.Storage/storageAccounts/acccvmpp"
+        "storage_account_id": "/subscriptions/e5839dfd-61f0-4b2f-b06f-de7fc47b5998/resourceGroups/acccvm/providers/Microsoft.Storage/storageAccounts/acccvmpp",
+        "security_data_url": "https://cvmtestharieastes.blob.core.windows.net/cvmvhds/vmgscvm.vhd"
       },
       "vm_size": "Standard_DC2as_v4",
       "ports": [22],
