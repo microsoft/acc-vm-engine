@@ -250,4 +250,4 @@
       "metadata": {
         "description": "Security Data URL."
       }
-    },
+    }
