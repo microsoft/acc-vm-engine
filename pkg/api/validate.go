@@ -210,6 +210,9 @@ func validateOSDisk(p *OSDisk) error {
 	if len(p.StorageAccountID) == 0 {
 		return fmt.Errorf("OS VHD storage account ID is not set")
 	}
+	if len(p.SecurityData) == 0 {
+		return fmt.Errorf("OS Security Data URL is not set")
+	}
 	return nil
 }
 

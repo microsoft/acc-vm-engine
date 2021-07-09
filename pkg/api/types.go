@@ -65,6 +65,7 @@ type OSDisk struct {
 	VHD              string `json:"vhd_url"`
 	VMGS             string `json:"vmgs_url"`
 	StorageAccountID string `json:"storage_account_id"`
+	SecurityData     string `json:"security_data_url"`
 }
 
 // LinuxProfile represents the linux parameters passed to the cluster

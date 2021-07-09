@@ -134,16 +134,17 @@
       "properties": {
         "osType": "[parameters('osType')]",
         "hyperVGeneration": "V2",
+        "creationData": {
+          "createOption": "Import",
+          "sourceUri": "[parameters('osDiskURL')]",
+          "storageAccountId": "[parameters('osDiskStorageAccountID')]",
+          "securityDataUri": "[parameters('securityDataURL')]"
+        },
 {{if HasSecurityProfile}}
         "securityProfile":{
           "securityType" : "{{GetSecurityType}}"
-        },
-{{end}}
-        "creationData": {
-          "createOption": "Import",
-          "storageAccountId": "[parameters('osDiskStorageAccountID')]",
-          "sourceUri": "[parameters('osDiskURL')]"
         }
+{{end}}
       }
     },
 {{end}}
