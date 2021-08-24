@@ -4,6 +4,7 @@
     "vm_profile": {
       "name": "cvm-ubuntu",
       "os_image_name": "Ubuntu 20.04 LTS Gen 2",
+      "os_name": "Ubuntu20.04",
       "os_type": "Linux",
       "tip_node_session_id": "aaa-bbb-ccc-ddd",
       "cluster_name": "QWERTY",
