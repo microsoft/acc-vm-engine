@@ -74,6 +74,5 @@
                     "confidentialDiskEncryptionType" : "DiskWithPlatformKey"
           }
         }
-{{end}}
       }
     }
