@@ -52,7 +52,7 @@
     "osProfile": {
       "computername": "[parameters('vmName')]",
       "adminUsername": "[parameters('adminUsername')]",
-      "adminPassword": "[parameters('adminPassword')]",
+      "adminPasswordOrKey": "[parameters('adminPasswordOrKey')]",
 {{if IsLinux .}}
       "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
 {{else}}
