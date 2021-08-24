@@ -187,7 +187,7 @@
           "uefiSettings": {
             "secureBootEnabled": "[parameters('secureBootEnabled')]",
             "vTPMEnabled": "[parameters('vTPMEnabled')]"
-          }
+          },
           "securityType" : "{{GetVMSecurityType}}"
         },
 {{end}}
