@@ -27,6 +27,7 @@ type SecurityProfile struct {
 // VMProfile represents the definition of a VM
 type VMProfile struct {
 	Name            string           `json:"name"`
+	OSImageName     string           `json:"os_image_name"`
 	OSType          OSType           `json:"os_type"`
 	OSName          OSName           `json:"os_name"`
 	OSDiskType      string           `json:"os_disk_type"`
