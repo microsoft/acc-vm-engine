@@ -6,6 +6,11 @@
       "os_image_name": "Ubuntu 20.04 LTS Gen 2",
       "os_name": "Ubuntu20.04",
       "os_type": "Linux",
+      "os_disk": {
+        "vhd_url": "https://acccvmtestvhds.blob.core.windows.net/unencrypted/AZCC0123_UnencryptedGuestOS_ServerDatacenter.vhd",
+        "vmgs_url": "https://acccvmtestvhds.blob.core.windows.net/unencrypted/cvme2etestvmgs.vhd",
+        "storage_account_id": "/subscriptions/e5839dfd-61f0-4b2f-b06f-de7fc47b5998/resourceGroups/cvm-end2-end-test-storage/providers/Microsoft.Storage/storageAccounts/acccvmtestvhds"
+      },
       "tip_node_session_id": "aaa-bbb-ccc-ddd",
       "cluster_name": "QWERTY",
       "vm_size": "Standard_DC2as_v5",
