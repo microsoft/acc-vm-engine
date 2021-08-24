@@ -67,13 +67,6 @@
       {{GetDataDisks .}}
       "osDisk": {
         "caching": "ReadWrite",
-{{if HasAttachedOsDisk}}
-        "osType": "[parameters('osType')]",
-        "createOption": "Attach",
-        "managedDisk": {
-          "id": "[resourceId('Microsoft.Compute/disks','CustomDisk')]"
-        }
-{{else}}
         "createOption": "FromImage",
         "managedDisk": {
           "storageAccountType": "[parameters('osDiskType')]",
