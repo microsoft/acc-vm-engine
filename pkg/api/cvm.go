@@ -26,7 +26,7 @@ func (h *cvmConfigurator) OSImage() *OSImage {
 // DefaultLinuxImage returns default Linux OS image
 func (h *cvmConfigurator) OSImageName() string {
 	log.Info("OSImageName is not set")
-	return nil
+	return "Windows Server 2022 Gen 2"
 }
 
 // DefaultOsDiskType returns default OS disk type
