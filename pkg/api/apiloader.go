@@ -45,7 +45,7 @@ func (a *Apiloader) LoadVM(contents []byte, validate, isUpdate bool, sshPubKeys 
 		return nil, err
 	}
 	var osName OSName
-	if vm.Properties != nil && vm.Properties.VMProfile.OSName != nil {
+	if vm.Properties != nil && len(vm.Properties.VMProfile.OSName) > 0 {
 		osName = vm.Properties.VMProfile.OSName 
 	}
 	if vm.VMConfigurator, err = getVMConfigurator(vm.VMCategory, osName); err != nil {
