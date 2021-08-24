@@ -63,57 +63,13 @@
         "description": "OS image publisher."
       }
     },
-    "osImageOffer": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image offer."
-      }
-    },
-    "osImageSKU": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image SKU."
-      }
-    },
-    "osImageVersion": {
-      "type": "string",
-      "defaultValue": "latest",
-      "metadata": {
-        "description": "OS image version."
-      }
-    },
-    "osImageURL": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image URL."
-      }
-    },
-    "osDiskURL": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS VHD URL."
-      }
-    },
-    "osDiskVmgsURL": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS VMGS URL."
-      }
-    },
-    "osDiskStorageAccountID": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "ID of the OS disk storage account."
-      }
-    },
     "osDiskType": {
       "type": "string",
+      "defaultValue": "StandardSSD_LRS",
+      "allowedValues": [
+        "Premium_LRS",
+        "StandardSSD_LRS"
+      ],
       {{GetOsDiskTypes}}
       "metadata": {
         "description": "Type of managed disk to create."
