@@ -10,6 +10,10 @@
       "vm_size": "Standard_DC2as_v5",
       "ports": [3389],
       "has_dns_name": false
+    },
+    "windows_profile": {
+      "admin_username": "acctestuser",
+      "admin_password": "accpassword"
     }
   }
 }
