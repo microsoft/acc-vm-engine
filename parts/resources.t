@@ -1,4 +1,4 @@
-    {
+ {
       "apiVersion": "2018-05-01",
       "name": "[concat('ResourceGroupDeployment-', uniqueString(deployment().name))]",
       "type": "Microsoft.Resources/deployments",
@@ -170,28 +170,13 @@
 {{end}}
     {
       "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2020-12-01",
+      "apiVersion": "2021-07-01",
       "name": "[parameters('vmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-{{if HasCustomOsImage}}
-        "CustomImage",
-{{end}}
-{{if HasAttachedOsDisk}}
-        "CustomDisk",
-{{end}}
-{{if HasTipNodeSession}}
-        "[variables('availabilitySetName')]",
-{{end}}
+        "[variables('diskName')]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
-      "tags":
-      {
-{{if HasSecurityProfile}}
-        "Platform.SecurityType": "{{GetSecurityType}}",
-{{end}}
-        "creationSource" : "['acc-vm-engine']"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
@@ -202,6 +187,7 @@
             "secureBootEnabled": "[parameters('secureBootEnabled')]",
             "vTPMEnabled": "[parameters('vTPMEnabled')]"
           }
+          "securityType" : "{{GetVMSecurityType}}"
         },
 {{end}}
 {{if not HasAttachedOsDisk}}
