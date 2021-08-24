@@ -16,6 +16,7 @@ type Apiloader struct {
 // VMConfigurator manages VM specific configuration
 type VMConfigurator interface {
 	DefaultVMName() string
+	OSImage() *OSImage
 	OSImageName() *OSImageName
 	DefaultOsDiskType() string
 	AllowedOsDiskTypes() []string
