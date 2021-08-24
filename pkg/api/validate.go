@@ -61,7 +61,7 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	if len(vm.OSType) == 0 {
 		return fmt.Errorf("OSType is not specified")
 	}
-	hasOsImage := (len(vm.OSName) > 0 || vm.OSImage != nil || len(vm.OSImageName) > 0)
+// 	hasOsImage := (len(vm.OSName) > 0 || vm.OSImage != nil || len(vm.OSImageName) > 0)
 	hasOsDisk := (vm.OSDisk != nil)
 
 // 	if hasOsImage {
