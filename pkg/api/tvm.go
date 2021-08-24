@@ -81,12 +81,11 @@ func (h *tvmConfigurator) OSImage() *OSImage {
 	return tvmOSImageMap[h.osName]
 }
 
-func (h *tvmConfigurator) OSImageName() *OSImageName {
+func (h *tvmConfigurator) OSImageName() string {
 	if len(h.osName) == 0 {
-		log.Fatal("OSNameName is not set")
+		log.Fatal("OSImageName is not set")
 	}
-	var osImageName OSImageName
-	return &osImageName
+	return ""
 }
 
 // DefaultOsDiskType returns default OS disk type
