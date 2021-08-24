@@ -36,6 +36,7 @@
     "nsgName": "[concat(parameters('vmName'), '-nsg')]",
     "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('nsgName'))]",
     "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('subnetName'))]",
+    "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
     "linuxConfiguration": {
       "disablePasswordAuthentication": "true",
       "ssh": {{GetLinuxPublicKeys}}
