@@ -120,8 +120,8 @@
 {{if HasAttachedOsDisk}}
     {
       "type": "Microsoft.Compute/disks",
-      "apiVersion": "2020-12-01",
-      "name": "CustomDisk",
+      "apiVersion": "2021-04-01",
+      "name": "[variables('diskName')]",
       "location": "[resourceGroup().location]",
 {{if HasAttachedOsDiskVMGS}}
       "tags": {
@@ -129,10 +129,10 @@
      },
 {{end}}
       "sku": {
-        "name": "Standard_LRS"
+        "name": "[parameters('osDiskType')]"
       },
       "properties": {
-        "osType": "[parameters('osType')]",
+        "osType": "[if(variables('isWindows'), 'Windows', 'Linux')]",
         "hyperVGeneration": "V2",
 {{if HasSecurityProfile}}
         "securityProfile":{
@@ -140,9 +140,10 @@
         },
 {{end}}
         "creationData": {
-          "createOption": "Import",
-          "storageAccountId": "[parameters('osDiskStorageAccountID')]",
-          "sourceUri": "[parameters('osDiskURL')]"
+          "createOption": "FromImage",
+          "imageReference": {
+            "id": "[variables('imageDiskReferenceId')]"
+          }
         }
       }
     },
