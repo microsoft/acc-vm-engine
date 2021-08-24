@@ -29,7 +29,7 @@
         "description": "Username for the Virtual Machine."
       }
     },
-    "adminPassword": {
+    "adminPasswordOrKey": {
       "type": "securestring",
       "defaultValue": "",
       "metadata": {
