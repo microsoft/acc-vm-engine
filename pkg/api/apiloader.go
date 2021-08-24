@@ -17,7 +17,7 @@ type Apiloader struct {
 type VMConfigurator interface {
 	DefaultVMName() string
 	OSImage() *OSImage
-	OSImageName() *OSImageName
+	OSImageName() string
 	DefaultOsDiskType() string
 	AllowedOsDiskTypes() []string
 	AllowedVMSizes() []string
@@ -44,15 +44,11 @@ func (a *Apiloader) LoadVM(contents []byte, validate, isUpdate bool, sshPubKeys 
 	if err != nil {
 		return nil, err
 	}
-	var osImageName OSImageName
 	var osName OSName
-	if vm.Properties != nil && vm.Properties.VMProfile.OSImageName != nil {
-		osImageName = vm.Properties.VMProfile.OSImageName 
-	}
 	if vm.Properties != nil && vm.Properties.VMProfile.OSName != nil {
 		osName = vm.Properties.VMProfile.OSName 
 	}
-	if vm.VMConfigurator, err = getVMConfigurator(vm.VMCategory, osImageName, osName); err != nil {
+	if vm.VMConfigurator, err = getVMConfigurator(vm.VMCategory, osName); err != nil {
 		return nil, err
 	}
 	// add SSH public keys from command line arguments
@@ -72,7 +68,7 @@ func (a *Apiloader) SerializeVM(vm *APIModel) ([]byte, error) {
 	return helpers.JSONMarshalIndent(vm, "", "  ", false)
 }
 
-func getVMConfigurator(vmcat VMCategory, osImageName OSImageName, osName OSName) (VMConfigurator, error) {
+func getVMConfigurator(vmcat VMCategory, osName OSName) (VMConfigurator, error) {
 	switch vmcat {
 	case TVM:
 		return NewTVMConfigurator(osName)
