@@ -49,20 +49,6 @@
         "description": "OS Image for the Virtual Machine"
       }
     },
-    "osType": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS type."
-      }
-    },
-    "osImagePublisher": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image publisher."
-      }
-    },
     "osDiskType": {
       "type": "string",
       "defaultValue": "StandardSSD_LRS",
@@ -130,13 +116,6 @@
         "description": "TIP Node session ID"
       }
     },
-    "clusterName": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Cluster"
-      }
-    },  
 {{if HasSecurityProfile}}
     "secureBootEnabled": {
       "type": "string",
