@@ -56,7 +56,6 @@
         "Premium_LRS",
         "StandardSSD_LRS"
       ],
-      {{GetOsDiskTypes}}
       "metadata": {
         "description": "Type of managed disk to create."
       }
@@ -150,45 +149,5 @@
       ],
       "metadata": {
         "description": "Boot diagnostics setting of the VM."
-      }
-    },
-    "diagnosticsStorageAccountNewOrExisting": {
-      "type": "string",
-      "defaultValue": "new",
-      "allowedValues": [
-        "new",
-        "existing"
-      ],
-      "metadata": {
-        "description": "Determines whether or not a new storage account should be provisioned."
-      }
-    },
-    "diagnosticsStorageAccountName": {
-      "type": "string",
-      "defaultValue": "none",
-      "metadata": {
-        "description": "Name of the diagnostics storage account."
-      }
-    },
-    "diagnosticsStorageAccountType": {
-      "type": "string",
-      "defaultValue": "Standard_LRS",
-      "allowedValues": [
-        "Standard_LRS",
-        "Standard_GRS"
-      ],
-      "metadata": {
-        "description": "Type of diagnostics storage account."
-      }
-    },
-    "diagnosticsStorageAccountKind": {
-      "type": "string",
-      "defaultValue": "Storage",
-      "allowedValues": [
-        "Storage",
-        "StorageV2"
-      ],
-      "metadata": {
-        "description": "Kind of diagnostics storage account."
       }
     }
