@@ -158,7 +158,17 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 			case api.TVM:
 				return "SecureBoot"
 			case api.CVM:
-				return "MemoryEncryption"
+				return "ConfidentialVM_DiskEncryptedWithPlatformKey"
+			default:
+				return "None"
+			}
+		},
+		"GetVMSecurityType": func() string {
+			switch vm.VMCategory {
+			case api.TVM:
+				return ""
+			case api.CVM:
+				return "ConfidentialVM"
 			default:
 				return "None"
 			}
