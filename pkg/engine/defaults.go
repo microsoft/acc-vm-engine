@@ -31,6 +31,9 @@ func setPropertiesDefaults(vm *api.APIModel) {
 	if vm.Properties.VMProfile.OSImage == nil && vm.Properties.VMProfile.OSDisk == nil {
 		vm.Properties.VMProfile.OSImage = vm.VMConfigurator.OSImage()
 	}
+	if vm.Properties.VMProfile.OSImageName == nil {
+		vm.Properties.VMProfile.OSImageName = vm.VMConfigurator.OSImageName()
+	}
 	if len(vm.Properties.VMProfile.OSDiskType) == 0 {
 		vm.Properties.VMProfile.OSDiskType = vm.VMConfigurator.DefaultOsDiskType()
 	}
