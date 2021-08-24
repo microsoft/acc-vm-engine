@@ -64,24 +64,24 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	hasOsImage := (len(vm.OSName) > 0 || vm.OSImage != nil || len(vm.OSImageName) > 0)
 	hasOsDisk := (vm.OSDisk != nil)
 
-	if hasOsImage {
-		if len(vm.OSName) == 0 {
-			if vm.OSImage == nil && vm.OSImageName == nil {
-				return fmt.Errorf("Either OSName or OSImage should be specified")
-			}
-		} else {
-			if vm.OSImage != nil {
-				return fmt.Errorf("Cannot have OSName and OSImage both specified")
-			}
-		}
-	}
+// 	if hasOsImage {
+// 		if len(vm.OSName) == 0 {
+// 			if vm.OSImage == nil && vm.OSImageName == nil {
+// 				return fmt.Errorf("Either OSName or OSImage should be specified")
+// 			}
+// 		} else {
+// 			if vm.OSImage != nil {
+// 				return fmt.Errorf("Cannot have OSName and OSImage both specified")
+// 			}
+// 		}
+// 	}
 
-	if hasOsImage && hasOsDisk {
-		return fmt.Errorf("OS image and disk are mutually exclusive")
-	}
-	if !hasOsImage && !hasOsDisk {
-		return fmt.Errorf("Neither OS image nor disk are specified")
-	}
+// 	if hasOsImage && hasOsDisk {
+// 		return fmt.Errorf("OS image and disk are mutually exclusive")
+// 	}
+// 	if !hasOsImage && !hasOsDisk {
+// 		return fmt.Errorf("Neither OS image nor disk are specified")
+// 	}
 
 	switch vm.OSType {
 	case Linux:
@@ -92,11 +92,11 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 		return fmt.Errorf("OS type '%s' is not supported", vm.OSType)
 	}
 
-	if e := validateOSImage(vm.OSImage); e != nil {
-		return e
-	}
-	if e := validateOSDisk(vm.OSDisk); e != nil {
-		return e
+// 	if e := validateOSImage(vm.OSImage); e != nil {
+// 		return e
+// 	}
+// 	if e := validateOSDisk(vm.OSDisk); e != nil {
+// 		return e
 	}
 	if (vm.SecurityProfile != nil) {
 		if (vm.SecurityProfile.SecureBoot != "true") && (vm.SecurityProfile.SecureBoot != "false") && (vm.SecurityProfile.SecureBoot != "none"){
