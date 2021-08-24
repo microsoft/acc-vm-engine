@@ -99,24 +99,6 @@
         "name": "[parameters('diagnosticsStorageAccountType')]"
       }
     },
-{{if HasCustomOsImage}}
-     {
-      "type": "Microsoft.Compute/images",
-      "apiVersion": "2018-06-01",
-      "name": "CustomImage",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "storageProfile": {
-          "osDisk": {
-            "osType": "[parameters('osType')]",
-            "osState": "Generalized",
-            "blobUri": "[parameters('osImageURL')]",
-            "storageAccountType": "Standard_LRS"
-          }
-        }
-      }
-    },
-{{end}}
 {{if HasAttachedOsDisk}}
     {
       "type": "Microsoft.Compute/disks",
