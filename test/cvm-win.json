@@ -3,15 +3,11 @@
   "properties": {
     "vm_profile": {
       "name": "cvm-win",
+      "os_image_name": "Windows Server 2022 Gen 2",
       "os_type": "Windows",
-      "os_disk": {
-        "vhd_url": "https://mystorage.blob.core.windows.net/vhds/osdisk.vhd",
-        "vmgs_url": "https://mystorage.blob.core.windows.net/vhds/vmgsdata.vhd",
-        "storage_account_id": "/subscriptions/12345/resourceGroups/myresourcegroup/providers/Microsoft.Storage/storageAccounts/mystorage"
-      },
       "tip_node_session_id": "aaa-bbb-ccc-ddd",
       "cluster_name": "QWERTY",
-      "vm_size": "Standard_DC1as_v4",
+      "vm_size": "Standard_DC2as_v5",
       "ports": [3389],
       "has_dns_name": false
     }
