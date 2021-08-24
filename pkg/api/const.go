@@ -26,6 +26,7 @@ const (
 	Windows OSType = "Windows"
 
 	Ubuntu1804                   OSName = "Ubuntu18.04"
+	Ubuntu2004                   OSName = "Ubuntu20.04"
 	Windows10                    OSName = "Windows10"
 	WindowsServer2016            OSName = "WindowsServer2016"
 	WindowsServer2019            OSName = "WindowsServer2019"
