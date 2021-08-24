@@ -23,6 +23,12 @@ func (h *cvmConfigurator) OSImage() *OSImage {
 	return nil
 }
 
+// DefaultLinuxImage returns default Linux OS image
+func (h *cvmConfigurator) OSImageName() *OSImageName {
+	log.Info("OSImage is not set")
+	return nil
+}
+
 // DefaultOsDiskType returns default OS disk type
 func (h *cvmConfigurator) DefaultOsDiskType() string {
 	return "Premium_LRS"
