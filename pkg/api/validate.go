@@ -66,7 +66,7 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 
 	if hasOsImage {
 		if len(vm.OSName) == 0 {
-			if vm.OSImage == nil {
+			if vm.OSImage == nil && vm.OSImageName == nil {
 				return fmt.Errorf("Either OSName or OSImage should be specified")
 			}
 		} else {
