@@ -123,11 +123,6 @@
       "apiVersion": "2021-04-01",
       "name": "[variables('diskName')]",
       "location": "[resourceGroup().location]",
-{{if HasAttachedOsDiskVMGS}}
-      "tags": {
-        "VmgsBlobUri": "[parameters('osDiskVmgsURL')]"
-     },
-{{end}}
       "sku": {
         "name": "[parameters('osDiskType')]"
       },
