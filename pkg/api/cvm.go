@@ -24,8 +24,8 @@ func (h *cvmConfigurator) OSImage() *OSImage {
 }
 
 // DefaultLinuxImage returns default Linux OS image
-func (h *cvmConfigurator) OSImageName() *OSImageName {
-	log.Info("OSImage is not set")
+func (h *cvmConfigurator) OSImageName() string {
+	log.Info("OSImageName is not set")
 	return nil
 }
 
