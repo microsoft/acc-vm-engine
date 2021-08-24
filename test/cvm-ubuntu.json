@@ -1,0 +1,17 @@
+		{
+		  "vm_category": "CVM",
+		  "properties": {
+		    "vm_profile": {
+		      "name": "anjuli-cvm-ubuntu-test",
+		      "os_type": "Linux",
+		      "os_disk": {
+		        "vhd_url": "https://accdatcvmcirrusbitseus.blob.core.windows.net/vhds/encrypted/maaprod/ubuntu2004/latest_ubuntu2004_1k_lsvmload_opt.vhd",
+		        "vmgs_url": "https://accdatcvmcirrusbitseus.blob.core.windows.net/vhds/encrypted/maaprod/ubuntu2004/latest_ubuntu2004_1k_lsvmload_opt_vmgs.vhd",
+		        "storage_account_id": "/subscriptions/e5839dfd-61f0-4b2f-b06f-de7fc47b5998/resourceGroups/acccvm/providers/Microsoft.Storage/storageAccounts/acccvmpp"
+		      },
+		      "vm_size": "Standard_DC2as_v5",
+		      "ports": [22],
+		      "has_dns_name": false
+		    }
+		  }
+}
