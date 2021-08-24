@@ -18,6 +18,9 @@ type OSType string
 // OSName represents pre-set OS name
 type OSName string
 
+// OSImageName represents pre-set OS image name
+type OSImageName string
+
 // SecurityProfile represents VM security profile
 type SecurityProfile struct {
 	SecureBoot string `json:"secure_boot_enabled,omitempty"`
@@ -27,7 +30,7 @@ type SecurityProfile struct {
 // VMProfile represents the definition of a VM
 type VMProfile struct {
 	Name            string           `json:"name"`
-	OSImageName     string           `json:"os_image_name"`
+	OSImageName     OSImageName      `json:"os_image_name"`
 	OSType          OSType           `json:"os_type,omitempty"`
 	OSName          OSName           `json:"os_name,omitempty"`
 	OSDiskType      string           `json:"os_disk_type"`
