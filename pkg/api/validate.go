@@ -97,7 +97,7 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 // 	}
 // 	if e := validateOSDisk(vm.OSDisk); e != nil {
 // 		return e
-	}
+// 	}
 	if (vm.SecurityProfile != nil) {
 		if (vm.SecurityProfile.SecureBoot != "true") && (vm.SecurityProfile.SecureBoot != "false") && (vm.SecurityProfile.SecureBoot != "none"){
 			return fmt.Errorf("Invalid Entry! Only the values \"true\", \"false\" and \"none\" are allowed for secure_boot_enabled")
