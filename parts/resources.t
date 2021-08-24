@@ -110,7 +110,6 @@
       },
       "properties": {
         "osType": "[if(variables('isWindows'), 'Windows', 'Linux')]",
-        "hyperVGeneration": "V2",
 {{if HasSecurityProfile}}
         "securityProfile":{
           "securityType" : "{{GetSecurityType}}"
@@ -122,27 +121,6 @@
             "id": "[variables('imageDiskReferenceId')]"
           }
         }
-      }
-    },
-{{end}}
-{{if HasTipNodeSession}}
-    {
-      "type": "Microsoft.Compute/availabilitySets",
-      "apiVersion": "2020-06-01",
-      "name": "[variables('availabilitySetName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "platformUpdateDomainCount": "1",
-        "platformFaultDomainCount": "1",
-        "internalData": {
-          "pinnedFabricCluster": "[parameters('clusterName')]"
-        }
-      },
-      "tags": {
-        "TipNode.SessionId": "[parameters('tipNodeSessionId')]"
-      },
-      "sku": {
-        "name": "aligned"
       }
     },
 {{end}}
