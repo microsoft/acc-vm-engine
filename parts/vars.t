@@ -48,7 +48,6 @@
 {{if HasTipNodeSession}}
     "availabilitySetName": "[concat(parameters('vmName'), '-availSet')]",
 {{end}}
-{{if not HasAttachedOsDisk}}
     "osProfile": {
       "computername": "[parameters('vmName')]",
       "adminUsername": "[parameters('adminUsername')]",
@@ -59,11 +58,8 @@
       "windowsConfiguration": "[variables('windowsConfiguration')]"
 {{end}}
     },
-{{end}}
     "storageProfile": {
-{{if not HasAttachedOsDisk}}
       "imageReference": {"[variables('imageReference')]"},
-{{end}}
       {{GetDataDisks .}}
       "osDisk": {
         "caching": "ReadWrite",
