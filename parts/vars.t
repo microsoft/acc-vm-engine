@@ -73,18 +73,4 @@
 {{else}}
       "windowsConfiguration": "[variables('windowsConfiguration')]"
 {{end}}
-    },
-    "storageProfile": {
-      "imageReference": {"[variables('imageReference')]"},
-      {{GetDataDisks .}}
-      "osDisk": {
-        "caching": "ReadWrite",
-        "createOption": "FromImage",
-        "managedDisk": {
-          "storageAccountType": "[parameters('osDiskType')]",
-          "securityProfile": {
-                    "confidentialDiskEncryptionType" : "DiskWithPlatformKey"
-          }
-        }
-      }
     }
