@@ -19,7 +19,7 @@
         "sshPublicKey"
       ],
       "metadata": {
-        "description": "Type of authentication to use on Linux virtual machine."
+        "description": "Type of authentication to use on virtual machine (password for Windows, ssh public key for Linux)."
       }
     },
     "adminUsername": {
@@ -33,7 +33,7 @@
       "type": "securestring",
       "defaultValue": "",
       "metadata": {
-        "description": "Password for the Virtual Machine."
+        "description": "Password or ssh public key for the Virtual Machine."
       }
     },
     "osImageName": {
@@ -46,7 +46,7 @@
         "Ubuntu 18.04 LTS Gen 2"
       ],
       "metadata": {
-        "description": "OS Image for the Virtual Machine"
+        "description": "OS image name for the Virtual Machine"
       }
     },
     "osDiskType": {
