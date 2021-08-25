@@ -75,11 +75,11 @@ type WindowsProfile struct {
 
 // VnetProfile represents the definition of a vnet
 type VnetProfile struct {
-	VnetResourceGroup string `json:"vnetResourceGroup,omitempty"`
-	VnetName          string `json:"vnetName,omitempty"`
-	VnetAddress       string `json:"vnetAddress,omitempty"`
-	SubnetName        string `json:"subnetName,omitempty"`
-	SubnetAddress     string `json:"subnetAddress,omitempty"`
+	VnetResourceGroup 	string `json:"vnetResourceGroup,omitempty"`
+	VirtualNetworkName  string `json:"virtualNetworkName,omitempty"`
+	VnetAddress       	string `json:"vnetAddress,omitempty"`
+	SubnetName        	string `json:"subnetName,omitempty"`
+	SubnetAddress     	string `json:"subnetAddress,omitempty"`
 }
 
 // DiagnosticsProfile contains settings to on/off boot diagnostics collection
@@ -97,7 +97,7 @@ type PublicKey struct {
 
 // IsCustomVNET returns true if the customer brought their own VNET
 func (p *VnetProfile) IsCustomVNET() bool {
-	return len(p.VnetResourceGroup) > 0 && len(p.VnetName) > 0 && len(p.SubnetName) > 0
+	return len(p.VnetResourceGroup) > 0 && len(p.VirtualNetworkName) > 0 && len(p.SubnetName) > 0
 }
 
 // HasAzureGalleryImage returns true if Azure Image Gallery is used

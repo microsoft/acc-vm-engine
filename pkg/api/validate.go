@@ -163,7 +163,7 @@ func (p *Properties) validateVnetProfile() error {
 	}
 	// existing vnet is uniquely defined by resource group, vnet name, and subnet name
 	if len(h.VnetResourceGroup) > 0 {
-		if len(h.VnetName) == 0 {
+		if len(h.VirtualNetworkName) == 0 {
 			return fmt.Errorf("vnetProfile.vnetName cannot be empty for existing vnet")
 		}
 		if len(h.SubnetName) == 0 {

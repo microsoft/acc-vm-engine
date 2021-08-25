@@ -83,15 +83,6 @@
         "description": "Determines whether or not a new virtual network should be provisioned"
       }
     },
-    "vnetName": {
-      "type": "string",
-      "defaultValue": "[concat(resourceGroup().name, '-vnet')]",
-      "metadata": {
-        "description": "Name of the virtual network (alphanumeric, hyphen, underscore, period)."
-      },
-      "minLength": 2,
-      "maxLength": 64
-    },
     "vnetResourceGroupName": {
       "type": "string",
       "defaultValue": "[resourceGroup().name]",

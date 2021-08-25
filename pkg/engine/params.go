@@ -36,7 +36,7 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	if properties.VnetProfile.IsCustomVNET() {
 		addValue(parametersMap, "vnetNewOrExisting", "existing")
 		addValue(parametersMap, "vnetResourceGroupName", properties.VnetProfile.VnetResourceGroup)
-		addValue(parametersMap, "vnetName", properties.VnetProfile.VnetName)
+		addValue(parametersMap, "virtualNetworkName", properties.VnetProfile.VirtualNetworkName)
 		addValue(parametersMap, "subnetName", properties.VnetProfile.SubnetName)
 	} else {
 		addValue(parametersMap, "vnetNewOrExisting", "new")
