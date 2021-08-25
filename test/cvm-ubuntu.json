@@ -10,9 +10,9 @@
       "has_dns_name": false
     },
     "linux_profile": {
-      "authentication_type": "sshpublickey",
+      "authentication_type": "password",
       "admin_username": "acctestuser",
-      "admin_password_or_key": "ssh_key_here"
+      "admin_password_or_key": "Password1234!"
     }
   }
 }
