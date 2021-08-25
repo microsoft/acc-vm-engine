@@ -61,27 +61,6 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	if len(vm.OSType) == 0 {
 		return fmt.Errorf("OSType is not specified")
 	}
-// 	hasOsImage := (len(vm.OSName) > 0 || vm.OSImage != nil || len(vm.OSImageName) > 0)
-	hasOsDisk := (vm.OSDisk != nil)
-
-// 	if hasOsImage {
-// 		if len(vm.OSName) == 0 {
-// 			if vm.OSImage == nil && vm.OSImageName == nil {
-// 				return fmt.Errorf("Either OSName or OSImage should be specified")
-// 			}
-// 		} else {
-// 			if vm.OSImage != nil {
-// 				return fmt.Errorf("Cannot have OSName and OSImage both specified")
-// 			}
-// 		}
-// 	}
-
-// 	if hasOsImage && hasOsDisk {
-// 		return fmt.Errorf("OS image and disk are mutually exclusive")
-// 	}
-// 	if !hasOsImage && !hasOsDisk {
-// 		return fmt.Errorf("Neither OS image nor disk are specified")
-// 	}
 
 	switch vm.OSType {
 	case Linux:
@@ -92,12 +71,6 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 		return fmt.Errorf("OS type '%s' is not supported", vm.OSType)
 	}
 
-// 	if e := validateOSImage(vm.OSImage); e != nil {
-// 		return e
-// 	}
-// 	if e := validateOSDisk(vm.OSDisk); e != nil {
-// 		return e
-// 	}
 	if (vm.SecurityProfile != nil) {
 		if (vm.SecurityProfile.SecureBoot != "true") && (vm.SecurityProfile.SecureBoot != "false") && (vm.SecurityProfile.SecureBoot != "none"){
 			return fmt.Errorf("Invalid Entry! Only the values \"true\", \"false\" and \"none\" are allowed for secure_boot_enabled")
@@ -128,17 +101,6 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	}
 	if (len(vm.TipNodeSessionID) == 0 && len(vm.ClusterName) != 0) || (len(vm.TipNodeSessionID) != 0 && len(vm.ClusterName) == 0) {
 		return fmt.Errorf("Must specify either both 'tip_node_session_id' and 'cluster_name', or neither")
-	}
-	if !hasOsDisk {
-		if isLinux {
-			if e := validateLinuxProfile(p.LinuxProfile); e != nil {
-				return e
-			}
-		} else {
-			if e := validateWindowsProfile(p.WindowsProfile); e != nil {
-				return e
-			}
-		}
 	}
 	return nil
 }
@@ -196,19 +158,6 @@ func validateOSImage(p *OSImage) error {
 			return fmt.Errorf("OS image SKU is not set")
 		}
 		// version is optional
-	}
-	return nil
-}
-
-func validateOSDisk(p *OSDisk) error {
-	if p == nil {
-		return nil
-	}
-	if len(p.VHD) == 0 {
-		return fmt.Errorf("OS VHD URL is not set")
-	}
-	if len(p.StorageAccountID) == 0 {
-		return fmt.Errorf("OS VHD storage account ID is not set")
 	}
 	return nil
 }
