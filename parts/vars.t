@@ -38,6 +38,7 @@
     "virtualNetworkName": "[concat(parameters('vmName'), '-vnet')]",
     "virtualNetworkId": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('virtualNetworkId'), '/subnets/', variables('subnetName'))]",
+    "subnetName": "[concat(parameters('vmName'), 'Subnet')]",
     "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('subnetName'))]",
     "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
     "linuxConfiguration": {
