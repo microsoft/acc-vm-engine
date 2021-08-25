@@ -24,7 +24,6 @@
         "version": "0.0.1"
       }
     },
-    "hasTipNodeSession": "[not(or(empty(parameters('tipNodeSessionId')), empty(parameters('clusterName'))))]",
     "imageReference": "[variables('imageList')[parameters('osImageName')]]",
     "imagePublisher": "[variables('imageReference')['publisher']]",
     "imageOffer": "[variables('imageReference')['offer']]",
