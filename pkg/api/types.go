@@ -62,6 +62,7 @@ type OSImage struct {
 
 // LinuxProfile represents the linux parameters passed to the cluster
 type LinuxProfile struct {
+	AuthenticationType 	string       	`json:"authentication_type" validate:"required"`
 	AdminUsername 		string       	`json:"admin_username" validate:"required"`
 	AdminPasswordOrKey  string       	`json:"admin_password_or_key"`
 	SSHPubKeys    		[]*PublicKey 	`json:"ssh_public_keys"`
