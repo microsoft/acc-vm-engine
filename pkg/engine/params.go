@@ -11,7 +11,6 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 
 	addValue(parametersMap, "vmName", properties.VMProfile.Name)
 	addValue(parametersMap, "vmSize", properties.VMProfile.VMSize)
-	addValue(parametersMap, "osType", properties.VMProfile.OSType)
 	addValue(parametersMap, "osImageName", properties.VMProfile.OSImageName)
 	if len(properties.VMProfile.OSDiskType) > 0 {
 		addValue(parametersMap, "osDiskType", properties.VMProfile.OSDiskType)
