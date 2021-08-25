@@ -9,6 +9,11 @@
       "vm_size": "Standard_DC2as_v5",
       "ports": [22],
       "has_dns_name": false
+    },
+    "linux_profile": {
+      "authentication_type": "sshpublickey",
+      "admin_username": "acctestuser",
+      "admin_password_or_key": "ssh_key_here"
     }
   }
 }
