@@ -4,14 +4,7 @@
     "vm_profile": {
       "name": "cvm-win",
       "os_image_name": "Windows Server 2022 Gen 2",
-      "os_disk": {
-        "vhd_url": "https://acccvmtestvhds.blob.core.windows.net/unencrypted/AZCC0123_UnencryptedGuestOS_ServerDatacenter.vhd",
-        "vmgs_url": "https://acccvmtestvhds.blob.core.windows.net/unencrypted/cvme2etestvmgs.vhd",
-        "storage_account_id": "/subscriptions/e5839dfd-61f0-4b2f-b06f-de7fc47b5998/resourceGroups/cvm-end2-end-test-storage/providers/Microsoft.Storage/storageAccounts/acccvmtestvhds"
-      },
       "os_type": "Windows",
-      "tip_node_session_id": "aaa-bbb-ccc-ddd",
-      "cluster_name": "QWERTY",
       "vm_size": "Standard_DC2as_v5",
       "ports": [3389],
       "has_dns_name": false
