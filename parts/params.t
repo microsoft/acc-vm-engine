@@ -62,10 +62,11 @@
     },
     "securityType": {
       "type": "string",
-      "defaultValue": "MemoryEncryption",
+      "defaultValue": "Unencrypted",
       "allowedValues": [
-          "Unencrypted",
-          "MemoryEncryption"
+        "Unencrypted",
+        "VMGuestStateOnly",
+        "DiskWithVMGuestState"
       ],
       "metadata": {
           "description": "VM security type."

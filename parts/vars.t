@@ -24,6 +24,7 @@
         "version": "0.0.1"
       }
     },
+    "hasTipNodeSession": "[not(or(empty(parameters('tipNodeSessionId')), empty(parameters('clusterName'))))]",
     "imageReference": "[variables('imageList')[parameters('osImageName')]]",
     "imagePublisher": "[variables('imageReference')['publisher']]",
     "imageOffer": "[variables('imageReference')['offer']]",
@@ -37,13 +38,30 @@
     "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('nsgName'))]",
     "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('subnetName'))]",
     "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
-    "isMemoryEncrypted": "[equals(parameters('securityType'), 'MemoryEncryption')]",
     "linuxConfiguration": {
       "disablePasswordAuthentication": "true",
       "ssh": {{GetLinuxPublicKeys}}
     },
     "windowsConfiguration": {
       "provisionVmAgent": "true"
+    },
+    "isMemoryUnencrypted": "[equals(parameters('securityType'), 'Unencrypted')]",
+    "diskSecurityType": {
+        "Unencrypted": "",
+        "VMGuestStateOnly": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
+        "DiskWithVMGuestState": "ConfidentialVM_DiskEncryptedWithPlatformKey"
+    },
+    "diskSecurityProfile": {
+        "SecurityType": "[variables('diskSecurityType')[parameters('securityType')]]"
+    },
+    "vmStorageProfileManagedDisk": {
+      "storageAccountType": "[parameters('osDiskType')]"
+    },
+    "vmStorageProfileManagedDiskEncrypted": {
+      "storageAccountType": "[parameters('osDiskType')]",
+      "securityProfile": {
+          "confidentialDiskEncryptionType" : "[parameters('securityType')]"
+      }
     },
     "diagnosticsStorageAction": "[if(equals(parameters('bootDiagnostics'), 'false'), 'nop', parameters('diagnosticsStorageAccountNewOrExisting'))]",
     "osProfile": {

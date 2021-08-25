@@ -109,11 +109,7 @@
       },
       "properties": {
         "osType": "[if(variables('isWindows'), 'Windows', 'Linux')]",
-{{if HasSecurityProfile}}
-        "securityProfile":{
-          "securityType" : "{{GetSecurityType}}"
-        },
-{{end}}
+        "SecurityProfile": "[if(variables('isMemoryUnencrypted'), json('null'), variables('diskSecurityProfile'))]",
         "creationData": {
           "createOption": "FromImage",
           "imageReference": {
@@ -145,7 +141,13 @@
         },
 {{end}}
         "osProfile": "[variables('osProfile')]",
-        "storageProfile": "[variables('storageProfile')]",
+        "storageProfile": {
+          "osDisk": {
+            "createOption": "fromImage",
+            "managedDisk": "[if(variables('isMemoryUnencrypted'), variables('vmStorageProfileManagedDisk'), variables('vmStorageProfileManagedDiskEncrypted'))]"
+          },
+          "imageReference": "[variables('imageReference')]"
+        },
         "networkProfile": {
           "networkInterfaces": [
             {
