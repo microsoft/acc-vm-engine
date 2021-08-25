@@ -83,17 +83,6 @@
       }
     },
     {
-      "condition": "[equals(variables('diagnosticsStorageAction'), 'new')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2019-06-01",
-      "name": "[parameters('diagnosticsStorageAccountName')]",
-      "location": "[resourceGroup().location]",
-      "kind": "[parameters('diagnosticsStorageAccountKind')]",
-      "sku": {
-        "name": "[parameters('diagnosticsStorageAccountType')]"
-      }
-    },
-    {
       "type": "Microsoft.Compute/disks",
       "apiVersion": "2021-04-01",
       "name": "[variables('diskName')]",
