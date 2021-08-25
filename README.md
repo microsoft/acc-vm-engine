@@ -4,8 +4,40 @@
 - Trusted VM (TVM)
 - Confidential VM (CVM)
 
+#### Pre-Requisite
+If you want to build on Linux or MacOS, make sure you have golang installed. If not, you can download it by following these instructions:
+```sh
+# update your system
+sudo apt update
+sudo apt upgrade
+
+# download the go binary
+wget https://dl.google.com/go/go1.15.5.linux-amd64.tar.gz
+
+# extract binaries tarball
+sudo tar -C /usr/local/ -xzf go1.15.5.linux-amd64.tar.gz
+
+# set the right path
+cd /usr/local/
+echo $PATH
+sudo nano $HOME/.profile
+```
+inside your profile, append the following:
+```sh
+export PATH=$PATH:/usr/local/go/bin
+```
+save and apply changes:
+```sh
+source $HOME/.profile
+```
+check that it installed correctly:
+```sh
+go version
+```
+
 #### Build
-If your machine runs Linux or MacOS, and you have Go binary installed, execute:
+On Linux or MacOS, execute:
+
 ```sh
 make build
 ```
@@ -18,10 +50,10 @@ docker run \
 ```
 
 #### Generate template
-A sample configuration file for TVM deployment is located in [test/cvm-win.json](./test/cvm-win.json)
+A sample configuration file for CVM deployment is located in [test/cvm-win.json](./test/cvm-win.json) for windows or [test/cvm-ubuntu.json](./test/cvm-ubuntu.json) for linux.
 On Linux or MacOS, execute:
 ```sh
-./acc-vm-engine generate -c ./test/cvm-win.json
+./acc-vm-engine generate -c ./test/cvm-ubuntu.json
 ```
 Alternatively, use Docker container:
 ```sh
