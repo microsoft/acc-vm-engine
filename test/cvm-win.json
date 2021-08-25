@@ -11,7 +11,7 @@
     },
     "windows_profile": {
       "admin_username": "acctestuser",
-      "admin_password": "accpassword"
+      "admin_password_or_key": "accpassword"
     }
   }
 }
