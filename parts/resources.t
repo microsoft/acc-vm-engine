@@ -28,7 +28,7 @@
       "condition": "[equals(parameters('vnetNewOrExisting'), 'new')]",
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2019-09-01",
-      "name": "[parameters('virtualNetworkName')]",
+      "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[variables('networkSecurityGroupId')]"

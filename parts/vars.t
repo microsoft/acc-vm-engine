@@ -39,7 +39,7 @@
     "virtualNetworkId": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('virtualNetworkId'), '/subnets/', variables('subnetName'))]",
     "subnetName": "[concat(parameters('vmName'), 'Subnet')]",
-    "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'), parameters('subnetName'))]",
+    "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', variables('virtualNetworkName'), parameters('subnetName'))]",
     "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
     "linuxConfiguration": {
       "disablePasswordAuthentication": "true",
