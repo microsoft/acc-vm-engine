@@ -22,7 +22,7 @@ func HandleValidationErrors(e validator.ValidationErrors) error {
 	case "Properties.MasterProfile", "Properties.MasterProfile.DNSPrefix", "Properties.MasterProfile.VMSize",
 		"Properties.LinuxProfile",
 		"Properties.WindowsProfile.AdminUsername",
-		"Properties.WindowsProfile.AdminPassword":
+		"Properties.WindowsProfile.AdminPasswordOrKey":
 		return fmt.Errorf("missing %s", ns)
 	case "Properties.MasterProfile.OSDiskSizeGB":
 		return fmt.Errorf("Invalid os disk size of %d specified.  The range of valid values are [%d, %d]", err.Value().(int), MinDiskSizeGB, MaxDiskSizeGB)

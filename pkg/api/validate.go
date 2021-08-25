@@ -103,10 +103,10 @@ func validateLinuxProfile(p *LinuxProfile) error {
 	if len(p.AdminUsername) == 0 {
 		return fmt.Errorf("LinuxProfile.AdminUsername cannot be empty")
 	}
-	if len(p.AdminPassword) > 0 && len(p.SSHPubKeys) > 0 {
+	if len(p.AdminPasswordOrKey) > 0 && len(p.SSHPubKeys) > 0 {
 		return fmt.Errorf("AdminPassword and SSH public keys are mutually exclusive")
 	}
-	if len(p.AdminPassword) == 0 && len(p.SSHPubKeys) == 0 {
+	if len(p.AdminPasswordOrKey) == 0 && len(p.SSHPubKeys) == 0 {
 		return fmt.Errorf("Must specify either AdminPassword or SSH public keys")
 	}
 	for i, key := range p.SSHPubKeys {
@@ -124,7 +124,7 @@ func validateWindowsProfile(p *WindowsProfile) error {
 	if e := validate.Var(p.AdminUsername, "required"); e != nil {
 		return fmt.Errorf("WindowsProfile.AdminUsername cannot be empty")
 	}
-	if e := validate.Var(p.AdminPassword, "required"); e != nil {
+	if e := validate.Var(p.AdminPasswordOrKey, "required"); e != nil {
 		return fmt.Errorf("WindowsProfile.AdminPassword cannot be empty")
 	}
 	return nil

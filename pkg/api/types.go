@@ -62,15 +62,15 @@ type OSImage struct {
 
 // LinuxProfile represents the linux parameters passed to the cluster
 type LinuxProfile struct {
-	AdminUsername string       `json:"admin_username" validate:"required"`
-	AdminPassword string       `json:"admin_password"`
-	SSHPubKeys    []*PublicKey `json:"ssh_public_keys"`
+	AdminUsername 		string       	`json:"admin_username" validate:"required"`
+	AdminPasswordOrKey  string       	`json:"admin_password_or_key"`
+	SSHPubKeys    		[]*PublicKey 	`json:"ssh_public_keys"`
 }
 
 // WindowsProfile represents the windows parameters passed to the cluster
 type WindowsProfile struct {
-	AdminUsername string `json:"admin_username" validate:"required"`
-	AdminPassword string `json:"admin_password" validate:"required"`
+	AdminUsername 		string `json:"admin_username" validate:"required"`
+	AdminPasswordOrKey 	string `json:"admin_password_or_key" validate:"required"`
 }
 
 // VnetProfile represents the definition of a vnet
