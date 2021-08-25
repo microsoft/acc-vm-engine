@@ -31,7 +31,6 @@ type SecurityProfile struct {
 type VMProfile struct {
 	Name            string           `json:"name"`
 	OSImageName     OSImageName      `json:"os_image_name,omitempty"`
-	OSType          OSType           `json:"os_type,omitempty"`
 	OSName          OSName           `json:"os_name,omitempty"`
 	OSDiskType      string           `json:"os_disk_type"`
 	OSImage         *OSImage         `json:"os_image,omitempty"`

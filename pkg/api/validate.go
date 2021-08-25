@@ -57,13 +57,6 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 	if vm == nil {
 		return fmt.Errorf("VMProfile is not specified")
 	}
-	if len(vm.OSType) == 0 {
-		return fmt.Errorf("OSType is not specified")
-	}
-
-	if vm.OSType != "Linux" && vm.OSType != "Windows" {
-		return fmt.Errorf("OS type '%s' is not supported", vm.OSType)
-	}
 
 	if (vm.SecurityProfile != nil) {
 		if (vm.SecurityProfile.SecureBoot != "true") && (vm.SecurityProfile.SecureBoot != "false") && (vm.SecurityProfile.SecureBoot != "none"){
