@@ -108,13 +108,6 @@
         "description": "Sets the subnet of the VM."
       }
     },
-    "tipNodeSessionId": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "TIP Node session ID"
-      }
-    },
 {{if HasSecurityProfile}}
     "secureBootEnabled": {
       "type": "string",
