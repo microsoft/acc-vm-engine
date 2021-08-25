@@ -6,24 +6,9 @@
       "os_image_name": "Ubuntu 20.04 LTS Gen 2",
       "os_name": "Ubuntu20.04",
       "os_type": "Linux",
-      "os_disk": {
-        "vhd_url": "test",
-        "vmgs_url": "test",
-        "storage_account_id": "test"
-      },
-      "tip_node_session_id": "aaa-bbb-ccc-ddd",
-      "cluster_name": "QWERTY",
       "vm_size": "Standard_DC2as_v5",
       "ports": [22],
       "has_dns_name": false
-    },
-    "linux_profile": {
-      "admin_username": "acctestuser",
-      "ssh_public_keys": [
-        {
-          "key_data": "ssh-rsa AAAA"
-        }
-      ]
     }
   }
 }
