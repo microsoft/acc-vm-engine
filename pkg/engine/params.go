@@ -16,22 +16,6 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	if len(properties.VMProfile.OSDiskType) > 0 {
 		addValue(parametersMap, "osDiskType", properties.VMProfile.OSDiskType)
 	}
-	if properties.VMProfile.HasAttachedOsDisk() {
-		addValue(parametersMap, "osDiskURL", properties.VMProfile.OSDisk.VHD)
-		addValue(parametersMap, "osDiskStorageAccountID", properties.VMProfile.OSDisk.StorageAccountID)
-		if len(properties.VMProfile.OSDisk.VMGS) > 0 {
-			addValue(parametersMap, "osDiskVmgsURL", properties.VMProfile.OSDisk.VMGS)
-		}
-	} else if properties.VMProfile.HasCustomOsImage() {
-		addValue(parametersMap, "osImageURL", properties.VMProfile.OSImage.URL)
-	} else {
-		addValue(parametersMap, "osImagePublisher", properties.VMProfile.OSImage.Publisher)
-		addValue(parametersMap, "osImageOffer", properties.VMProfile.OSImage.Offer)
-		addValue(parametersMap, "osImageSKU", properties.VMProfile.OSImage.SKU)
-		if len(properties.VMProfile.OSImage.Version) > 0 {
-			addValue(parametersMap, "osImageVersion", properties.VMProfile.OSImage.Version)
-		}
-	}
 	if properties.LinuxProfile != nil {
 		addValue(parametersMap, "adminUsername", properties.LinuxProfile.AdminUsername)
 		if len(properties.LinuxProfile.AdminPassword) > 0 {
