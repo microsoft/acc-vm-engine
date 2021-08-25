@@ -42,7 +42,6 @@
     "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', variables('virtualNetworkName'), parameters('subnetName'))]",
     "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
     "linuxConfiguration": {
-      "disablePasswordAuthentication": "true",
       "ssh": {
         "publicKeys": [
           {
