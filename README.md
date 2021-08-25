@@ -1,7 +1,6 @@
 # Azure template generator for ACC VMs
 
 ### Supported VMs
-- Trusted VM (TVM)
 - Confidential VM (CVM)
 
 #### Pre-Requisite
