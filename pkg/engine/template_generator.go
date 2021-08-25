@@ -182,12 +182,6 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		"WrapAsVerbatim": func(s string) string {
 			return fmt.Sprintf("',%s,'", s)
 		},
-		"IsLinux": func(p *api.Properties) bool {
-			return p.VMProfile.OSType == api.Linux
-		},
-		"IsWindows": func(p *api.Properties) bool {
-			return p.VMProfile.OSType == api.Windows
-		},
 		"HasCustomOsImage": func() bool {
 			return vm.Properties.VMProfile.HasCustomOsImage()
 		},
