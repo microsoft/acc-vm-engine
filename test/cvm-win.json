@@ -4,14 +4,13 @@
     "vm_profile": {
       "name": "cvm-win",
       "os_image_name": "Windows Server 2022 Gen 2",
-      "os_type": "Windows",
       "vm_size": "Standard_DC2as_v5",
       "ports": [3389],
       "has_dns_name": false
     },
     "windows_profile": {
       "admin_username": "acctestuser",
-      "admin_password_or_key": "accpassword"
+      "admin_password_or_key": "Password1234!"
     }
   }
 }

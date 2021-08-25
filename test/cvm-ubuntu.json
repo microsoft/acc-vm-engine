@@ -5,7 +5,6 @@
       "name": "cvm-ubuntu",
       "os_image_name": "Ubuntu 20.04 LTS Gen 2",
       "os_name": "Ubuntu20.04",
-      "os_type": "Linux",
       "vm_size": "Standard_DC2as_v5",
       "ports": [22],
       "has_dns_name": false
