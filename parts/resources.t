@@ -28,7 +28,7 @@
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-02-01",
-      "name": "[variables('nsgName')]",
+      "name": "[variables('networkSecurityGroupName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "securityRules": [
@@ -42,17 +42,23 @@
       "apiVersion": "2019-09-01",
       "name": "[parameters('vnetName')]",
       "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[variables('networkSecurityGroupId')]"
+      ],
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[parameters('vnetAddress')]"
+            "[parameters('addressPrefix')]"
           ]
         },
         "subnets": [
           {
-            "name": "[parameters('subnetName')]",
+            "name": "[variables('subnetName')]",
             "properties": {
-              "addressPrefix": "[parameters('subnetAddress')]"
+              "addressPrefix": "[parameters('subnetPrefix')]",
+              "networkSecurityGroup": {
+                "id": "[variables('networkSecurityGroupId')]"
+              }
             }
           }
         ]
@@ -66,7 +72,7 @@
       "dependsOn": [
         "[variables('publicIPAddressName')]",
         "[parameters('vnetName')]",
-        "[variables('nsgName')]"
+        "[variables('networkSecurityGroupName')]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -84,7 +90,7 @@
           }
         ]
         ,"networkSecurityGroup": {
-          "id": "[variables('nsgId')]"
+          "id": "[variables('networkSecurityGroupId')]"
         }
       }
     },

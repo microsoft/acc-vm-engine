@@ -106,6 +106,13 @@
         "description": "VNET address space"
       }
     },
+    "addressPrefix": {
+      "type": "string",
+      "defaultValue": "10.1.16.0/24",
+      "metadata": {
+        "description": "VNET address space"
+      }
+    },
     "subnetName": {
       "type": "string",
       "defaultValue": "[concat(resourceGroup().name, '-subnet')]",
@@ -116,6 +123,13 @@
     "subnetAddress": {
       "type": "string",
       "defaultValue": "{{.VnetProfile.SubnetAddress}}",
+      "metadata": {
+        "description": "Sets the subnet of the VM."
+      }
+    },
+    "subnetPrefix": {
+      "type": "string",
+      "defaultValue": "10.1.16.0/24",
       "metadata": {
         "description": "Sets the subnet of the VM."
       }

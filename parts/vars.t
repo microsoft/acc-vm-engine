@@ -34,8 +34,8 @@
     "diskName": "[concat(parameters('vmName'), '-osDisk')]",
     "nicName": "[concat(parameters('vmName'), '-nic')]",
     "publicIPAddressName": "[concat(parameters('vmName'), '-ip')]",
-    "nsgName": "[concat(parameters('vmName'), '-nsg')]",
-    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('nsgName'))]",
+    "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+    "networkSecurityGroupId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
     "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('subnetName'))]",
     "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
     "linuxConfiguration": {
