@@ -33,12 +33,6 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 		addValue(parametersMap, "secureBootEnabled", properties.VMProfile.SecurityProfile.SecureBoot)
 		addValue(parametersMap, "vTPMEnabled", properties.VMProfile.SecurityProfile.VTPM)
 	}
-	if len(properties.VMProfile.TipNodeSessionID) > 0 {
-		addValue(parametersMap, "tipNodeSessionId", properties.VMProfile.TipNodeSessionID)
-	}
-	if len(properties.VMProfile.ClusterName) > 0 {
-		addValue(parametersMap, "clusterName", properties.VMProfile.ClusterName)
-	}
 	if properties.VnetProfile.IsCustomVNET() {
 		addValue(parametersMap, "vnetNewOrExisting", "existing")
 		addValue(parametersMap, "vnetResourceGroupName", properties.VnetProfile.VnetResourceGroup)
