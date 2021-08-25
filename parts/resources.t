@@ -99,7 +99,6 @@
         "name": "[parameters('diagnosticsStorageAccountType')]"
       }
     },
-{{if HasAttachedOsDisk}}
     {
       "type": "Microsoft.Compute/disks",
       "apiVersion": "2021-04-01",
@@ -123,7 +122,6 @@
         }
       }
     },
-{{end}}
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-07-01",
