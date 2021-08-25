@@ -72,7 +72,8 @@
         ]
       }
     },
-          "type": "Microsoft.Network/networkInterfaces",
+    {
+      "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2019-07-01",
       "name": "[variables('networkInterfaceName')]",
       "location": "[resourceGroup().location]",
