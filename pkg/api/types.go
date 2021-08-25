@@ -113,16 +113,6 @@ func (h *VMProfile) HasCustomOsImage() bool {
 	return h.OSImage != nil && len(h.OSImage.URL) > 0
 }
 
-// HasAttachedOsDisk returns true if there is an attached OS disk specified
-func (h *VMProfile) HasAttachedOsDisk() bool {
-	return h.OSDisk != nil && len(h.OSDisk.VHD) > 0
-}
-
-// HasAttachedOsDiskVMGS returns true if there is an VMGS specified
-func (h *VMProfile) HasAttachedOsDiskVMGS() bool {
-	return h.OSDisk != nil && len(h.OSDisk.VMGS) > 0
-}
-
 // HasDisks returns true if the customer specified disks
 func (h *VMProfile) HasDisks() bool {
 	return len(h.DiskSizesGB) > 0
