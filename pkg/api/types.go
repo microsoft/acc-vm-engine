@@ -40,9 +40,6 @@ type VMProfile struct {
 	Ports           []int            `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
 	HasDNSName      bool             `json:"has_dns_name"`
 	SecurityProfile *SecurityProfile `json:"security_profile,omitempty"`
-
-	TipNodeSessionID string `json:"tip_node_session_id,omitempty"`
-	ClusterName      string `json:"cluster_name,omitempty"`
 }
 
 // Properties represents the ACS cluster definition
