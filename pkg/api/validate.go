@@ -53,7 +53,6 @@ func handleValidationErrors(e validator.ValidationErrors) error {
 }
 
 func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
-	var isLinux bool
 	vm := p.VMProfile
 	if vm == nil {
 		return fmt.Errorf("VMProfile is not specified")
@@ -62,12 +61,7 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 		return fmt.Errorf("OSType is not specified")
 	}
 
-	switch vm.OSType {
-	case Linux:
-		isLinux = true
-	case Windows:
-		isLinux = false
-	default:
+	if vm.OSType != "Linux" && vm.OSType != "Windows" {
 		return fmt.Errorf("OS type '%s' is not supported", vm.OSType)
 	}
 
