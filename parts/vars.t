@@ -45,9 +45,6 @@
       "provisionVmAgent": "true"
     },
     "diagnosticsStorageAction": "[if(equals(parameters('bootDiagnostics'), 'false'), 'nop', parameters('diagnosticsStorageAccountNewOrExisting'))]",
-{{if HasTipNodeSession}}
-    "availabilitySetName": "[concat(parameters('vmName'), '-availSet')]",
-{{end}}
     "osProfile": {
       "computername": "[parameters('vmName')]",
       "adminUsername": "[parameters('adminUsername')]",
