@@ -35,7 +35,6 @@ type VMProfile struct {
 	OSName          OSName           `json:"os_name,omitempty"`
 	OSDiskType      string           `json:"os_disk_type"`
 	OSImage         *OSImage         `json:"os_image,omitempty"`
-	OSDisk          *OSDisk          `json:"os_disk,omitempty"`
 	DiskSizesGB     []int            `json:"disk_sizes_gb,omitempty"`
 	VMSize          string           `json:"vm_size"`
 	Ports           []int            `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
@@ -62,13 +61,6 @@ type OSImage struct {
 	Offer     string `json:"offer"`
 	SKU       string `json:"sku"`
 	Version   string `json:"version,omitempty"`
-}
-
-// OSDisk represents Managed OS Disk
-type OSDisk struct {
-	VHD              string `json:"vhd_url"`
-	VMGS             string `json:"vmgs_url"`
-	StorageAccountID string `json:"storage_account_id"`
 }
 
 // LinuxProfile represents the linux parameters passed to the cluster
