@@ -1,24 +1,4 @@
- {
-  "name": "[concat('ResourceGroupDeployment-', uniqueString(deployment().name))]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2018-05-01",
-      "location": "[deployment().location]",
-      "properties": {
-          "mode": "Incremental",
-          "template": {
-              "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
-              "contentVersion": "1.0.0.1",
-              "resources": [
-                  {
-                      "type": "Microsoft.Resources/resourceGroups",
-                      "apiVersion": "2019-05-01",
-                      "name": "[parameters('resourceGroup')]",
-                      "location": "[deployment().location]"
-                  }
-              ]
-          }
-      }
-    },
+
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2019-02-01",
