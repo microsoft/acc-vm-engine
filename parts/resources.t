@@ -153,11 +153,6 @@
             }
           ]
         },
-{{if HasTipNodeSession}}
-        "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
-        },
-{{end}}
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "[equals(parameters('bootDiagnostics'), 'true')]",
