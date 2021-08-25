@@ -1,14 +1,22 @@
  {
-      "apiVersion": "2018-05-01",
-      "name": "[concat('ResourceGroupDeployment-', uniqueString(deployment().name))]",
+  "name": "[concat('ResourceGroupDeployment-', uniqueString(deployment().name))]",
       "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2018-05-01",
+      "location": "[deployment().location]",
       "properties": {
-        "mode": "Incremental",
-        "template": {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-          "contentVersion": "1.0.0.0",
-          "resources": []
-        }
+          "mode": "Incremental",
+          "template": {
+              "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+              "contentVersion": "1.0.0.1",
+              "resources": [
+                  {
+                      "type": "Microsoft.Resources/resourceGroups",
+                      "apiVersion": "2019-05-01",
+                      "name": "[parameters('resourceGroup')]",
+                      "location": "[deployment().location]"
+                  }
+              ]
+          }
       }
     },
     {
@@ -136,16 +144,14 @@
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
-{{if HasSecurityProfile}}
-        "securityProfile": {
-          "uefiSettings": {
-            "secureBootEnabled": "[parameters('secureBootEnabled')]",
-            "vTPMEnabled": "[parameters('vTPMEnabled')]"
-          },
-          "securityType" : "{{GetVMSecurityType}}"
+        "osProfile": {
+          "computerName": "[parameters('vmName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPasswordOrKey')]",
+          "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]",
+          "windowsConfiguration": "[if(variables('isWindows'), variables('windowsConfiguration'), json('null'))]"
         },
-{{end}}
-        "osProfile": "[variables('osProfile')]",
+        "securityProfile": "[if(variables('isMemoryUnencrypted'), json('null'), variables('vmSecurityProfile'))]",
         "storageProfile": {
           "osDisk": {
             "createOption": "fromImage",

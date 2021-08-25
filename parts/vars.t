@@ -43,9 +43,17 @@
     "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
     "linuxConfiguration": {
       "disablePasswordAuthentication": "true",
-      "ssh": {{GetLinuxPublicKeys}}
+      "ssh": {
+        "publicKeys": [
+          {
+            "keyData": "[parameters('adminPasswordOrKey')]",
+            "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]"
+          }
+        ]
+      }
     },
     "windowsConfiguration": {
+      "enableAutomaticUpdates": "true",
       "provisionVmAgent": "true"
     },
     "isMemoryUnencrypted": "[equals(parameters('securityType'), 'Unencrypted')]",
@@ -67,13 +75,10 @@
       }
     },
     "diagnosticsStorageAction": "[if(equals(parameters('bootDiagnostics'), 'false'), 'nop', parameters('diagnosticsStorageAccountNewOrExisting'))]",
-    "osProfile": {
-      "computername": "[parameters('vmName')]",
-      "adminUsername": "[parameters('adminUsername')]",
-      "adminPasswordOrKey": "[parameters('adminPasswordOrKey')]",
-{{if IsLinux .}}
-      "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
-{{else}}
-      "windowsConfiguration": "[variables('windowsConfiguration')]"
-{{end}}
+    "vmSecurityProfile": {
+      "uefiSettings" : {
+        "secureBootEnabled": "[parameters('secureBootEnabled')]",
+        "vTpmEnabled": "true"
+      },
+      "securityType" : "ConfidentialVM"
     }
