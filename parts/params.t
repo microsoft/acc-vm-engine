@@ -60,6 +60,17 @@
         "description": "Type of managed disk to create."
       }
     },
+    "securityType": {
+      "type": "string",
+      "defaultValue": "MemoryEncryption",
+      "allowedValues": [
+          "Unencrypted",
+          "MemoryEncryption"
+      ],
+      "metadata": {
+          "description": "VM security type."
+      }
+    },
     "vnetNewOrExisting": {
       "type": "string",
       "defaultValue": "new",

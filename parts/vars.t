@@ -37,6 +37,7 @@
     "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('nsgName'))]",
     "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('subnetName'))]",
     "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
+    "isMemoryEncrypted": "[equals(parameters('securityType'), 'MemoryEncryption')]",
     "linuxConfiguration": {
       "disablePasswordAuthentication": "true",
       "ssh": {{GetLinuxPublicKeys}}
