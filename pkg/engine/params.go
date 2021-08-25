@@ -18,11 +18,12 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	}
 	if properties.LinuxProfile != nil {
 		addValue(parametersMap, "adminUsername", properties.LinuxProfile.AdminUsername)
-		if len(properties.LinuxProfile.AdminPasswordOrKey) > 0 {
+		if properties.LinuxProfile.AuthenticationType =="password" {
 			addValue(parametersMap, "authenticationType", "password")
 			addValue(parametersMap, "adminPasswordOrKey", properties.LinuxProfile.AdminPasswordOrKey)
 		} else {
 			addValue(parametersMap, "authenticationType", "sshPublicKey")
+			addValue(parametersMap, "adminPasswordOrKey", properties.LinuxProfile.AdminPasswordOrKey)
 		}
 	}
 	if properties.WindowsProfile != nil {
