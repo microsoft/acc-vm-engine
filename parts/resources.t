@@ -146,9 +146,7 @@
           "securityType" : "{{GetVMSecurityType}}"
         },
 {{end}}
-{{if not HasAttachedOsDisk}}
         "osProfile": "[variables('osProfile')]",
-{{end}}
         "storageProfile": "[variables('storageProfile')]",
         "networkProfile": {
           "networkInterfaces": [
