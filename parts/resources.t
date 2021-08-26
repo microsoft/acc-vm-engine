@@ -82,13 +82,37 @@
         }
       }
     },
+    {{if HasTipNodeSession}}
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "apiVersion": "2020-06-01",
+      "name": "[variables('availabilitySetName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "platformUpdateDomainCount": "1",
+        "platformFaultDomainCount": "1",
+        "internalData": {
+          "pinnedFabricCluster": "[parameters('clusterName')]"
+        }
+      },
+      "tags": {
+        "TipNode.SessionId": "[parameters('tipNodeSessionId')]"
+      },
+      "sku": {
+        "name": "aligned"
+      }
+    },
+    {{end}}
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-07-01",
       "name": "[parameters('vmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]",
+        {{if HasTipNodeSession}}
+        "[variables('availabilitySetName')]"
+        {{end}} 
       ],
       "properties": {
         "hardwareProfile": {
@@ -116,6 +140,11 @@
             }
           ]
         },
+        {{if HasTipNodeSession}}
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
+        },
+        {{end}}
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "[equals(parameters('bootDiagnostics'), 'true')]",

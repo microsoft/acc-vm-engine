@@ -69,6 +69,9 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 			return fmt.Errorf("Invalid Entry! vTPM cannot be \"true\" when secure-boot is \"none\"")
 		}
 	}
+	if (len(vm.TipNodeSessionID) == 0 && len(vm.ClusterName) != 0) || (len(vm.TipNodeSessionID) != 0 && len(vm.ClusterName) == 0) {
+		return fmt.Errorf("Must specify either both 'tip_node_session_id' and 'cluster_name', or neither")
+	}
 	if len(vm.OSDiskType) > 0 {
 		found := false
 		for _, t := range vmconf.AllowedOsDiskTypes() {

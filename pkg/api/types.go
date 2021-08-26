@@ -43,6 +43,8 @@ type VMProfile struct {
 	HasDNSName      bool             `json:"has_dns_name"`
 	SecurityProfile *SecurityProfile `json:"security_profile,omitempty"`
 	SecurityType    SecurityType     `json:"security_type,omitempty"`
+	TipNodeSessionID string `json:"tip_node_session_id,omitempty"`
+	ClusterName      string `json:"cluster_name,omitempty"`
 }
 
 // Properties represents the ACS cluster definition

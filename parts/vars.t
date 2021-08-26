@@ -50,6 +50,9 @@
       "enableAutomaticUpdates": "true",
       "provisionVmAgent": "true"
     },
+    {{if HasTipNodeSession}}
+    "availabilitySetName": "[concat(parameters('vmName'), '-availSet')]",
+    {{end}}
     "isMemoryUnencrypted": "[equals(parameters('securityType'), 'Unencrypted')]",
     "vmStorageProfileManagedDisk": {
       "storageAccountType": "[parameters('osDiskType')]"
