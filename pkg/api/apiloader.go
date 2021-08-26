@@ -18,6 +18,7 @@ type VMConfigurator interface {
 	DefaultVMName() string
 	OSImage() *OSImage
 	OSImageName() string
+	SecurityType() string
 	DefaultOsDiskType() string
 	AllowedOsDiskTypes() []string
 	AllowedVMSizes() []string

@@ -28,6 +28,12 @@ func (h *cvmConfigurator) OSImageName() string {
 	return "Ubuntu 20.04 LTS Gen 2"
 }
 
+// DefaultLinuxSecurityType returns default Linux OS security type
+func (h *cvmConfigurator) SecurityType() string {
+	log.Info("SecurityType is not set")
+	return "Unencrypted"
+}
+
 // DefaultOsDiskType returns default OS disk type
 func (h *cvmConfigurator) DefaultOsDiskType() string {
 	return "Premium_LRS"
