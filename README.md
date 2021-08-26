@@ -40,6 +40,7 @@ On Linux or MacOS, execute:
 ```sh
 make build
 ```
+
 Alternatively, you can build with a Docker container:
 ```sh
 docker run \
@@ -49,11 +50,22 @@ docker run \
 ```
 
 #### Generate template
-A sample configuration file for CVM deployment is located in [test/cvm-win.json](./test/cvm-win.json) for windows or [test/cvm-ubuntu.json](./test/cvm-ubuntu.json) for linux.
-On Linux or MacOS, execute:
+A sample configuration file for CVM deployment is located in the [test/](./test/) folder.
+If your machine runs Linux or MacOS, you can execute the following command to generate templates for a windows vm deployment: 
+```sh
+./acc-vm-engine generate -c ./test/cvm-win.json
+```
+
+Please note that for a linux deployment, you will have to put your ssh public key into the [test/cvm-ubuntu.json](./test/cvm-ubuntu.json) parameter file under 'admin_password_or_key' or you will not be able to connect. Then execute: 
 ```sh
 ./acc-vm-engine generate -c ./test/cvm-ubuntu.json
 ```
+
+In case you need to generate an ssh public key, you can use the following command and use the public key content that it outputs into your ~/.ssh folder: 
+```
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
 Alternatively, use Docker container:
 ```sh
 docker run \
