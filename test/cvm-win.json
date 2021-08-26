@@ -6,7 +6,8 @@
       "os_image_name": "Windows Server 2022 Gen 2",
       "vm_size": "Standard_DC2as_v5",
       "ports": [3389],
-      "has_dns_name": false
+      "has_dns_name": false,
+      "security_type": "Unencrypted"
     },
     "windows_profile": {
       "admin_username": "acctestuser",

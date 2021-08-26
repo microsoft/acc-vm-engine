@@ -7,7 +7,8 @@
       "os_name": "Ubuntu20.04",
       "vm_size": "Standard_DC2as_v5",
       "ports": [22],
-      "has_dns_name": false
+      "has_dns_name": false,
+      "security_type": "Unencrypted"
     },
     "linux_profile": {
       "authentication_type": "sshPublicKey",
