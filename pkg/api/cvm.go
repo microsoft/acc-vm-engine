@@ -65,7 +65,7 @@ func (h *cvmConfigurator) AllowedVMSizes() []string {
 		"Standard_DC32ads_v5",
 		"Standard_DC48ads_v5",
 		"Standard_DC64ads_v5",
-		"Standard_DC96ads_v5": 
+		"Standard_DC96ads_v5"
 	}
 }
 
