@@ -21,6 +21,9 @@ type OSName string
 // OSImageName represents pre-set OS image name
 type OSImageName string
 
+// OSImageName represents pre-set OS image name
+type SecurityType string
+
 // SecurityProfile represents VM security profile
 type SecurityProfile struct {
 	SecureBoot string `json:"secure_boot_enabled,omitempty"`
@@ -39,6 +42,7 @@ type VMProfile struct {
 	Ports           []int            `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
 	HasDNSName      bool             `json:"has_dns_name"`
 	SecurityProfile *SecurityProfile `json:"security_profile,omitempty"`
+	SecurityType    SecurityType     `json:"security_type,omitempty"`
 }
 
 // Properties represents the ACS cluster definition

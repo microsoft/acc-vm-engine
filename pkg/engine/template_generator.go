@@ -153,16 +153,6 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		"HasSecurityProfile": func() bool {
 			return (vm.Properties.VMProfile.SecurityProfile != nil)
 		},
-		"GetSecurityType": func() string {
-			switch vm.VMCategory {
-			case api.TVM:
-				return "SecureBoot"
-			case api.CVM:
-				return "ConfidentialVM_DiskEncryptedWithPlatformKey"
-			default:
-				return "None"
-			}
-		},
 		"GetVMSecurityType": func() string {
 			switch vm.VMCategory {
 			case api.TVM:
