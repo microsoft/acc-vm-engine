@@ -83,31 +83,11 @@
       }
     },
     {
-      "type": "Microsoft.Compute/disks",
-      "apiVersion": "2021-04-01",
-      "name": "[variables('diskName')]",
-      "location": "[resourceGroup().location]",
-      "sku": {
-        "name": "[parameters('osDiskType')]"
-      },
-      "properties": {
-        "osType": "[if(variables('isWindows'), 'Windows', 'Linux')]",
-        "SecurityProfile": "[if(variables('isMemoryUnencrypted'), json('null'), variables('diskSecurityProfile'))]",
-        "creationData": {
-          "createOption": "FromImage",
-          "imageReference": {
-            "id": "[variables('imageDiskReferenceId')]"
-          }
-        }
-      }
-    },
-    {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-07-01",
       "name": "[parameters('vmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[variables('diskName')]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
       ],
       "properties": {

@@ -25,12 +25,6 @@
       }
     },
     "imageReference": "[variables('imageList')[parameters('osImageName')]]",
-    "imagePublisher": "[variables('imageReference')['publisher']]",
-    "imageOffer": "[variables('imageReference')['offer']]",
-    "imageSku": "[variables('imageReference')['sku']]",
-    "imageVersion": "[variables('imageReference')['version']]",
-    "imageDiskReferenceId": "[concat('/Subscriptions/', subscription().subscriptionId, '/Providers/Microsoft.Compute/Locations/', resourceGroup().location, '/Publishers/', variables('imagePublisher'), '/ArtifactTypes/VMImage/Offers/', variables('imageOffer'), '/Skus/', variables('imageSku'), '/Versions/', variables('imageVersion'))]",
-    "diskName": "[concat(parameters('vmName'), '-osDisk')]",
     "networkInterfaceName": "[concat(parameters('vmName'), '-nic')]",
     "publicIPAddressName": "[concat(parameters('vmName'), '-ip')]",
     "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
@@ -57,14 +51,6 @@
       "provisionVmAgent": "true"
     },
     "isMemoryUnencrypted": "[equals(parameters('securityType'), 'Unencrypted')]",
-    "diskSecurityType": {
-        "Unencrypted": "",
-        "VMGuestStateOnly": "ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey",
-        "DiskWithVMGuestState": "ConfidentialVM_DiskEncryptedWithPlatformKey"
-    },
-    "diskSecurityProfile": {
-        "SecurityType": "[variables('diskSecurityType')[parameters('securityType')]]"
-    },
     "vmStorageProfileManagedDisk": {
       "storageAccountType": "[parameters('osDiskType')]"
     },
