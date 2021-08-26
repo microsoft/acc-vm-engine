@@ -21,7 +21,7 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 			addValue(parametersMap, "authenticationType", "password")
 			addValue(parametersMap, "adminPasswordOrKey", properties.LinuxProfile.AdminPasswordOrKey)
 		} else {
-			addValue(parametersMap, "authenticationType", "password")
+			addValue(parametersMap, "authenticationType", "sshPublicKey")
 			addValue(parametersMap, "adminPasswordOrKey", properties.LinuxProfile.AdminPasswordOrKey)
 		}
 	}
