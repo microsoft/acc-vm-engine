@@ -1,4 +1,4 @@
-pkg/engine/templates.go
+/pkg/engine/templates.go
 /acc-vm-engine
 /_output
 /vendor
