@@ -1,16 +1,4 @@
-    {
-      "apiVersion": "2018-05-01",
-      "name": "[concat('ResourceGroupDeployment-', uniqueString(deployment().name))]",
-      "type": "Microsoft.Resources/deployments",
-      "properties": {
-        "mode": "Incremental",
-        "template": {
-          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-          "contentVersion": "1.0.0.0",
-          "resources": []
-        }
-      }
-    },
+
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2019-02-01",
@@ -28,7 +16,7 @@
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-02-01",
-      "name": "[variables('nsgName')]",
+      "name": "[variables('networkSecurityGroupName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "securityRules": [
@@ -40,19 +28,25 @@
       "condition": "[equals(parameters('vnetNewOrExisting'), 'new')]",
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2019-09-01",
-      "name": "[parameters('vnetName')]",
+      "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[variables('networkSecurityGroupId')]"
+      ],
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[parameters('vnetAddress')]"
+            "[parameters('addressPrefix')]"
           ]
         },
         "subnets": [
           {
-            "name": "[parameters('subnetName')]",
+            "name": "[variables('subnetName')]",
             "properties": {
-              "addressPrefix": "[parameters('subnetAddress')]"
+              "addressPrefix": "[parameters('subnetPrefix')]",
+              "networkSecurityGroup": {
+                "id": "[variables('networkSecurityGroupId')]"
+              }
             }
           }
         ]
@@ -61,12 +55,12 @@
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2019-07-01",
-      "name": "[variables('nicName')]",
+      "name": "[variables('networkInterfaceName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[variables('publicIPAddressName')]",
-        "[parameters('vnetName')]",
-        "[variables('nsgName')]"
+        "[variables('networkSecurityGroupId')]",
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+        "[concat('Microsoft.Network/publicIpAddresses/', variables('publicIpAddressName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -75,79 +69,20 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[variables('vnetSubnetId')]"
+                "id": "[variables('subnetRef')]"
               },
               "publicIpAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
               }
             }
           }
-        ]
-        ,"networkSecurityGroup": {
-          "id": "[variables('nsgId')]"
+        ],
+        "networkSecurityGroup": {
+          "id": "[variables('networkSecurityGroupId')]"
         }
       }
     },
-    {
-      "condition": "[equals(variables('diagnosticsStorageAction'), 'new')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2019-06-01",
-      "name": "[parameters('diagnosticsStorageAccountName')]",
-      "location": "[resourceGroup().location]",
-      "kind": "[parameters('diagnosticsStorageAccountKind')]",
-      "sku": {
-        "name": "[parameters('diagnosticsStorageAccountType')]"
-      }
-    },
-{{if HasCustomOsImage}}
-     {
-      "type": "Microsoft.Compute/images",
-      "apiVersion": "2018-06-01",
-      "name": "CustomImage",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "storageProfile": {
-          "osDisk": {
-            "osType": "[parameters('osType')]",
-            "osState": "Generalized",
-            "blobUri": "[parameters('osImageURL')]",
-            "storageAccountType": "Standard_LRS"
-          }
-        }
-      }
-    },
-{{end}}
-{{if HasAttachedOsDisk}}
-    {
-      "type": "Microsoft.Compute/disks",
-      "apiVersion": "2020-12-01",
-      "name": "CustomDisk",
-      "location": "[resourceGroup().location]",
-{{if HasAttachedOsDiskVMGS}}
-      "tags": {
-        "VmgsBlobUri": "[parameters('osDiskVmgsURL')]"
-     },
-{{end}}
-      "sku": {
-        "name": "Standard_LRS"
-      },
-      "properties": {
-        "osType": "[parameters('osType')]",
-        "hyperVGeneration": "V2",
-{{if HasSecurityProfile}}
-        "securityProfile":{
-          "securityType" : "{{GetSecurityType}}"
-        },
-{{end}}
-        "creationData": {
-          "createOption": "Import",
-          "storageAccountId": "[parameters('osDiskStorageAccountID')]",
-          "sourceUri": "[parameters('osDiskURL')]"
-        }
-      }
-    },
-{{end}}
-{{if HasTipNodeSession}}
+    {{if HasTipNodeSession}}
     {
       "type": "Microsoft.Compute/availabilitySets",
       "apiVersion": "2020-06-01",
@@ -167,59 +102,49 @@
         "name": "aligned"
       }
     },
-{{end}}
+    {{end}}
     {
       "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2020-12-01",
+      "apiVersion": "2021-07-01",
       "name": "[parameters('vmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-{{if HasCustomOsImage}}
-        "CustomImage",
-{{end}}
-{{if HasAttachedOsDisk}}
-        "CustomDisk",
-{{end}}
-{{if HasTipNodeSession}}
-        "[variables('availabilitySetName')]",
-{{end}}
-        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]",
+        {{if HasTipNodeSession}}
+        "[variables('availabilitySetName')]"
+        {{end}} 
       ],
-      "tags":
-      {
-{{if HasSecurityProfile}}
-        "Platform.SecurityType": "{{GetSecurityType}}",
-{{end}}
-        "creationSource" : "['acc-vm-engine']"
-      },
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
-{{if HasSecurityProfile}}
-        "securityProfile": {
-          "uefiSettings": {
-            "secureBootEnabled": "[parameters('secureBootEnabled')]",
-            "vTPMEnabled": "[parameters('vTPMEnabled')]"
-          }
+        "osProfile": {
+          "computerName": "[parameters('vmName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPasswordOrKey')]",
+          "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]",
+          "windowsConfiguration": "[if(variables('isWindows'), variables('windowsConfiguration'), json('null'))]"
         },
-{{end}}
-{{if not HasAttachedOsDisk}}
-        "osProfile": "[variables('osProfile')]",
-{{end}}
-        "storageProfile": "[variables('storageProfile')]",
+        "securityProfile": "[if(variables('isMemoryUnencrypted'), json('null'), variables('vmSecurityProfile'))]",
+        "storageProfile": {
+          "osDisk": {
+            "createOption": "fromImage",
+            "managedDisk": "[if(variables('isMemoryUnencrypted'), variables('vmStorageProfileManagedDisk'), variables('vmStorageProfileManagedDiskEncrypted'))]"
+          },
+          "imageReference": "[variables('imageReference')]"
+        },
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
             }
           ]
         },
-{{if HasTipNodeSession}}
+        {{if HasTipNodeSession}}
         "availabilitySet": {
           "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('availabilitySetName'))]"
         },
-{{end}}
+        {{end}}
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "[equals(parameters('bootDiagnostics'), 'true')]",

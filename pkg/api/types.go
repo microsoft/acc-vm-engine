@@ -18,6 +18,12 @@ type OSType string
 // OSName represents pre-set OS name
 type OSName string
 
+// OSImageName represents pre-set OS image name
+type OSImageName string
+
+// OSImageName represents pre-set OS image name
+type SecurityType string
+
 // SecurityProfile represents VM security profile
 type SecurityProfile struct {
 	SecureBoot string `json:"secure_boot_enabled,omitempty"`
@@ -27,17 +33,16 @@ type SecurityProfile struct {
 // VMProfile represents the definition of a VM
 type VMProfile struct {
 	Name            string           `json:"name"`
-	OSType          OSType           `json:"os_type"`
-	OSName          OSName           `json:"os_name"`
+	OSImageName     OSImageName      `json:"os_image_name,omitempty"`
+	OSName          OSName           `json:"os_name,omitempty"`
 	OSDiskType      string           `json:"os_disk_type"`
 	OSImage         *OSImage         `json:"os_image,omitempty"`
-	OSDisk          *OSDisk          `json:"os_disk,omitempty"`
 	DiskSizesGB     []int            `json:"disk_sizes_gb,omitempty"`
 	VMSize          string           `json:"vm_size"`
 	Ports           []int            `json:"ports,omitempty" validate:"dive,min=1,max=65535"`
 	HasDNSName      bool             `json:"has_dns_name"`
 	SecurityProfile *SecurityProfile `json:"security_profile,omitempty"`
-
+	SecurityType    SecurityType     `json:"security_type,omitempty"`
 	TipNodeSessionID string `json:"tip_node_session_id,omitempty"`
 	ClusterName      string `json:"cluster_name,omitempty"`
 }
@@ -60,33 +65,27 @@ type OSImage struct {
 	Version   string `json:"version,omitempty"`
 }
 
-// OSDisk represents Managed OS Disk
-type OSDisk struct {
-	VHD              string `json:"vhd_url"`
-	VMGS             string `json:"vmgs_url"`
-	StorageAccountID string `json:"storage_account_id"`
-}
-
 // LinuxProfile represents the linux parameters passed to the cluster
 type LinuxProfile struct {
-	AdminUsername string       `json:"admin_username" validate:"required"`
-	AdminPassword string       `json:"admin_password"`
-	SSHPubKeys    []*PublicKey `json:"ssh_public_keys"`
+	AuthenticationType 	string       	`json:"authentication_type" validate:"required"`
+	AdminUsername 		string       	`json:"admin_username" validate:"required"`
+	AdminPasswordOrKey  string       	`json:"admin_password_or_key"`
+	SSHPubKeys    		[]*PublicKey 	`json:"ssh_public_keys"`
 }
 
 // WindowsProfile represents the windows parameters passed to the cluster
 type WindowsProfile struct {
-	AdminUsername string `json:"admin_username" validate:"required"`
-	AdminPassword string `json:"admin_password" validate:"required"`
+	AdminUsername 		string `json:"admin_username" validate:"required"`
+	AdminPasswordOrKey 	string `json:"admin_password_or_key" validate:"required"`
 }
 
 // VnetProfile represents the definition of a vnet
 type VnetProfile struct {
-	VnetResourceGroup string `json:"vnetResourceGroup,omitempty"`
-	VnetName          string `json:"vnetName,omitempty"`
-	VnetAddress       string `json:"vnetAddress,omitempty"`
-	SubnetName        string `json:"subnetName,omitempty"`
-	SubnetAddress     string `json:"subnetAddress,omitempty"`
+	VnetResourceGroup 	string `json:"vnetResourceGroup,omitempty"`
+	VirtualNetworkName  string `json:"virtualNetworkName,omitempty"`
+	VnetAddress       	string `json:"vnetAddress,omitempty"`
+	SubnetName        	string `json:"subnetName,omitempty"`
+	SubnetAddress     	string `json:"subnetAddress,omitempty"`
 }
 
 // DiagnosticsProfile contains settings to on/off boot diagnostics collection
@@ -104,7 +103,7 @@ type PublicKey struct {
 
 // IsCustomVNET returns true if the customer brought their own VNET
 func (p *VnetProfile) IsCustomVNET() bool {
-	return len(p.VnetResourceGroup) > 0 && len(p.VnetName) > 0 && len(p.SubnetName) > 0
+	return len(p.VnetResourceGroup) > 0 && len(p.VirtualNetworkName) > 0 && len(p.SubnetName) > 0
 }
 
 // HasAzureGalleryImage returns true if Azure Image Gallery is used
@@ -115,16 +114,6 @@ func (h *VMProfile) HasAzureGalleryImage() bool {
 // HasCustomOsImage returns true if there is a custom OS image url specified
 func (h *VMProfile) HasCustomOsImage() bool {
 	return h.OSImage != nil && len(h.OSImage.URL) > 0
-}
-
-// HasAttachedOsDisk returns true if there is an attached OS disk specified
-func (h *VMProfile) HasAttachedOsDisk() bool {
-	return h.OSDisk != nil && len(h.OSDisk.VHD) > 0
-}
-
-// HasAttachedOsDiskVMGS returns true if there is an VMGS specified
-func (h *VMProfile) HasAttachedOsDiskVMGS() bool {
-	return h.OSDisk != nil && len(h.OSDisk.VMGS) > 0
 }
 
 // HasDisks returns true if the customer specified disks

@@ -1,58 +1,73 @@
-    "nicName": "[concat(parameters('vmName'), '-nic')]",
+    "imageList": {
+      "Windows Server 2022 Gen 2": {
+        "publisher": "AZURERT.PIRCORE.CAPSBVT",
+        "offer": "longlivedconfidentialvm",
+        "sku":  "WindowsServer2022",
+        "version": "0.0.1"
+      },
+      "Windows Server 2019 Gen 2": {
+        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
+        "offer":  "longlivedconfidentialvm",
+        "sku":  "WindowsServer2019-2",
+        "version": "0.0.1"
+      },
+      "Ubuntu 20.04 LTS Gen 2": {
+        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
+        "offer":  "longlivedconfidentialvm",
+        "sku":  "Ubuntu20.04",
+        "version": "0.0.1"
+      },
+      "Ubuntu 18.04 LTS Gen 2": {
+        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
+        "offer":  "longlivedconfidentialvm",
+        "sku":  "Ubuntu18.04",
+        "version": "0.0.1"
+      }
+    },
+    "imageReference": "[variables('imageList')[parameters('osImageName')]]",
+    "networkInterfaceName": "[concat(parameters('vmName'), '-nic')]",
     "publicIPAddressName": "[concat(parameters('vmName'), '-ip')]",
-    "nsgName": "[concat(parameters('vmName'), '-nsg')]",
-    "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('nsgName'))]",
-    "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('subnetName'))]",
+    "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+    "networkSecurityGroupId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
+    "virtualNetworkName": "[concat(parameters('vmName'), '-vnet')]",
+    "virtualNetworkId": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+    "subnetRef": "[concat(variables('virtualNetworkId'), '/subnets/', variables('subnetName'))]",
+    "subnetName": "[concat(parameters('vmName'), 'Subnet')]",
+    "vnetSubnetId": "[resourceId(parameters('vnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets/', variables('virtualNetworkName'), parameters('subnetName'))]",
+    "isWindows": "[contains(parameters('osImageName'), 'Windows')]",
     "linuxConfiguration": {
       "disablePasswordAuthentication": "true",
-      "ssh": {{GetLinuxPublicKeys}}
+      "ssh": {
+        "publicKeys": [
+          {
+            "keyData": "[parameters('adminPasswordOrKey')]",
+            "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]"
+          }
+        ]
+      }
     },
     "windowsConfiguration": {
+      "enableAutomaticUpdates": "true",
       "provisionVmAgent": "true"
     },
-    "diagnosticsStorageAction": "[if(equals(parameters('bootDiagnostics'), 'false'), 'nop', parameters('diagnosticsStorageAccountNewOrExisting'))]",
-{{if HasTipNodeSession}}
+    {{if HasTipNodeSession}}
     "availabilitySetName": "[concat(parameters('vmName'), '-availSet')]",
-{{end}}
-{{if not HasAttachedOsDisk}}
-    "osProfile": {
-      "computername": "[parameters('vmName')]",
-      "adminUsername": "[parameters('adminUsername')]",
-      "adminPassword": "[parameters('adminPassword')]",
-{{if IsLinux .}}
-      "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
-{{else}}
-      "windowsConfiguration": "[variables('windowsConfiguration')]"
-{{end}}
+    {{end}}
+    "isMemoryUnencrypted": "[equals(parameters('securityType'), 'Unencrypted')]",
+    "vmStorageProfileManagedDisk": {
+      "storageAccountType": "[parameters('osDiskType')]"
     },
-{{end}}
-    "storageProfile": {
-{{if not HasAttachedOsDisk}}
-      "imageReference": {
-{{if HasCustomOsImage}}
-        "id": "[resourceId('Microsoft.Compute/images','CustomImage')]"
-{{else}}
-        "publisher": "[parameters('osImagePublisher')]",
-        "offer": "[parameters('osImageOffer')]",
-        "sku": "[parameters('osImageSKU')]",
-        "version": "[parameters('osImageVersion')]"
-{{end}}
-      },
-{{end}}
-      {{GetDataDisks .}}
-      "osDisk": {
-        "caching": "ReadWrite",
-{{if HasAttachedOsDisk}}
-        "osType": "[parameters('osType')]",
-        "createOption": "Attach",
-        "managedDisk": {
-          "id": "[resourceId('Microsoft.Compute/disks','CustomDisk')]"
-        }
-{{else}}
-        "createOption": "FromImage",
-        "managedDisk": {
-          "storageAccountType": "[parameters('osDiskType')]"
-        }
-{{end}}
+    "vmStorageProfileManagedDiskEncrypted": {
+      "storageAccountType": "[parameters('osDiskType')]",
+      "securityProfile": {
+          "confidentialDiskEncryptionType" : "[parameters('securityType')]"
       }
+    },
+    "diagnosticsStorageAction": "[if(equals(parameters('bootDiagnostics'), 'false'), 'nop', parameters('diagnosticsStorageAccountNewOrExisting'))]",
+    "vmSecurityProfile": {
+      "uefiSettings" : {
+        "secureBootEnabled": "[parameters('secureBootEnabled')]",
+        "vTpmEnabled": "true"
+      },
+      "securityType" : "ConfidentialVM"
     }

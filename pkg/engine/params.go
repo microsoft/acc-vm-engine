@@ -11,38 +11,24 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 
 	addValue(parametersMap, "vmName", properties.VMProfile.Name)
 	addValue(parametersMap, "vmSize", properties.VMProfile.VMSize)
-	addValue(parametersMap, "osType", properties.VMProfile.OSType)
+	addValue(parametersMap, "osImageName", properties.VMProfile.OSImageName)
+	addValue(parametersMap, "securityType", properties.VMProfile.SecurityType)
 	if len(properties.VMProfile.OSDiskType) > 0 {
 		addValue(parametersMap, "osDiskType", properties.VMProfile.OSDiskType)
 	}
-	if properties.VMProfile.HasAttachedOsDisk() {
-		addValue(parametersMap, "osDiskURL", properties.VMProfile.OSDisk.VHD)
-		addValue(parametersMap, "osDiskStorageAccountID", properties.VMProfile.OSDisk.StorageAccountID)
-		if len(properties.VMProfile.OSDisk.VMGS) > 0 {
-			addValue(parametersMap, "osDiskVmgsURL", properties.VMProfile.OSDisk.VMGS)
-		}
-	} else if properties.VMProfile.HasCustomOsImage() {
-		addValue(parametersMap, "osImageURL", properties.VMProfile.OSImage.URL)
-	} else {
-		addValue(parametersMap, "osImagePublisher", properties.VMProfile.OSImage.Publisher)
-		addValue(parametersMap, "osImageOffer", properties.VMProfile.OSImage.Offer)
-		addValue(parametersMap, "osImageSKU", properties.VMProfile.OSImage.SKU)
-		if len(properties.VMProfile.OSImage.Version) > 0 {
-			addValue(parametersMap, "osImageVersion", properties.VMProfile.OSImage.Version)
-		}
-	}
 	if properties.LinuxProfile != nil {
 		addValue(parametersMap, "adminUsername", properties.LinuxProfile.AdminUsername)
-		if len(properties.LinuxProfile.AdminPassword) > 0 {
+		if properties.LinuxProfile.AuthenticationType =="password" {
 			addValue(parametersMap, "authenticationType", "password")
-			addValue(parametersMap, "adminPassword", properties.LinuxProfile.AdminPassword)
+			addValue(parametersMap, "adminPasswordOrKey", properties.LinuxProfile.AdminPasswordOrKey)
 		} else {
 			addValue(parametersMap, "authenticationType", "sshPublicKey")
+			addValue(parametersMap, "adminPasswordOrKey", properties.LinuxProfile.AdminPasswordOrKey)
 		}
 	}
 	if properties.WindowsProfile != nil {
 		addValue(parametersMap, "adminUsername", properties.WindowsProfile.AdminUsername)
-		addValue(parametersMap, "adminPassword", properties.WindowsProfile.AdminPassword)
+		addValue(parametersMap, "adminPasswordOrKey", properties.WindowsProfile.AdminPasswordOrKey)
 	}
 	if properties.VMProfile.SecurityProfile != nil {
 		addValue(parametersMap, "secureBootEnabled", properties.VMProfile.SecurityProfile.SecureBoot)
@@ -57,7 +43,7 @@ func getParameters(vm *api.APIModel, generatorCode string) (paramsMap, error) {
 	if properties.VnetProfile.IsCustomVNET() {
 		addValue(parametersMap, "vnetNewOrExisting", "existing")
 		addValue(parametersMap, "vnetResourceGroupName", properties.VnetProfile.VnetResourceGroup)
-		addValue(parametersMap, "vnetName", properties.VnetProfile.VnetName)
+		addValue(parametersMap, "virtualNetworkName", properties.VnetProfile.VirtualNetworkName)
 		addValue(parametersMap, "subnetName", properties.VnetProfile.SubnetName)
 	} else {
 		addValue(parametersMap, "vnetNewOrExisting", "new")

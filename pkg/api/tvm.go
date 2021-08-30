@@ -81,6 +81,20 @@ func (h *tvmConfigurator) OSImage() *OSImage {
 	return tvmOSImageMap[h.osName]
 }
 
+func (h *tvmConfigurator) OSImageName() string {
+	if len(h.osName) == 0 {
+		log.Fatal("OSImageName is not set")
+	}
+	return ""
+}
+
+// DefaultLinuxSecurityType returns default Linux OS security type
+func (h *tvmConfigurator) SecurityType() string {
+	log.Info("SecurityType is not set")
+	return "Unencrypted"
+}
+
+
 // DefaultOsDiskType returns default OS disk type
 func (h *tvmConfigurator) DefaultOsDiskType() string {
 	return "Premium_LRS"

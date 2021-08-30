@@ -53,51 +53,11 @@ func handleValidationErrors(e validator.ValidationErrors) error {
 }
 
 func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
-	var isLinux bool
 	vm := p.VMProfile
 	if vm == nil {
 		return fmt.Errorf("VMProfile is not specified")
 	}
-	if len(vm.OSType) == 0 {
-		return fmt.Errorf("OSType is not specified")
-	}
-	hasOsImage := (len(vm.OSName) > 0 || vm.OSImage != nil)
-	hasOsDisk := (vm.OSDisk != nil)
 
-	if hasOsImage {
-		if len(vm.OSName) == 0 {
-			if vm.OSImage == nil {
-				return fmt.Errorf("Either OSName or OSImage should be specified")
-			}
-		} else {
-			if vm.OSImage != nil {
-				return fmt.Errorf("Cannot have OSName and OSImage both specified")
-			}
-		}
-	}
-
-	if hasOsImage && hasOsDisk {
-		return fmt.Errorf("OS image and disk are mutually exclusive")
-	}
-	if !hasOsImage && !hasOsDisk {
-		return fmt.Errorf("Neither OS image nor disk are specified")
-	}
-
-	switch vm.OSType {
-	case Linux:
-		isLinux = true
-	case Windows:
-		isLinux = false
-	default:
-		return fmt.Errorf("OS type '%s' is not supported", vm.OSType)
-	}
-
-	if e := validateOSImage(vm.OSImage); e != nil {
-		return e
-	}
-	if e := validateOSDisk(vm.OSDisk); e != nil {
-		return e
-	}
 	if (vm.SecurityProfile != nil) {
 		if (vm.SecurityProfile.SecureBoot != "true") && (vm.SecurityProfile.SecureBoot != "false") && (vm.SecurityProfile.SecureBoot != "none"){
 			return fmt.Errorf("Invalid Entry! Only the values \"true\", \"false\" and \"none\" are allowed for secure_boot_enabled")
@@ -108,6 +68,9 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 		if (vm.SecurityProfile.SecureBoot == "none") && (vm.SecurityProfile.VTPM == "true") {
 			return fmt.Errorf("Invalid Entry! vTPM cannot be \"true\" when secure-boot is \"none\"")
 		}
+	}
+	if (len(vm.TipNodeSessionID) == 0 && len(vm.ClusterName) != 0) || (len(vm.TipNodeSessionID) != 0 && len(vm.ClusterName) == 0) {
+		return fmt.Errorf("Must specify either both 'tip_node_session_id' and 'cluster_name', or neither")
 	}
 	if len(vm.OSDiskType) > 0 {
 		found := false
@@ -126,20 +89,6 @@ func (p *Properties) validateVMProfile(vmconf VMConfigurator) error {
 			return e
 		}
 	}
-	if (len(vm.TipNodeSessionID) == 0 && len(vm.ClusterName) != 0) || (len(vm.TipNodeSessionID) != 0 && len(vm.ClusterName) == 0) {
-		return fmt.Errorf("Must specify either both 'tip_node_session_id' and 'cluster_name', or neither")
-	}
-	if !hasOsDisk {
-		if isLinux {
-			if e := validateLinuxProfile(p.LinuxProfile); e != nil {
-				return e
-			}
-		} else {
-			if e := validateWindowsProfile(p.WindowsProfile); e != nil {
-				return e
-			}
-		}
-	}
 	return nil
 }
 
@@ -150,10 +99,10 @@ func validateLinuxProfile(p *LinuxProfile) error {
 	if len(p.AdminUsername) == 0 {
 		return fmt.Errorf("LinuxProfile.AdminUsername cannot be empty")
 	}
-	if len(p.AdminPassword) > 0 && len(p.SSHPubKeys) > 0 {
+	if len(p.AdminPasswordOrKey) > 0 && len(p.SSHPubKeys) > 0 {
 		return fmt.Errorf("AdminPassword and SSH public keys are mutually exclusive")
 	}
-	if len(p.AdminPassword) == 0 && len(p.SSHPubKeys) == 0 {
+	if len(p.AdminPasswordOrKey) == 0 && len(p.SSHPubKeys) == 0 {
 		return fmt.Errorf("Must specify either AdminPassword or SSH public keys")
 	}
 	for i, key := range p.SSHPubKeys {
@@ -171,7 +120,7 @@ func validateWindowsProfile(p *WindowsProfile) error {
 	if e := validate.Var(p.AdminUsername, "required"); e != nil {
 		return fmt.Errorf("WindowsProfile.AdminUsername cannot be empty")
 	}
-	if e := validate.Var(p.AdminPassword, "required"); e != nil {
+	if e := validate.Var(p.AdminPasswordOrKey, "required"); e != nil {
 		return fmt.Errorf("WindowsProfile.AdminPassword cannot be empty")
 	}
 	return nil
@@ -200,19 +149,6 @@ func validateOSImage(p *OSImage) error {
 	return nil
 }
 
-func validateOSDisk(p *OSDisk) error {
-	if p == nil {
-		return nil
-	}
-	if len(p.VHD) == 0 {
-		return fmt.Errorf("OS VHD URL is not set")
-	}
-	if len(p.StorageAccountID) == 0 {
-		return fmt.Errorf("OS VHD storage account ID is not set")
-	}
-	return nil
-}
-
 func (p *Properties) validateDiagnosticsProfile() error {
 	if p.DiagnosticsProfile == nil || !p.DiagnosticsProfile.Enabled {
 		return nil
@@ -230,7 +166,7 @@ func (p *Properties) validateVnetProfile() error {
 	}
 	// existing vnet is uniquely defined by resource group, vnet name, and subnet name
 	if len(h.VnetResourceGroup) > 0 {
-		if len(h.VnetName) == 0 {
+		if len(h.VirtualNetworkName) == 0 {
 			return fmt.Errorf("vnetProfile.vnetName cannot be empty for existing vnet")
 		}
 		if len(h.SubnetName) == 0 {

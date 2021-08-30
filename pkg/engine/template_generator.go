@@ -153,12 +153,12 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		"HasSecurityProfile": func() bool {
 			return (vm.Properties.VMProfile.SecurityProfile != nil)
 		},
-		"GetSecurityType": func() string {
+		"GetVMSecurityType": func() string {
 			switch vm.VMCategory {
 			case api.TVM:
-				return "SecureBoot"
+				return ""
 			case api.CVM:
-				return "MemoryEncryption"
+				return "ConfidentialVM"
 			default:
 				return "None"
 			}
@@ -175,20 +175,8 @@ func (t *TemplateGenerator) getTemplateFuncMap(vm *api.APIModel) template.FuncMa
 		"WrapAsVerbatim": func(s string) string {
 			return fmt.Sprintf("',%s,'", s)
 		},
-		"IsLinux": func(p *api.Properties) bool {
-			return p.VMProfile.OSType == api.Linux
-		},
-		"IsWindows": func(p *api.Properties) bool {
-			return p.VMProfile.OSType == api.Windows
-		},
 		"HasCustomOsImage": func() bool {
 			return vm.Properties.VMProfile.HasCustomOsImage()
-		},
-		"HasAttachedOsDisk": func() bool {
-			return vm.Properties.VMProfile.HasAttachedOsDisk()
-		},
-		"HasAttachedOsDiskVMGS": func() bool {
-			return vm.Properties.VMProfile.HasAttachedOsDiskVMGS()
 		},
 		"HasDNSName": func(p *api.Properties) bool {
 			return p.VMProfile.HasDNSName

@@ -17,6 +17,8 @@ type Apiloader struct {
 type VMConfigurator interface {
 	DefaultVMName() string
 	OSImage() *OSImage
+	OSImageName() string
+	SecurityType() string
 	DefaultOsDiskType() string
 	AllowedOsDiskTypes() []string
 	AllowedVMSizes() []string
@@ -44,8 +46,8 @@ func (a *Apiloader) LoadVM(contents []byte, validate, isUpdate bool, sshPubKeys 
 		return nil, err
 	}
 	var osName OSName
-	if vm.Properties != nil && vm.Properties.VMProfile != nil {
-		osName = vm.Properties.VMProfile.OSName
+	if vm.Properties != nil && len(vm.Properties.VMProfile.OSName) > 0 {
+		osName = vm.Properties.VMProfile.OSName 
 	}
 	if vm.VMConfigurator, err = getVMConfigurator(vm.VMCategory, osName); err != nil {
 		return nil, err

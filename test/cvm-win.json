@@ -3,17 +3,17 @@
   "properties": {
     "vm_profile": {
       "name": "cvm-win",
-      "os_type": "Windows",
-      "os_disk": {
-        "vhd_url": "https://mystorage.blob.core.windows.net/vhds/osdisk.vhd",
-        "vmgs_url": "https://mystorage.blob.core.windows.net/vhds/vmgsdata.vhd",
-        "storage_account_id": "/subscriptions/12345/resourceGroups/myresourcegroup/providers/Microsoft.Storage/storageAccounts/mystorage"
-      },
-      "tip_node_session_id": "aaa-bbb-ccc-ddd",
-      "cluster_name": "QWERTY",
-      "vm_size": "Standard_DC1as_v4",
+      "os_image_name": "Windows Server 2022 Gen 2",
+      "vm_size": "Standard_DC2as_v5",
       "ports": [3389],
-      "has_dns_name": false
+      "has_dns_name": false,
+      "security_type": "Unencrypted",
+      "tip_node_session_id": "af2a0623-09d8-4e43-bccd-ab6269f195d4",
+      "cluster_name": "CBN10PrdApp04"
+    },
+    "windows_profile": {
+      "admin_username": "acctestuser",
+      "admin_password_or_key": "Password1234!"
     }
   }
 }

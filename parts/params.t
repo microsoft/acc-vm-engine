@@ -19,7 +19,7 @@
         "sshPublicKey"
       ],
       "metadata": {
-        "description": "Type of authentication to use on Linux virtual machine."
+        "description": "Type of authentication to use on virtual machine (password for Windows, ssh public key for Linux)."
       }
     },
     "adminUsername": {
@@ -29,81 +29,47 @@
         "description": "Username for the Virtual Machine."
       }
     },
-    "adminPassword": {
+    "adminPasswordOrKey": {
       "type": "securestring",
       "defaultValue": "",
       "metadata": {
-        "description": "Password for the Virtual Machine."
+        "description": "Password or ssh public key for the Virtual Machine."
       }
     },
-    "osType": {
+    "osImageName": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "Windows Server 2022 Gen 2",
+      "allowedValues": [
+        "Windows Server 2022 Gen 2",
+        "Windows Server 2019 Gen 2",
+        "Ubuntu 20.04 LTS Gen 2",
+        "Ubuntu 18.04 LTS Gen 2"
+      ],
       "metadata": {
-        "description": "OS type."
-      }
-    },
-    "osImagePublisher": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image publisher."
-      }
-    },
-    "osImageOffer": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image offer."
-      }
-    },
-    "osImageSKU": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image SKU."
-      }
-    },
-    "osImageVersion": {
-      "type": "string",
-      "defaultValue": "latest",
-      "metadata": {
-        "description": "OS image version."
-      }
-    },
-    "osImageURL": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS image URL."
-      }
-    },
-    "osDiskURL": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS VHD URL."
-      }
-    },
-    "osDiskVmgsURL": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "OS VMGS URL."
-      }
-    },
-    "osDiskStorageAccountID": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "ID of the OS disk storage account."
+        "description": "OS image name for the Virtual Machine"
       }
     },
     "osDiskType": {
       "type": "string",
-      {{GetOsDiskTypes}}
+      "defaultValue": "StandardSSD_LRS",
+      "allowedValues": [
+        "Premium_LRS",
+        "StandardSSD_LRS"
+      ],
       "metadata": {
         "description": "Type of managed disk to create."
+      }
+    },
+    "securityType": {
+      "type": "string",
+      "defaultValue": "Unencrypted",
+      "allowedValues": [
+        "Unencrypted",
+        "VMGuestStateOnly",
+        "DiskWithVMGuestState"
+      ],
+      "metadata": {
+          "description": "VM security type."
       }
     },
     "vnetNewOrExisting": {
@@ -117,15 +83,6 @@
         "description": "Determines whether or not a new virtual network should be provisioned"
       }
     },
-    "vnetName": {
-      "type": "string",
-      "defaultValue": "[concat(resourceGroup().name, '-vnet')]",
-      "metadata": {
-        "description": "Name of the virtual network (alphanumeric, hyphen, underscore, period)."
-      },
-      "minLength": 2,
-      "maxLength": 64
-    },
     "vnetResourceGroupName": {
       "type": "string",
       "defaultValue": "[resourceGroup().name]",
@@ -136,6 +93,13 @@
     "vnetAddress": {
       "type": "string",
       "defaultValue": "{{.VnetProfile.VnetAddress}}",
+      "metadata": {
+        "description": "VNET address space"
+      }
+    },
+    "addressPrefix": {
+      "type": "string",
+      "defaultValue": "10.1.16.0/24",
       "metadata": {
         "description": "VNET address space"
       }
@@ -154,6 +118,13 @@
         "description": "Sets the subnet of the VM."
       }
     },
+    "subnetPrefix": {
+      "type": "string",
+      "defaultValue": "10.1.16.0/24",
+      "metadata": {
+        "description": "Sets the subnet of the VM."
+      }
+    },
     "tipNodeSessionId": {
       "type": "string",
       "defaultValue": "",
@@ -167,7 +138,7 @@
       "metadata": {
         "description": "Cluster"
       }
-    },  
+    }, 
 {{if HasSecurityProfile}}
     "secureBootEnabled": {
       "type": "string",
@@ -202,45 +173,5 @@
       ],
       "metadata": {
         "description": "Boot diagnostics setting of the VM."
-      }
-    },
-    "diagnosticsStorageAccountNewOrExisting": {
-      "type": "string",
-      "defaultValue": "new",
-      "allowedValues": [
-        "new",
-        "existing"
-      ],
-      "metadata": {
-        "description": "Determines whether or not a new storage account should be provisioned."
-      }
-    },
-    "diagnosticsStorageAccountName": {
-      "type": "string",
-      "defaultValue": "none",
-      "metadata": {
-        "description": "Name of the diagnostics storage account."
-      }
-    },
-    "diagnosticsStorageAccountType": {
-      "type": "string",
-      "defaultValue": "Standard_LRS",
-      "allowedValues": [
-        "Standard_LRS",
-        "Standard_GRS"
-      ],
-      "metadata": {
-        "description": "Type of diagnostics storage account."
-      }
-    },
-    "diagnosticsStorageAccountKind": {
-      "type": "string",
-      "defaultValue": "Storage",
-      "allowedValues": [
-        "Storage",
-        "StorageV2"
-      ],
-      "metadata": {
-        "description": "Kind of diagnostics storage account."
       }
     }

@@ -22,6 +22,18 @@ func (h *cvmConfigurator) OSImage() *OSImage {
 	return nil
 }
 
+// DefaultLinuxImageName returns default Linux OS image name 
+func (h *cvmConfigurator) OSImageName() string {
+	log.Info("OSImageName is not set")
+	return "Ubuntu 20.04 LTS Gen 2"
+}
+
+// DefaultLinuxSecurityType returns default Linux OS security type
+func (h *cvmConfigurator) SecurityType() string {
+	log.Info("SecurityType is not set")
+	return "Unencrypted"
+}
+
 // DefaultOsDiskType returns default OS disk type
 func (h *cvmConfigurator) DefaultOsDiskType() string {
 	return "Premium_LRS"
@@ -38,16 +50,25 @@ func (h *cvmConfigurator) AllowedOsDiskTypes() []string {
 // AllowedVMSizes returns supported VM sizes
 func (h *cvmConfigurator) AllowedVMSizes() []string {
 	return []string{
-		"Standard_DC1as_v4",
-		"Standard_DC2as_v4",
-		"Standard_DC8as_v4",
-		"Standard_DC16as_v4",
-		"Standard_DC32as_v4",
-		"Standard_DC48as_v4",
-		"Standard_DC96as_v4",
+		"Standard_DC2as_v5",
+		"Standard_DC4as_v5",
+		"Standard_DC8as_v5",
+		"Standard_DC16as_v5",
+		"Standard_DC32as_v5",
+		"Standard_DC48as_v5",
+		"Standard_DC64as_v5",
+		"Standard_DC96as_v5",
+		"Standard_DC2ads_v5",
+		"Standard_DC4ads_v5",
+		"Standard_DC8ads_v5",
+		"Standard_DC16ads_v5",
+		"Standard_DC32ads_v5",
+		"Standard_DC48ads_v5",
+		"Standard_DC64ads_v5",
+		"Standard_DC96ads_v5",
 	}
 }
 
 func (h *cvmConfigurator) DefaultVMSize() string {
-	return "Standard_DC1as_v4"
+	return "Standard_DC2as_v5"
 }
