@@ -51,7 +51,7 @@
     },
     "osDiskType": {
       "type": "string",
-      "defaultValue": "StandardSSD_LRS",
+      "defaultValue": "Premium_LRS",
       "allowedValues": [
         "Premium_LRS",
         "StandardSSD_LRS"
@@ -62,7 +62,7 @@
     },
     "securityType": {
       "type": "string",
-      "defaultValue": "Unencrypted",
+      "defaultValue": "VMGuestStateOnly",
       "allowedValues": [
         "Unencrypted",
         "VMGuestStateOnly",
