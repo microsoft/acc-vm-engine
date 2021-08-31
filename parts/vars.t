@@ -60,7 +60,7 @@
     "vmStorageProfileManagedDiskEncrypted": {
       "storageAccountType": "[parameters('osDiskType')]",
       "securityProfile": {
-          "confidentialDiskEncryptionType" : "[parameters('securityType')]"
+          "securityEncryptionType" : "[parameters('securityType')]"
       }
     },
     "diagnosticsStorageAction": "[if(equals(parameters('bootDiagnostics'), 'false'), 'nop', parameters('diagnosticsStorageAccountNewOrExisting'))]",
