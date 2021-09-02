@@ -54,7 +54,8 @@
       "defaultValue": "Premium_LRS",
       "allowedValues": [
         "Premium_LRS",
-        "StandardSSD_LRS"
+        "StandardSSD_LRS",
+        "Standard_LRS"
       ],
       "metadata": {
         "description": "Type of managed disk to create."

@@ -44,6 +44,7 @@ func (h *cvmConfigurator) AllowedOsDiskTypes() []string {
 	return []string{
 		"Premium_LRS",
 		"StandardSSD_LRS",
+		"Premium_LRS"
 	}
 }
 
