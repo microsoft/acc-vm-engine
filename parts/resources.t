@@ -109,10 +109,10 @@
       "name": "[parameters('vmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]",
         {{if HasTipNodeSession}}
-        "[variables('availabilitySetName')]"
+        "[variables('availabilitySetName')]",
         {{end}} 
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
       ],
       "properties": {
         "hardwareProfile": {
