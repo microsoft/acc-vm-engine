@@ -67,6 +67,26 @@ func (h *cvmConfigurator) AllowedVMSizes() []string {
 		"Standard_DC48ads_v5",
 		"Standard_DC64ads_v5",
 		"Standard_DC96ads_v5",
+		"Standard_EC2as_v5",
+		"Standard_EC4as_v5",
+		"Standard_EC8as_v5",
+		"Standard_EC16as_v5",
+		"Standard_EC20as_v5",
+		"Standard_EC32as_v5",
+		"Standard_EC48as_v5",
+		"Standard_EC64as_v5",
+		"Standard_EC96as_v5",
+		"Standard_EC96ias_v5",
+		"Standard_EC2ads_v5",
+		"Standard_EC4ads_v5",
+		"Standard_EC8ads_v5",
+		"Standard_EC16ads_v5",
+		"Standard_EC20ads_v5",
+		"Standard_EC32ads_v5",
+		"Standard_EC48ads_v5",
+		"Standard_EC64ads_v5",
+		"Standard_EC96ads_v5",
+		"Standard_EC96iads_v5"
 	}
 }
 
