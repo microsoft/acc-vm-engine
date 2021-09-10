@@ -12,16 +12,16 @@
         "version": "0.0.1"
       },
       "Ubuntu 20.04 LTS Gen 2": {
-        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
-        "offer":  "longlivedconfidentialvm",
-        "sku":  "Ubuntu20.04",
-        "version": "0.0.1"
+        "publisher": "Canonical",
+        "offer": "0001-com-ubuntu-confidential-vm-experimental",
+        "sku": "20_04-gen2",
+        "version": "20.04.20210309"
       },
       "Ubuntu 18.04 LTS Gen 2": {
-        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
-        "offer":  "longlivedconfidentialvm",
-        "sku":  "Ubuntu18.04",
-        "version": "0.0.1"
+        "publisher": "Canonical",
+        "offer": "0001-com-ubuntu-confidential-vm-experimental",
+        "sku": "18_04-gen2",
+        "version": "18.04.20210309"
       }
     },
     "imageReference": "[variables('imageList')[parameters('osImageName')]]",
