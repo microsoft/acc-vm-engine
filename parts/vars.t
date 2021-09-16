@@ -1,15 +1,15 @@
     "imageList": {
       "Windows Server 2022 Gen 2": {
-        "publisher": "AZURERT.PIRCORE.CAPSBVT",
-        "offer": "longlivedconfidentialvm",
-        "sku":  "WindowsServer2022",
-        "version": "0.0.1"
+        "publisher": "microsoftwindowsserver",
+        "offer": "windows-cvm",
+        "sku":  "2022-datacenter-cvm",
+        "version": "latest"
       },
       "Windows Server 2019 Gen 2": {
-        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
-        "offer":  "longlivedconfidentialvm",
-        "sku":  "WindowsServer2019-2",
-        "version": "0.0.1"
+        "publisher": "microsoftwindowsserver",
+        "offer":  "windows-cvm",
+        "sku":  "2019-datacenter-cvm",
+        "version": "latest"
       },
       "Ubuntu 20.04 LTS Gen 2": {
         "publisher": "Canonical",
