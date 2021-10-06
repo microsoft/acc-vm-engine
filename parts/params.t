@@ -51,7 +51,7 @@
     },
     "osDiskType": {
       "type": "string",
-      "defaultValue": "Premium_LRS",
+      "defaultValue": "Standard_LRS",
       "allowedValues": [
         "Premium_LRS",
         "StandardSSD_LRS",
