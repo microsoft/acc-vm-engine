@@ -1,27 +1,27 @@
     "imageList": {
       "Windows Server 2022 Gen 2": {
-        "publisher": "AZURERT.PIRCORE.CAPSBVT",
-        "offer": "longlivedconfidentialvm",
-        "sku":  "WindowsServer2022",
-        "version": "0.0.1"
+        "publisher": "microsoftwindowsserver",
+        "offer": "windows-cvm",
+        "sku":  "2022-datacenter-cvm",
+        "version": "latest"
       },
       "Windows Server 2019 Gen 2": {
-        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
-        "offer":  "longlivedconfidentialvm",
-        "sku":  "WindowsServer2019-2",
-        "version": "0.0.1"
+        "publisher": "microsoftwindowsserver",
+        "offer":  "windows-cvm",
+        "sku":  "2019-datacenter-cvm",
+        "version": "latest"
       },
       "Ubuntu 20.04 LTS Gen 2": {
-        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
-        "offer":  "longlivedconfidentialvm",
-        "sku":  "Ubuntu20.04",
-        "version": "0.0.1"
+        "publisher": "Canonical",
+        "offer": "0001-com-ubuntu-confidential-vm-experimental",
+        "sku": "20_04-gen2",
+        "version": "20.04.20210309"
       },
       "Ubuntu 18.04 LTS Gen 2": {
-        "publisher":  "AZURERT.PIRCORE.CAPSBVT",
-        "offer":  "longlivedconfidentialvm",
-        "sku":  "Ubuntu18.04",
-        "version": "0.0.1"
+        "publisher": "Canonical",
+        "offer": "0001-com-ubuntu-confidential-vm-experimental",
+        "sku": "18_04-gen2",
+        "version": "18.04.20210309"
       }
     },
     "imageReference": "[variables('imageList')[parameters('osImageName')]]",
@@ -60,7 +60,7 @@
     "vmStorageProfileManagedDiskEncrypted": {
       "storageAccountType": "[parameters('osDiskType')]",
       "securityProfile": {
-          "confidentialDiskEncryptionType" : "[parameters('securityType')]"
+          "securityEncryptionType" : "[parameters('securityType')]"
       }
     },
     "diagnosticsStorageAction": "[if(equals(parameters('bootDiagnostics'), 'false'), 'nop', parameters('diagnosticsStorageAccountNewOrExisting'))]",

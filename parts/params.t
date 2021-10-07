@@ -51,10 +51,11 @@
     },
     "osDiskType": {
       "type": "string",
-      "defaultValue": "StandardSSD_LRS",
+      "defaultValue": "Standard_LRS",
       "allowedValues": [
         "Premium_LRS",
-        "StandardSSD_LRS"
+        "StandardSSD_LRS",
+        "Standard_LRS"
       ],
       "metadata": {
         "description": "Type of managed disk to create."
@@ -62,7 +63,7 @@
     },
     "securityType": {
       "type": "string",
-      "defaultValue": "Unencrypted",
+      "defaultValue": "VMGuestStateOnly",
       "allowedValues": [
         "Unencrypted",
         "VMGuestStateOnly",
