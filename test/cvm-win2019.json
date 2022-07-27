@@ -1,0 +1,21 @@
+
+{
+  "vm_category": "CVM",
+  "properties": {
+    "vm_profile": {
+      "name": "cvm-win2019-dc16as",
+      "os_image_name": "Windows Server 2019 Gen 2",
+      "vm_size": "Standard_DC16as_v5",
+      "security_type": "VMGuestStateOnly",
+      "os_disk_type": "StandardSSD_LRS",
+      "ports": [3389],
+      "has_dns_name": false,
+      "tip_node_session_id": "3f92ae0d-b878-43e6-b5a9-ede99ad63dee",
+      "cluster_name": "SJC20PrdApp39"
+    },
+    "windows_profile": {
+      "admin_username": "acctestuser",
+      "admin_password_or_key": "Password1234!"
+    }
+  }
+}

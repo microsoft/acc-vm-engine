@@ -1,0 +1,20 @@
+{
+  "vm_category": "CVM",
+  "properties": {
+    "vm_profile": {
+      "name": "anjuli-testing",
+      "os_image_name": "Ubuntu 20.04 LTS Gen 2 TVMCVM",
+      "vm_size": "Standard_DC2as_v5",
+      "os_disk_type": "StandardSSD_LRS",
+      "security_type": "DiskWithVMGuestState",
+      "ports": [22],
+      "has_dns_name": false
+    },    
+      "linux_profile": {
+      "authentication_type": "sshPublicKey",
+      "admin_username": "acctestuser",
+      "admin_password_or_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDDugVDwpAsjo1dK0UmTdjYF63RYw8lXjrlttayW6OrfcTCwDlCqGLluQJLjbA3mObZgdXilDF4Yqi1amAnFdHYWss7SwYm+W/ad8pjEi8Lq50Z95whsz0BcFBH8tlFrRb3DJ33Fv1TYiNs2vwod8iuH/+IBGB0e9dcMg603l3m7W4m2OOKnpIppbCZI1kxPCc+f6gJfiJmBnAx5bKLDt5nKqFVq9wEEeW2u6x+tKQjn6GRcK6wKF6AdQDyjzg2kWs9SmQURzode2ZQSit70v97qY7mTvPR5uKQcpls3bRkd5wYWyUQgiTo+A6aK76Q3bzVGiOi3ihX4AY7ChwLddZDnYbYTwUkCX4FNYbyy3fcfzwQgte5yL4i8/ivixSbCO3jEgfLaGtBgg0+sv/MGMUdn4OEGUYgGuQLCUsvWd5r9UPwKGxJzAbEU78py2c8poQfBWgePaHh8BrZRhL/z0qQwDapgskXPCwL3x3Nq/JHtPkXu1CRHxIVqln9G9Msp1fU21GSF9r7KMI1ECXbh/gcBN6PnXnfPVPQoeC5ykN49k+GUtUcSUGv0joZUAcg8cXHewhvt7uBH4BP8buDVuj5KSCEeE3ujkSAtxQOpaJbWZN9lLQ94DoStVge82yBkJK9h9pMPHuTviy/MPjbxi0ru9AuLYbSf2YBqtyjyxWbUw== soccerl"
+    }
+  }
+}
+

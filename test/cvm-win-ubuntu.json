@@ -1,0 +1,18 @@
+{
+  "vm_category": "CVM",
+  "properties": {
+    "vm_profile": {
+      "name": "anjuli-measuring-cvm",
+      "os_type": "Linux",
+      "secure_boot_enabled":false,
+      "os_disk": {
+        "vhd_url": "https://premcvmcirrusbitseus.blob.core.windows.net/vhds/encrypted/ubuntu1804/maaprod/latest_ubuntu1804_1k_lsvmload_opt.vhd",
+        "vmgs_url": "https://premcvmcirrusbitseus.blob.core.windows.net/vhds/encrypted/ubuntu1804/maaprod/latest_ubuntu1804_1k_lsvmload_opt_vmgs.vhd",
+        "storage_account_id": "/subscriptions/504a8247-b5ff-430b-8e53-686a2b87e541/resourceGroups/mboddewy-cvm-setup/providers/Microsoft.Storage/storageAccounts/premcvmcirrusbitseus"
+      },
+      "vm_size": "Standard_DC1as_v4",
+      "ports": [22],
+      "has_dns_name": false
+    }
+  }
+}
