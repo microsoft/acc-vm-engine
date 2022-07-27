@@ -1,0 +1,22 @@
+{
+  "vm_category": "CVM",
+  "properties": {
+    "vm_profile": {
+      "name": "cvm-linux2004",
+      "os_image_name": "Ubuntu 20.04 LTS Gen 2",
+      "vm_size": "Standard_DC16as_v5",
+      "os_disk_type": "StandardSSD_LRS",
+      "security_type": "VMGuestStateOnly",
+      "ports": [22],
+      "has_dns_name": false,
+      "tip_node_session_id": "61e9b5dc-a89c-43e6-990a-6b232982d378",
+      "cluster_name": "SJC20PrdApp39"
+    },
+    "linux_profile": {
+      "authentication_type": "sshPublicKey",
+      "admin_username": "acctestuser",
+      "admin_password_or_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDd1MoHxSx0ZNl4O72Zauot+eGJcozCcS+eEh/sUpOyGGWKYyndPColnBgj+4HzZtrRJ/w98oAE75nszMH2xKY4a/a3Pk4d2szkA8fqnBZVgiyFFOsIhNvTzreWDpS2MEz7cMsIZEI7QqjxOrnV2HpZ+7QRNf4uNUagGVxxA82Br97lH1XOqDWzw99ylR0PQPDNYUQiJqfZxgimkpFr1sNgWaegq5Vg13f7SaQzocmbLaU4Lc8ArjFuzO8Fvl3iyB8eu2YOp3cTvEuYR3gWw7Dlmny2yPvsWoxA7t01Ml9RTUnc00mmOP9qHDwTX4RzR933ePKLbgPdsJup3ZnQtUzFSnMbJEVuMhJ9HE9z78jeGc5LMzMLEyfrpfuY4QHCtpwPYAzSIoLwYq2gec4E9xyeVXLhF4xDUGWL1wT0jkzLXwM8jAD8tthBhMPyiMo3VKaB1kI96CGQELBF/xl59fD0pzKbV0hxFRNpBq38Yff/1ZimgIC7GPQwguDWtjr+eyU= angoring@MININT-BOODHL8"
+    }
+  }
+}
+

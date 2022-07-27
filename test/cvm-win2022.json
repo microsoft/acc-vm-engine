@@ -1,0 +1,20 @@
+
+{
+  "vm_category": "CVM",
+  "properties": {
+    "vm_profile": {
+      "name": "cvm-win2022",
+      "os_image_name": "Windows Server 2019 Gen 2",
+      "vm_size": "Standard_DC32ads_v5",
+      "security_type": "VMGuestStateOnly",
+      "os_disk_type": "StandardSSD_LRS",
+      "ports": [3389],
+      "has_dns_name": false
+    },
+
+    "windows_profile": {
+      "admin_username": "acctestuser",
+      "admin_password_or_key": "Password1234!"
+    }
+  }
+}
